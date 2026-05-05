@@ -1,9 +1,16 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
+import { useNavigate, Link } from "react-router-dom";
 import { FaWallet, FaHistory, FaChartPie, FaCalendarAlt } from "react-icons/fa";
 
 const Dashboard = ({ user }) => {
+  const navigate = useNavigate();
+
+  const goToExpenses = () => {
+    navigate("/expenses");
+  };
+
   return (
     <div className="bg-blue-600 w-screen h-screen">
       <Navbar username={user.username} />
@@ -32,6 +39,7 @@ const Dashboard = ({ user }) => {
       <Card
           title="See Your Expenses History"
           value="View Details"
+          onClick={goToExpenses}
           icon={<FaHistory />}
           className="bg-gradient-to-r from-pink-500 to-red-600 justify-between w-3/4 mx-auto mt-10 cursor-pointer hover:scale-105 transition-transform duration-300"
         />

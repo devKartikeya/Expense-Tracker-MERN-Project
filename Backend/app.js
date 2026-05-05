@@ -3,8 +3,11 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
+const User = require('./models/users.model');
+const Expense = require('./models/expenses.model');
 const { checkSignUp, checkLogin } = require('./middlewares/auth.middleware');
 const { authRegister, authLogin, authCheckUser, authCheckLogin, authLogout } = require('./controllers/auth.controller');
+const {addExpense, getExpenses} = require('./controllers/expense.controller');
 
 const app = express();
 app.use(cors({
@@ -23,6 +26,8 @@ app.post('/signup', checkSignUp, authRegister);
 app.post('/login', authLogin);
 app.post('/check-email', authCheckUser);
 app.post("/logout", authLogout);
+app.post("/expenses", checkLogin, addExpense);
+app.get("/expenses", checkLogin, getExpenses);
 
 
 // XIpjPCfVNzudfLmO

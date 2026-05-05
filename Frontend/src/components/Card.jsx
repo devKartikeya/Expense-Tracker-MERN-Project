@@ -1,9 +1,10 @@
 import React from "react";
 
-const Card = ({ title, value, icon, className }) => {
+const Card = ({ title, value, icon, className, onClick }) => {
   return (
     <div
       className={`flex items-center p-6 rounded-lg shadow-lg ${className}`}
+      onClick={onClick}
     >
       <div>
         <h2 className="text-lg font-semibold text-white">{title}</h2>

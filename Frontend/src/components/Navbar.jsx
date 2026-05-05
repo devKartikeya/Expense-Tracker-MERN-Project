@@ -19,13 +19,17 @@ const Navbar = ({ username }) => {
     navigate("/dashboard");
   };
 
+  const goToExpense = () => {
+    navigate("/expense");
+  }
+
   return (
     <nav className='bg-blue-800 p-2 font-poppins flex justify-between items-center shadow-lg'>
         <h1 className='text-2xl font-bold text-white'>Expense Tracker</h1>
         <h1 className='text-xl font-semibold text-yellow-300'>Welcome, {username}!</h1>
         <div className='flex gap-5'>
         <Button command="Dashboard" onClick={goToDashboard} />
-        <Button command="Add Expense" />
+        <Button command="Add Expense" onClick={goToExpense}/>
         </div>
         <Button command="Profile"/>
         <Button command="Logout" onClick={handleLogout}/>
