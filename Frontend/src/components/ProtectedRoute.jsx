@@ -3,24 +3,29 @@ import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
   const [auth, setAuth] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:3000/auth/check", {
       method: "GET",
-      credentials: "include", // 🔹 send cookie
+      credentials: "include", // send cookie
     })
       .then((res) => {
         if (!res.ok) throw new Error("Not authenticated");
         return res.json();
       })
-      .then(() => setAuth(true))
+      .then((data) => {
+        setAuth(true);
+        setUser(data.user); // store user info
+      })
       .catch(() => setAuth(false));
   }, []);
 
-  if (auth === null) return <p>Loading...</p>; // while checking
-  if (!auth) return <Navigate to="/login" replace />; // redirect if not logged in
+  if (auth === null) return <p>Loading...</p>;
+  if (!auth) return <Navigate to="/login" replace />;
 
-  return children; // render protected page
+  // Pass user down to the protected page
+  return React.cloneElement(children, { user });
 };
 
 export default ProtectedRoute;

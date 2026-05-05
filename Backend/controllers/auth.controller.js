@@ -55,9 +55,19 @@ async function authCheckLogin(req, res) {
     res.json({ authenticated: true, user: req.user });
 }
 
+async function authLogout(req, res) {
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: false,   // true in production with HTTPS
+        sameSite: "Lax"  // or "None" if frontend/backend are on different domains
+    });
+    res.json({ message: "Logged out successfully" });
+}
+
 module.exports = {
     authRegister,
     authLogin,
     authCheckUser,
-    authCheckLogin
-}
+    authCheckLogin,
+    authLogout
+};

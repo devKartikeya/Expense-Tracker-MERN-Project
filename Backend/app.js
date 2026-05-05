@@ -4,7 +4,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
 const { checkSignUp, checkLogin } = require('./middlewares/auth.middleware');
-const { authRegister, authLogin, authCheckUser, authCheckLogin } = require('./controllers/auth.controller');
+const { authRegister, authLogin, authCheckUser, authCheckLogin, authLogout } = require('./controllers/auth.controller');
 
 const app = express();
 app.use(cors({
@@ -22,6 +22,8 @@ app.get("/auth/check", checkLogin, authCheckLogin);
 app.post('/signup', checkSignUp, authRegister);
 app.post('/login', authLogin);
 app.post('/check-email', authCheckUser);
+app.post("/logout", authLogout);
+
 
 // XIpjPCfVNzudfLmO
 // mongodb+srv://kartikeya2122008_db_user:XIpjPCfVNzudfLmO@cluster0.tipdh27.mongodb.net/?appName=Cluster0

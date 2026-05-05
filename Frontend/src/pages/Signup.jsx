@@ -32,7 +32,7 @@ const Signup = () => {
       const result = await response.json();
 
       if (result.flag === "success") {
-        navigate("/home");
+        navigate("/dashboard");
       } else {
         if (result.message === "Invalid password") {
           setError("password", {

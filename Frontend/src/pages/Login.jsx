@@ -30,7 +30,7 @@ const Login = () => {
       .then((result) => {
         if (result.flag === "success") {
           console.log("Login successful:", result);
-          navigate("/home");
+          navigate("/dashboard");
         } else {
           if (result.message === "Invalid password") {
             setError("password", {
