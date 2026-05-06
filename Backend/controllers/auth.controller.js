@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { register, login } = require('../services/auth.service');
+const { register, login, checkUser } = require('../services/auth.service');
 const { exists } = require('../models/users.model');
 
 async function authRegister(req, res) {
@@ -49,9 +49,24 @@ async function authLogout(req, res) {
     res.json({ message: "Logged out successfully" });
 }
 
+async function authCheckUser(req, res) {
+    const { username } = req.body;
+    try {
+        const existingUser = await checkUser({ username });
+        if (existingUser.exists === true) {
+            res.json({ message: 'Username is already taken', flag: 'failure', exists: true });
+        } else {
+            res.json({ message: 'Username is available', flag: 'success', exists: false });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error checking username availability', flag: 'failure' });
+    }
+}
+
 module.exports = {
     authRegister,
     authLogin,
     authCheckLogin,
-    authLogout
+    authLogout,
+    authCheckUser
 };

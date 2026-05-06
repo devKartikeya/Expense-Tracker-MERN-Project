@@ -14,6 +14,7 @@ const Dashboard = ({ user }) => {
 
   console.log("User in Dashboard:", user);
 
+  const [expenses, setExpenses] = useState(0);
   const [totalExpenses, setTotalExpenses] = useState(0);
   const [monthlyTotal, setMonthlyTotal] = useState(0);
   const [topCategory, setTopCategory] = useState({ category: "", amount: 0 });
@@ -107,11 +108,22 @@ const Dashboard = ({ user }) => {
     setTopCategory(data);
   }
 
+  async function fetchExpensesCount() {
+    let response = await fetch("http://localhost:3000/expenses-count", {
+      method: "GET",
+      credentials: "include",
+    });
+    let data = await response.json();
+    console.log("Expenses count:", data);
+    setExpenses(data.count);
+  }
+
 
   useEffect(() => {
     fetchTotalExpenses();
     fetchMonthlyTotal();
     fetchTopCategory();
+    fetchExpensesCount();
   }, [])
 
 
@@ -138,7 +150,7 @@ const Dashboard = ({ user }) => {
         />
         <Card
           title="Expenses Logged"
-          value="32"
+          value={expenses}
           icon={<FaCalendarAlt />}
           className="bg-gradient-to-r from-pink-500 to-red-600 justify-between"
         />

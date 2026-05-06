@@ -1,4 +1,4 @@
-const { totalExpenses, monthlyExpenses, topCategory } = require('../services/services.service');
+const { totalExpenses, monthlyExpenses, topCategory, expensesCount } = require('../services/services.service');
 
 async function getTotalExpenses(req, res) {
     try {
@@ -35,4 +35,14 @@ async function getTopCategory(req, res) {
     }
 };
 
-module.exports = { getTotalExpenses, getMonthlyExpenses, getTopCategory };
+async function getExpensesCount(req, res) {
+    try {
+        const count = await expensesCount(req.user.id);
+        res.json({ count });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ message: error.message });
+    }
+};
+
+module.exports = { getTotalExpenses, getMonthlyExpenses, getTopCategory, getExpensesCount };

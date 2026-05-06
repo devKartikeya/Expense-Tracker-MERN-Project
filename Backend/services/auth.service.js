@@ -8,7 +8,7 @@ async function register(username, password) {
     const existingUser = await User.findOne({ username });
     if (existingUser) {
         console.log('User already exists');
-       return { message: 'User already exists', flag: 'failure' };
+        return { message: 'User already exists', flag: 'failure' };
     }
     const hashedPassword = await hashPassword(password);
     const user = await User.create({ username, password: hashedPassword });
@@ -30,7 +30,21 @@ async function login(username, password) {
     return { user, token, flag: 'success' };
 }
 
+async function checkUser({ username }) {
+    try {
+        const existingUser = await User.findOne({ username });
+        if (existingUser) {
+            return { message: 'Username is already taken', flag: 'failure', exists: true };
+        } else {
+            return { message: 'Username is available', flag: 'success', exists: false };
+        }
+    } catch (error) {
+        return { message: 'Error checking username availability', flag: 'failure' };
+    }
+}
+
 module.exports = {
     register,
-    login
+    login,
+    checkUser
 }

@@ -48,4 +48,9 @@ async function topCategory(userId) {
     return result.length > 0 ? { category: String(result[0]._id), amount: result[0].totalAmount } : { category: null, amount: 0 };
 };
 
-module.exports = { totalExpenses, monthlyExpenses, topCategory };
+async function expensesCount(userId) {
+    const count = await Expense.countDocuments({ userId: new mongoose.Types.ObjectId(userId) });
+    return count;
+}
+
+module.exports = { totalExpenses, monthlyExpenses, topCategory, expensesCount };
