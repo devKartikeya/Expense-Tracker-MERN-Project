@@ -60,7 +60,7 @@ const Dashboard = ({ user }) => {
     <div className="bg-blue-600 w-screen h-screen">
       <Navbar username={user.username} />
 
-      <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <Card
           title="Total This Month"
           value={`₹${monthlyTotal.toLocaleString()}`}

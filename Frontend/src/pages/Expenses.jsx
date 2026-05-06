@@ -18,34 +18,31 @@ const Expenses = ({ user }) => {
             <div className="p-6">
                 <h1 className="text-2xl font-bold text-white mb-4">All Expenses</h1>
 
-                <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                    <table className="w-full border-collapse">
+                <div className="bg-white rounded-lg shadow-md overflow-x-auto">
+                    <table className="w-full border-collapse min-w-[600px]">
                         <thead className="bg-blue-800 text-white">
                             <tr>
-                                <th className="py-3 px-4 text-left">Amount</th>
-                                <th className="py-3 px-4 text-left">Category</th>
-                                <th className="py-3 px-4 text-left">Description</th>
-                                <th className="py-3 px-4 text-left">Date</th>
+                                <th className="py-3 px-4 text-left text-sm md:text-base">Amount</th>
+                                <th className="py-3 px-4 text-left text-sm md:text-base">Category</th>
+                                <th className="py-3 px-4 text-left text-sm md:text-base">Description</th>
+                                <th className="py-3 px-4 text-left text-sm md:text-base">Date</th>
                             </tr>
                         </thead>
                         <tbody>
                             {expenses.length > 0 ? (
                                 expenses.map((exp) => (
-                                    <tr key={exp._id} className="border-b border-gray-300">
-                                        <td className="py-3 px-4 font-semibold">₹{exp.amount}</td>
-                                        <td className="py-3 px-4">{exp.category}</td>
-                                        <td className="py-3 px-4">{exp.description}</td>
-                                        <td className="py-3 px-4">
+                                    <tr key={exp._id} className="border-b border-gray-300 hover:bg-blue-50 transition">
+                                        <td className="py-3 px-4 font-semibold text-sm md:text-base">₹{exp.amount}</td>
+                                        <td className="py-3 px-4 text-sm md:text-base">{exp.category}</td>
+                                        <td className="py-3 px-4 text-sm md:text-base">{exp.description}</td>
+                                        <td className="py-3 px-4 text-sm md:text-base">
                                             {new Date(exp.date).toLocaleDateString()}
                                         </td>
                                     </tr>
                                 ))
                             ) : (
                                 <tr>
-                                    <td
-                                        colSpan="4"
-                                        className="py-6 text-center text-gray-500 font-medium"
-                                    >
+                                    <td colSpan="4" className="py-6 text-center text-gray-500 font-medium">
                                         No expenses found.
                                     </td>
                                 </tr>
@@ -54,6 +51,7 @@ const Expenses = ({ user }) => {
                     </table>
                 </div>
             </div>
+
         </div>
     );
 };

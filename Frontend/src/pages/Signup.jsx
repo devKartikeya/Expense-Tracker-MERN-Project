@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [ checkingUsername, setCheckingUsername] = useState(false);
+  const [checkingUsername, setCheckingUsername] = useState(false);
 
   const {
     register,
@@ -25,7 +25,7 @@ const Signup = () => {
           username: data.username,
           password: data.password,
         }),
-        credentials: "include", // Important for cookie handling
+        credentials: "include",
       });
 
       const result = await response.json();
@@ -34,24 +34,12 @@ const Signup = () => {
         navigate("/dashboard");
       } else {
         if (result.message === "Invalid password") {
-          setError("password", {
-            type: "server",
-            message: "Invalid password",
-          });
+          setError("password", { type: "server", message: "Invalid password" });
         } else if (result.message === "User already exists") {
-          setError("username", {
-            type: "server",
-            message: "User already exists",
-          });
+          setError("username", { type: "server", message: "User already exists" });
         } else if (result.message === "All fields are required") {
-          setError("username", {
-            type: "server",
-            message: "All fields are required",
-          });
-          setError("password", {
-            type: "server",
-            message: "All fields are required",
-          });
+          setError("username", { type: "server", message: "All fields are required" });
+          setError("password", { type: "server", message: "All fields are required" });
         }
       }
     } catch (error) {
@@ -97,51 +85,66 @@ const Signup = () => {
 
   return (
     <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 flex justify-center items-center w-screen h-screen text-white">
-      <form id="signup-form"
+      <form
+        id="signup-form"
         onSubmit={handleSubmit(onSubmit)}
-        className="h-3/4 w-1/3 flex flex-col items-center justify-evenly gap-4 bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl shadow-2xl p-3"
+        className="h-[80%] w-[90%] md:w-[30%] flex flex-col items-center justify-evenly gap-2 bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl shadow-2xl px-6 py-3"
       >
-        <h1 className="text-4xl font-extrabold tracking-wide text-white">Register</h1>
+        {/* App Name */}
+        <h1 className="text-3xl font-bold text-yellow-300 tracking-wide drop-shadow-md">
+          Xpense Tracker
+        </h1>
+
+        {/* Title */}
+        <h2 className="text-4xl font-extrabold tracking-wide text-white drop-shadow-lg">
+          Create Account
+        </h2>
+
 
         {/* Username */}
-        <Input
-          placeholder="Enter your Username"
-          type="text"
-          {...register("username", { required: "Username is required" })}
-          onBlur={checkUsernameAvailable} // 🔹 live check
-        />
-        <div className="h-5">
+        <div className="w-full">
+          <Input
+            placeholder="Enter your Username"
+            type="text"
+            {...register("username", { required: "Username is required" })}
+            onBlur={checkUsernameAvailable}
+          />
+          {checkingUsername && (
+            <p className="text-sm text-yellow-300 mt-1">Checking availability...</p>
+          )}
           {errors.username && (
-            <p className="text-red-500 text-md font-bold">{errors.username.message}</p>
+            <p className="text-red-400 text-sm font-semibold mt-1">
+              {errors.username.message}
+            </p>
           )}
         </div>
 
         {/* Password */}
-        <Input
-          placeholder="Enter your Password"
-          type="password"
-          {...register("password", {
-            required: "Password is required",
-            minLength: {
-              value: 6,
-              message: "Password must be at least 6 characters",
-            },
-          })}
-        />
-        <div className="h-5">
+        <div className="w-full">
+          <Input
+            placeholder="Enter your Password"
+            type="password"
+            {...register("password", {
+              required: "Password is required",
+              minLength: { value: 6, message: "Password must be at least 6 characters" },
+            })}
+          />
           {errors.password && (
-            <p className="text-red-500 text-md font-bold">{errors.password.message}</p>
+            <p className="text-red-400 text-sm font-semibold mt-1">
+              {errors.password.message}
+            </p>
           )}
         </div>
 
         {/* Button */}
-        <Button command="Register" />
+        <Button command="Register" className="w-full py-3 rounded-xl bg-blue-500 hover:bg-blue-700 transition duration-300 shadow-md" />
 
-        <p className="text-md">
+        {/* Footer */}
+        <p className="text-md text-gray-200">
           Already have an account?{" "}
           <Link
             to="/login"
-            className="text-blue-400 hover:text-blue-300 font-semibold underline"
+            className="text-blue-300 hover:text-blue-200 font-semibold underline"
           >
             Login
           </Link>

@@ -17,14 +17,12 @@ const Login = () => {
     console.log("Form Data:", data);
     let response = await fetch("http://localhost:3000/login", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         username: data.username,
         password: data.password,
       }),
-      credentials: "include", // Important for cookie handling
+      credentials: "include",
     })
       .then((response) => response.json())
       .then((result) => {
@@ -43,7 +41,6 @@ const Login = () => {
               message: "No account found with this username",
             });
           } else {
-            // fallback: show a general error
             setError("username", {
               type: "server",
               message: "Login failed. Please try again.",
@@ -64,50 +61,61 @@ const Login = () => {
     <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 flex justify-center items-center w-screen h-screen text-white">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="h-auto w-1/3 flex flex-col items-center gap-4 bg-gradient-to-br from-blue-700 to-cyan-600 rounded-3xl shadow-2xl p-5"
+        className="w-[90%] md:w-[30%] flex flex-col items-center gap-6 bg-gradient-to-br from-blue-700 to-cyan-600 rounded-3xl shadow-2xl p-8"
       >
-        <h1 className="text-4xl font-extrabold tracking-wide text-white">Login</h1>
+        {/* App Name */}
+        <h1 className="text-3xl font-bold text-yellow-300 tracking-wide drop-shadow-md">
+          Xpense Tracker
+        </h1>
+
+        {/* Title */}
+        <h2 className="text-4xl font-extrabold tracking-wide text-white drop-shadow-lg">
+          Welcome Back
+        </h2>
+
 
         {/* Username */}
-        <Input
-          placeholder="Enter your Username"
-          type="text"
-          {...register("username", {
-            required: "Username is required",
-          })}
-        />
-        <div className="h-5">
+        <div className="w-full">
+          <Input
+            placeholder="Enter your Username"
+            type="text"
+            {...register("username", { required: "Username is required" })}
+          />
           {errors.username && (
-            <p className="text-red-500 text-md font-bold transition-opacity duration-300">
+            <p className="text-red-400 text-sm font-semibold mt-1">
               {errors.username.message}
             </p>
           )}
         </div>
 
         {/* Password */}
-        <Input
-          placeholder="Enter your Password"
-          type="password"
-          {...register("password", {
-            required: "Password is required",
-            minLength: {
-              value: 6,
-              message: "Password must be at least 6 characters",
-            },
-          })}
-        />
-        <div className="h-5">
+        <div className="w-full">
+          <Input
+            placeholder="Enter your Password"
+            type="password"
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters",
+              },
+            })}
+          />
           {errors.password && (
-            <p className="text-red-500 text-md font-bold transition-opacity duration-300">
+            <p className="text-red-400 text-sm font-semibold mt-1">
               {errors.password.message}
             </p>
           )}
         </div>
 
         {/* Button */}
-        <Button command="Login" />
+        <Button
+          command="Login"
+          className="w-full py-3 rounded-xl bg-blue-500 hover:bg-blue-700 transition duration-300 shadow-md"
+        />
 
-        <p className="text-sm mt-4">
+        {/* Footer */}
+        <p className="text-sm mt-4 text-gray-200">
           Don’t have an account?{" "}
           <Link
             to="/"
