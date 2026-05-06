@@ -46,6 +46,44 @@ app.get("/total-expenses", checkLogin, getTotalExpenses);
 app.get("/monthly-expenses", checkLogin, getMonthlyExpenses);
 app.get("/top-category", checkLogin, getTopCategory);
 
+// Expenses grouped by category
+app.get("/expenses-by-category", checkLogin, async (req, res) => {
+    const result = await Expense.aggregate([
+        { $match: { userId: new mongoose.Types.ObjectId(req.user.id) } },
+        { $group: { _id: "$category", totalAmount: { $sum: "$amount" } } }
+    ]);
+    res.json(result.map(r => ({ category: r._id, totalAmount: r.totalAmount })));
+});
+
+// Monthly totals
+app.get("/monthly-totals", checkLogin, async (req, res) => {
+    const result = await Expense.aggregate([
+        { $match: { userId: new mongoose.Types.ObjectId(req.user.id) } },
+        {
+            $group: {
+                _id: { $month: "$date" },
+                total: { $sum: "$amount" }
+            }
+        },
+        { $sort: { "_id": 1 } }
+    ]);
+    res.json(result.map(r => ({ month: r._id, total: r.total })));
+});
+
+app.get("/daily-expenses", checkLogin, async (req, res) => {
+    const result = await Expense.aggregate([
+        { $match: { userId: new mongoose.Types.ObjectId(req.user.id) } },
+        {
+            $group: {
+                _id: { $dayOfMonth: "$date" },
+                total: { $sum: "$amount" }
+            }
+        },
+        { $sort: { "_id": 1 } }
+    ]);
+    res.json(result.map(r => ({ day: r._id, total: r.total })));
+});
+
 
 
 // XIpjPCfVNzudfLmO

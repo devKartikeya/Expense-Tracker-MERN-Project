@@ -11,3 +11,7 @@ nav {
 #signup-form {
     font-family: 'Poppins', sans-serif;
 }
+
+body {
+    background-color: rgb(37, 89, 233);
+}
