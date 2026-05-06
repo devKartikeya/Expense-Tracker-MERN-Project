@@ -69,7 +69,7 @@ const Dashboard = ({ user }) => {
         />
         <Card
           title="Top Category"
-          value={topCategory.category ? `${topCategory.category} (₹${topCategory.amount.toLocaleString()})` : "No data"}
+          value={topCategory.category ? `${topCategory.category ? topCategory.category : 'N/A'} (₹${topCategory.amount ? topCategory.amount.toLocaleString() : '0'})` : "No data"}
           icon={<FaChartPie />}
           className="bg-gradient-to-r from-green-500 to-teal-600 justify-between"
         />
