@@ -26,7 +26,19 @@ app.use(cookieParser());
 app.get("/auth/check", checkLogin, authCheckLogin);
 app.post('/signup', checkSignUp, authRegister);
 app.post('/login', authLogin);
-app.post('/check-email', authCheckUser);
+app.post('/check-username', async (req, res) => {
+    const { username } = req.body;
+    try {
+        const existingUser = await User.findOne({ username });
+        if (existingUser) {
+            res.json({ message: 'Username is already taken', flag: 'failure', exists: true });
+        } else {
+            res.json({ message: 'Username is available', flag: 'success', exists: false });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error checking username availability' });
+    }
+});
 app.post("/logout", authLogout);
 app.post("/expenses", checkLogin, addExpense);
 app.get("/expenses", checkLogin, getExpenses);

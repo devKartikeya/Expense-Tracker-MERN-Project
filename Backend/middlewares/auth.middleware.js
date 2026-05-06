@@ -2,19 +2,15 @@ const jwt = require('jsonwebtoken');
 const { verifyToken } = require('../utils/jwt.utils');
 
 function checkSignUp(req, res, next) {
-    const { username, email, password } = req.body;
-    console.log("Received signup data:", { username, email, password });
-    if (!username || !email || !password) {
+    const { username, password } = req.body;
+    console.log("Received signup data:", { username, password });
+    if (!username || !password) {
         return res.status(400).json({ message: 'All fields are required', flag: 'failure' });
         console.log("All fields are required");
     }
     else if (password.length < 6) {
         return res.status(400).json({ message: 'Invalid password', flag: 'failure' });
         console.log("Invalid password");
-    }
-    else if (!/^[^@ ]+@[^@ ]+\.[^@ ]+$/.test(email)) {
-        return res.status(400).json({ message: 'Invalid email format', flag: 'failure' });
-        console.log("Invalid email format");
     }
     next();
 }

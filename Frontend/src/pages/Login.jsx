@@ -21,7 +21,7 @@ const Login = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: data.email,
+        username: data.username,
         password: data.password,
       }),
       credentials: "include", // Important for cookie handling
@@ -38,13 +38,13 @@ const Login = () => {
               message: "Password is incorrect",
             });
           } else if (result.message === "User not found") {
-            setError("email", {
+            setError("username", {
               type: "server",
-              message: "No account found with this email",
+              message: "No account found with this username",
             });
           } else {
             // fallback: show a general error
-            setError("email", {
+            setError("username", {
               type: "server",
               message: "Login failed. Please try again.",
             });
@@ -53,7 +53,7 @@ const Login = () => {
       })
       .catch((error) => {
         console.error("Error:", error);
-        setError("email", {
+        setError("username", {
           type: "server",
           message: "Server error. Please try later.",
         });
@@ -68,22 +68,18 @@ const Login = () => {
       >
         <h1 className="text-4xl font-extrabold tracking-wide text-white">Login</h1>
 
-        {/* Email */}
+        {/* Username */}
         <Input
-          placeholder="Enter your Email"
-          type="email"
-          {...register("email", {
-            required: "Email is required",
-            pattern: {
-              value: /^[^@ ]+@[^@ ]+\.[^@ ]+$/,
-              message: "Invalid email format",
-            },
+          placeholder="Enter your Username"
+          type="text"
+          {...register("username", {
+            required: "Username is required",
           })}
         />
         <div className="h-5">
-          {errors.email && (
+          {errors.username && (
             <p className="text-red-500 text-md font-bold transition-opacity duration-300">
-              {errors.email.message}
+              {errors.username.message}
             </p>
           )}
         </div>

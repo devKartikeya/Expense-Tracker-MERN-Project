@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [checkingEmail, setCheckingEmail] = useState(false);
+  const [ checkingUsername, setCheckingUsername] = useState(false);
 
   const {
     register,
@@ -23,7 +23,6 @@ const Signup = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           username: data.username,
-          email: data.email,
           password: data.password,
         }),
         credentials: "include", // Important for cookie handling
@@ -39,22 +38,13 @@ const Signup = () => {
             type: "server",
             message: "Invalid password",
           });
-        } else if (result.message === "Invalid email format") {
-          setError("email", {
-            type: "server",
-            message: "Invalid email format",
-          });
         } else if (result.message === "User already exists") {
-          setError("email", {
+          setError("username", {
             type: "server",
             message: "User already exists",
           });
         } else if (result.message === "All fields are required") {
           setError("username", {
-            type: "server",
-            message: "All fields are required",
-          });
-          setError("email", {
             type: "server",
             message: "All fields are required",
           });
@@ -66,51 +56,50 @@ const Signup = () => {
       }
     } catch (error) {
       console.error("Error:", error);
-      setError("email", {
+      setError("username", {
         type: "server",
         message: "Server error. Please try later.",
       });
     }
   };
 
-  // 🔹 Email uniqueness check on blur
-  const checkEmailAvailable = async (e) => {
-    const email = e.target.value;
-    if (!email) return;
+  const checkUsernameAvailable = async (e) => {
+    const username = e.target.value;
+    if (!username) return;
 
-    setCheckingEmail(true);
+    setCheckingUsername(true);
     try {
-      const response = await fetch("http://localhost:3000/check-email", {
+      const response = await fetch("http://localhost:3000/check-username", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ username }),
       });
 
       const result = await response.json();
 
       if (result.exists) {
-        setError("email", {
+        setError("username", {
           type: "server",
-          message: "User already exists",
+          message: "Username is already taken",
         });
       } else {
-        clearErrors("email");
+        clearErrors("username");
       }
     } catch (error) {
-      setError("email", {
+      setError("username", {
         type: "server",
-        message: "Error checking email availability",
+        message: "Error checking username availability",
       });
     } finally {
-      setCheckingEmail(false);
+      setCheckingUsername(false);
     }
   };
 
   return (
     <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 flex justify-center items-center w-screen h-screen text-white">
-      <form
+      <form id="signup-form"
         onSubmit={handleSubmit(onSubmit)}
-        className="h-[95%] w-1/3 flex flex-col items-center gap-6 bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl shadow-2xl p-5"
+        className="h-3/4 w-1/3 flex flex-col items-center justify-evenly gap-4 bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl shadow-2xl p-3"
       >
         <h1 className="text-4xl font-extrabold tracking-wide text-white">Register</h1>
 
@@ -119,32 +108,11 @@ const Signup = () => {
           placeholder="Enter your Username"
           type="text"
           {...register("username", { required: "Username is required" })}
+          onBlur={checkUsernameAvailable} // 🔹 live check
         />
         <div className="h-5">
           {errors.username && (
             <p className="text-red-500 text-md font-bold">{errors.username.message}</p>
-          )}
-        </div>
-
-        {/* Email */}
-        <Input
-          placeholder="Enter your Email"
-          type="email"
-          {...register("email", {
-            required: "Email is required",
-            pattern: {
-              value: /^[^@ ]+@[^@ ]+\.[^@ ]+$/,
-              message: "Invalid email format",
-            },
-          })}
-          onBlur={checkEmailAvailable} // 🔹 live check
-        />
-        <div className="h-5">
-          {checkingEmail && (
-            <p className="text-yellow-300 text-md font-bold">Checking email...</p>
-          )}
-          {errors.email && (
-            <p className="text-red-500 text-md font-bold">{errors.email.message}</p>
           )}
         </div>
 
@@ -169,7 +137,7 @@ const Signup = () => {
         {/* Button */}
         <Button command="Register" />
 
-        <p className="text-md mt-4">
+        <p className="text-md">
           Already have an account?{" "}
           <Link
             to="/login"
