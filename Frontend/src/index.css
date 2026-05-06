@@ -15,3 +15,7 @@ nav {
 body {
     background-color: rgb(37, 89, 233);
 }
+
+#reset-form {
+    font-family: 'Poppins', sans-serif;
+}

@@ -115,13 +115,22 @@ const Login = () => {
         />
 
         {/* Footer */}
-        <p className="text-sm mt-4 text-gray-200">
+        <p className="text-sm mt-2 text-gray-200">
           Don’t have an account?{" "}
           <Link
             to="/"
-            className="text-pink-300 hover:text-pink-200 font-semibold underline"
+            className="text-pink-300 hover:text-pink-200 font-semibold"
           >
             Register
+          </Link>
+        </p>
+        <p className="text-sm text-gray-200">
+          Forgot your password?{" "}
+          <Link
+            to="/reset-password"
+            className="text-pink-300 hover:text-pink-200 font-semibold"
+          >
+            Reset Password
           </Link>
         </p>
       </form>

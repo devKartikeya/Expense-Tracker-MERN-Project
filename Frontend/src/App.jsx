@@ -5,6 +5,8 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard"; 
 import Expense from "./pages/Expense"; 
 import Expenses from "./pages/Expenses";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
@@ -37,6 +39,8 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="/reset-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
       </Routes>
     </Router>
   );
