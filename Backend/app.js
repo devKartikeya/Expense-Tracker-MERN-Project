@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 
-app.use("/mail", mailRoutes);
+app.use("/auth", mailRoutes);
 
 app.get("/auth/check", checkLogin, authCheckLogin);
 app.post('/signup', checkSignUp, authRegister);

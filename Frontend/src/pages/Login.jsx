@@ -58,7 +58,7 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 flex justify-center items-center w-screen h-screen text-white">
+    <div className="bg-gradient-to-br from-blue-600 via-blue-400 to-blue-500 flex justify-center items-center w-screen h-screen text-white">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-[90%] md:w-[30%] flex flex-col items-center gap-6 bg-gradient-to-br from-blue-700 to-cyan-600 rounded-3xl shadow-2xl p-8"

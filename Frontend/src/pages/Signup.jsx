@@ -84,7 +84,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 flex justify-center items-center w-screen h-screen text-white">
+    <div className="bg-gradient-to-br from-blue-600 via-blue-400 to-blue-500 flex justify-center items-center w-screen h-screen text-white">
       <form
         id="signup-form"
         onSubmit={handleSubmit(onSubmit)}

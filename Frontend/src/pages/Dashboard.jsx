@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
 import { useNavigate, Link } from "react-router-dom";
-import { FaWallet, FaHistory, FaChartPie, FaCalendarAlt } from "react-icons/fa";
+import { FaWallet, FaHistory, FaChartPie, FaCalendarAlt, FaClipboardCheck } from "react-icons/fa";
 import { Pie, Bar, Line } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, PointElement, LineElement} from "chart.js";
 
@@ -132,7 +132,7 @@ const Dashboard = ({ user }) => {
   };
 
   return (
-    <div className="bg-blue-600 w-screen h-screen">
+    <div className="bg-gradient-to-br from-blue-500 to-blue-800 w-screen h-screen">
       <Navbar username={user.username} />
 
       <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -157,7 +157,7 @@ const Dashboard = ({ user }) => {
         <Card
           title="Total Expenses"
           value={`₹${totalExpenses.toLocaleString()}`}
-          icon={<FaCalendarAlt />}
+          icon={<FaClipboardCheck />}
           className="bg-gradient-to-r from-yellow-500 to-orange-600 justify-between"
         />
 
