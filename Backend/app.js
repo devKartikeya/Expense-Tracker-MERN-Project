@@ -3,19 +3,16 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const nodemailer = require('nodemailer');
-const crypto = require("crypto");
-const bcrypt = require('bcrypt');
 
 const connectDB = require('./config/db');
-const User = require('./models/users.model');
-const Expense = require('./models/expenses.model');
 const mailRoutes = require("./routes/mail.route");
 const { checkSignUp, checkLogin } = require('./middlewares/auth.middleware');
 const { authRegister, authLogin, authCheckUser, authCheckLogin, authLogout, authDeleteAccount, authChangePassword } = require('./controllers/auth.controller');
 const { addExpense, getExpenses } = require('./controllers/expense.controller');
 const { getTotalExpenses, getMonthlyExpenses, getTopCategory, getExpensesCount } = require('./controllers/services.controller');
 const { getExpensesByCategory, getMonthlyTotals, getDailyExpenses } = require('./controllers/charts.controller');
-const { getProfileData } = require("./controllers/profile.controller")
+const { getProfileData } = require("./controllers/profile.controller");
+const { contactController } = require("./controllers/contact.controller");
 
 const app = express();
 app.use(cors({
@@ -29,11 +26,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-
 app.use("/auth", mailRoutes);
 
-app.get("/auth/check", checkLogin, authCheckLogin);
-app.post("/profile-data", checkLogin, getProfileData );
+app.post("/profile-data", checkLogin, getProfileData);
 app.post('/signup', checkSignUp, authRegister);
 app.post('/login', authLogin);
 app.post('/check-username', authCheckUser);
@@ -41,6 +36,8 @@ app.post("/logout", authLogout);
 app.post("/delete-account", checkLogin, authDeleteAccount);
 app.post("/change-password", checkLogin, authChangePassword);
 app.post("/expenses", checkLogin, addExpense);
+app.post("/contact-us", checkLogin, contactController);
+app.get("/auth/check", checkLogin, authCheckLogin);
 app.get("/expenses", checkLogin, getExpenses);
 app.get("/total-expenses", checkLogin, getTotalExpenses);
 app.get("/monthly-expenses", checkLogin, getMonthlyExpenses);
@@ -49,10 +46,6 @@ app.get("/expenses-count", checkLogin, getExpensesCount);
 app.get("/expenses-by-category", checkLogin, getExpensesByCategory);
 app.get("/monthly-totals", checkLogin, getMonthlyTotals);
 app.get("/daily-expenses", checkLogin, getDailyExpenses);
-
-
-// XIpjPCfVNzudfLmO
-// mongodb+srv://kartikeya2122008_db_user:XIpjPCfVNzudfLmO@cluster0.tipdh27.mongodb.net/?appName=Cluster0
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
