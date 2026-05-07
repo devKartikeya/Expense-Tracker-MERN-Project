@@ -3,6 +3,9 @@ A modern expense tracking application built with React (frontend) and Express + 
 It includes authentication, expense analytics, and a secure password reset flow with email integration using Nodemailer.
 
 🚀 Features
+
+🔗 Single Page Application with App-like feel !!
+
 🔐 Authentication
 
 Signup & Login with JWT-based sessions
@@ -32,6 +35,8 @@ Profile Page with User details, Change Password and Delete Account feature
 Contact US with messages saving to both Gmail and MongoDB 
 
 Interactive About US
+
+Component based architecture and React Router usage with Protected routes
 
 🎨 Modern UI
 
