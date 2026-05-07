@@ -2,14 +2,15 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard"; 
-import Expense from "./pages/Expense"; 
+import Dashboard from "./pages/Dashboard";
+import Expense from "./pages/Expense";
 import Expenses from "./pages/Expenses";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Profile from "./pages/Profile";
 import ChangePassword from "./pages/ChangePassword";
 import ContactUs from "./pages/Contact";
+import AboutUs from "./pages/About";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
@@ -50,22 +51,30 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route 
-        path="/change-password"
-        element={
-          <ProtectedRoute>
-            <ChangePassword />
-          </ProtectedRoute>
-        }
-      />
-       <Route 
-        path="/contact-us"
-        element={
-          <ProtectedRoute>
-            <ContactUs />
-          </ProtectedRoute>
-        }
-      />
+        <Route
+          path="/change-password"
+          element={
+            <ProtectedRoute>
+              <ChangePassword />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/contact-us"
+          element={
+            <ProtectedRoute>
+              <ContactUs />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/about-us"
+          element={
+            <ProtectedRoute>
+              <AboutUs />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/reset-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
       </Routes>
