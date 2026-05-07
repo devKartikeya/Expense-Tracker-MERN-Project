@@ -163,6 +163,7 @@ const Dashboard = ({ user }) => {
 
       </div>
       <Card
+        id="history-card"
         title="See Your Expenses History"
         value="View Details"
         onClick={goToExpenses}

@@ -1,8 +1,8 @@
 import React from "react";
 
-const Card = ({ title, value, icon, className, onClick }) => {
+const Card = ({ title, value, icon, className, onClick, id }) => {
   return (
-    <div
+    <div id={id}
       className={`flex flex-col sm:flex-row items-center justify-between p-6 rounded-lg shadow-lg ${className}`}
       onClick={onClick}
     >

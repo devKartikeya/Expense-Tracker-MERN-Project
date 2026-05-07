@@ -9,6 +9,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Profile from "./pages/Profile";
 import ChangePassword from "./pages/ChangePassword";
+import ContactUs from "./pages/Contact";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
@@ -54,6 +55,14 @@ const App = () => {
         element={
           <ProtectedRoute>
             <ChangePassword />
+          </ProtectedRoute>
+        }
+      />
+       <Route 
+        path="/contact-us"
+        element={
+          <ProtectedRoute>
+            <ContactUs />
           </ProtectedRoute>
         }
       />

@@ -42,33 +42,6 @@ const Profile = ({ user }) => {
     fetchProfileData();
   }, []);
 
-  // const fetchJoiningDate = async () => {
-  //   try {
-  //     let res = await fetch("http://localhost:3000/joining-date", {
-  //       method: "POST",
-  //       credentials: "include",
-  //     });
-  //     let response = await res.json();
-  //     if (res.ok) {
-  //       const joinedAt = new Date(response.joinedAt).toLocaleDateString("en-IN", {
-  //         year: "numeric",
-  //         month: "long",
-  //         day: "numeric",
-  //       });
-  //       setDate(joinedAt);
-  //     } else {
-  //       setDate("N/A");
-  //     }
-  //   } catch (err) {
-  //     setDate("N/A");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchJoiningDate();
-  // }, []);
-
-
   const deleteAccount = async () => {
     let res = await fetch("http://localhost:3000/delete-account", {
       method: "POST",

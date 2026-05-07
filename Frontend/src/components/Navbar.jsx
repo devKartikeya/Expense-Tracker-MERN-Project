@@ -17,7 +17,7 @@ const Navbar = ({ username, profileMode = false }) => {
   const goToDashboard = () => navigate("/dashboard");
   const goToExpense = () => navigate("/expense");
   const goToAbout = () => navigate("/about");
-  const goToContact = () => navigate("/contact");
+  const goToContact = () => navigate("/contact-us");
   const goToProfile = () => navigate("/profile");
 
   return (
