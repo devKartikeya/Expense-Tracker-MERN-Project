@@ -27,6 +27,12 @@ Secure token-based reset with expiry
 
 Nodemailer integration with Gmail App Passwords
 
+Profile Page with User details, Change Password and Delete Account feature
+
+Contact US with messages saving to both Gmail and MongoDB 
+
+Interactive About US
+
 🎨 Modern UI
 
 Responsive layouts with Tailwind CSS
