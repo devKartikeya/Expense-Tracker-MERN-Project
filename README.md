@@ -2,6 +2,10 @@
 A modern expense tracking application built with React (frontend) and Express + MongoDB (backend).
 It includes authentication, expense analytics, and a secure password reset flow with email integration using Nodemailer.
 
+Xpense Tracker is not just a product but a project with an aim to solve a problem and provide its users the peace and security they deserve. 
+
+The Product is reliable, scalable and secure. 
+
 🚀 Features
 
 🔗 Single Page Application with App-like feel !!
