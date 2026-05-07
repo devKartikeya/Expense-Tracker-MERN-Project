@@ -132,7 +132,7 @@ const Dashboard = ({ user }) => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-500 to-blue-800 w-screen h-screen">
+    <div id="dashboard" className="bg-gradient-to-br from-blue-500 to-blue-800 w-screen h-screen">
       <Navbar username={user.username} />
 
       <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -163,7 +163,6 @@ const Dashboard = ({ user }) => {
 
       </div>
       <Card
-        id="history-card"
         title="See Your Expenses History"
         value="View Details"
         onClick={goToExpenses}
@@ -174,19 +173,19 @@ const Dashboard = ({ user }) => {
       {/* Charts */}
       <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white rounded-lg shadow-md p-4">
-          <h2 className="text-xl font-bold mb-4">Expenses by Category</h2>
+          <h2 id="pie" className="text-xl font-bold mb-4">Expenses by Category</h2>
           <div className="h-64"> {/* height control */}
-            <Pie data={pieData} options={pieOptions} />
+            <Pie  data={pieData} options={pieOptions} />
           </div>
         </div>
 
         <div className="bg-white rounded-lg shadow-md p-4">
-          <h2 className="text-xl font-bold mb-4">Monthly Totals</h2>
-          <Bar data={barData} />
+          <h2 id="bar" className="text-xl font-bold mb-4">Monthly Totals</h2>
+          <Bar  data={barData} />
         </div>
 
         <div className="bg-white rounded-lg shadow-md p-4 lg:col-span-2">
-          <h2 className="text-xl font-bold mb-4">Daily Spending Trend</h2>
+          <h2 id="line" className="text-xl font-bold mb-4">Daily Spending Trend</h2>
           <div className="h-64">
             <Line data={lineData} options={{ maintainAspectRatio: false }} />
           </div>

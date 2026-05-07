@@ -28,6 +28,18 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-#history-card {
+#dashboard {
+    font-family: "Poppins";
+}
+
+#expenses-list {
+    font-family: "Poppins";
+}
+
+#pie, #line, #bar {
+    font-family: "Poppins";
+}
+
+#about , #contact{
     font-family: "Poppins";
 }

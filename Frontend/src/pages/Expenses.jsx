@@ -12,7 +12,7 @@ const Expenses = ({ user }) => {
     }, []);
 
     return (
-        <div className="w-screen h-screen bg-blue-600">
+        <div id="expenses-list" className="w-screen h-screen bg-blue-600">
             <Navbar username={user.username} />
 
             <div className="p-6">

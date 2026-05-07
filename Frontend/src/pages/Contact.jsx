@@ -29,7 +29,7 @@ const ContactUs = ({ user }) => {
 
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500">
+        <div id="contact" className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500">
             {/* Navbar */}
             <Navbar username={user.username} profileMode={true} />
 

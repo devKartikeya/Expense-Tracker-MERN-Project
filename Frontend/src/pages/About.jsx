@@ -4,7 +4,7 @@ import { FiTarget, FiTrendingUp, FiShield, FiUser } from "react-icons/fi";
 
 const AboutUs = ({ user }) => {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500">
+        <div id="about" className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500">
             {/* Navbar */}
             <Navbar username={user.username} profileMode={true} />
 
