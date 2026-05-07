@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('../models/users.model');
+const bcrypt = require("bcrypt");
 const { hashPassword, comparePassword } = require('../utils/bcrypt.utils');
 const { generateToken } = require('../utils/jwt.utils');
 
@@ -43,8 +44,39 @@ async function checkUser({ username }) {
     }
 }
 
+async function deleteAccount(userId) {
+    try {
+        await User.findByIdAndDelete(userId);
+        return { message: "Account deleted successfully" };
+    } catch (error) {
+        console.error("Error deleting account:", error);
+        return { error: "Failed to delete account" };
+    }
+}
+
+async function changePassword(userId, oldPassword, newPassword) {
+    try {
+        // Find user from session (assuming you store userId in cookie/JWT)
+        const user = await User.findById(userId);
+        if (!user) return { message: "User not found", flag: "failure" };
+        const isMatch = await comparePassword(oldPassword, user.password);
+        if (!isMatch) {
+            return { message: "Old password is incorrect", flag: "failure" };
+        }
+        user.password = await hashPassword(newPassword, 10);
+        await user.save();
+
+        return { message: "Password changed successfully", flag: "success" };
+    } catch (err) {
+        return { message: "Server error", flag: "failure" };
+    }
+}
+
+
 module.exports = {
     register,
     login,
-    checkUser
+    checkUser,
+    deleteAccount,
+    changePassword
 }

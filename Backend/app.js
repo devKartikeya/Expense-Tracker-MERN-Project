@@ -11,10 +11,11 @@ const User = require('./models/users.model');
 const Expense = require('./models/expenses.model');
 const mailRoutes = require("./routes/mail.route");
 const { checkSignUp, checkLogin } = require('./middlewares/auth.middleware');
-const { authRegister, authLogin, authCheckUser, authCheckLogin, authLogout } = require('./controllers/auth.controller');
+const { authRegister, authLogin, authCheckUser, authCheckLogin, authLogout, authDeleteAccount, authChangePassword } = require('./controllers/auth.controller');
 const { addExpense, getExpenses } = require('./controllers/expense.controller');
 const { getTotalExpenses, getMonthlyExpenses, getTopCategory, getExpensesCount } = require('./controllers/services.controller');
 const { getExpensesByCategory, getMonthlyTotals, getDailyExpenses } = require('./controllers/charts.controller');
+const { getProfileData } = require("./controllers/profile.controller")
 
 const app = express();
 app.use(cors({
@@ -32,10 +33,13 @@ app.use(cookieParser());
 app.use("/auth", mailRoutes);
 
 app.get("/auth/check", checkLogin, authCheckLogin);
+app.post("/profile-data", checkLogin, getProfileData );
 app.post('/signup', checkSignUp, authRegister);
 app.post('/login', authLogin);
 app.post('/check-username', authCheckUser);
 app.post("/logout", authLogout);
+app.post("/delete-account", checkLogin, authDeleteAccount);
+app.post("/change-password", checkLogin, authChangePassword);
 app.post("/expenses", checkLogin, addExpense);
 app.get("/expenses", checkLogin, getExpenses);
 app.get("/total-expenses", checkLogin, getTotalExpenses);
@@ -45,7 +49,6 @@ app.get("/expenses-count", checkLogin, getExpensesCount);
 app.get("/expenses-by-category", checkLogin, getExpensesByCategory);
 app.get("/monthly-totals", checkLogin, getMonthlyTotals);
 app.get("/daily-expenses", checkLogin, getDailyExpenses);
-
 
 
 // XIpjPCfVNzudfLmO

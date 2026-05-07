@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { register, login, checkUser } = require('../services/auth.service');
+const { register, login, checkUser, deleteAccount, changePassword } = require('../services/auth.service');
 const { exists } = require('../models/users.model');
 
 async function authRegister(req, res) {
@@ -63,10 +63,33 @@ async function authCheckUser(req, res) {
     }
 }
 
+async function authDeleteAccount(req, res) {
+    try {
+        await deleteAccount(req.user.id);
+        res.json({ message: "Account deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting account:", error);
+        res.status(500).json({ error: "Failed to delete account" });
+    }
+}
+
+async function authChangePassword(req, res) {
+    try {
+        const userID = req.user.id;
+        const { oldPassword, newPassword } = req.body;
+        const response = await changePassword(userID, oldPassword, newPassword);
+        res.json(response);
+    } catch (error) {
+        res.status(500).json({ message: "Server error" });
+    }
+}
+
 module.exports = {
     authRegister,
     authLogin,
     authCheckLogin,
     authLogout,
-    authCheckUser
+    authCheckUser,
+    authDeleteAccount,
+    authChangePassword
 };

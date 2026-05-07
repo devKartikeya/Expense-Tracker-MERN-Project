@@ -5,7 +5,11 @@ const userSchema = new Schema({
     username: String,
     password: String,
     resetPasswordToken: String,
-    resetPasswordExpires: Date
+    resetPasswordExpires: Date,
+    joinedAt: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 const User = mongoose.model('User', userSchema);

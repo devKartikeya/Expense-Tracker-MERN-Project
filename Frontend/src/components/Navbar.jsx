@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from './Button';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
-const Navbar = ({ username }) => {
+const Navbar = ({ username, profileMode = false }) => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -16,6 +16,9 @@ const Navbar = ({ username }) => {
 
   const goToDashboard = () => navigate("/dashboard");
   const goToExpense = () => navigate("/expense");
+  const goToAbout = () => navigate("/about");
+  const goToContact = () => navigate("/contact");
+  const goToProfile = () => navigate("/profile");
 
   return (
     <nav className="bg-blue-800 p-3 font-poppins flex justify-between items-center shadow-lg relative">
@@ -29,23 +32,44 @@ const Navbar = ({ username }) => {
 
       {/* Desktop Buttons */}
       <div className="hidden md:flex gap-5">
-        <Button command="Dashboard" onClick={goToDashboard} />
-        <Button command="Add Expense" onClick={goToExpense} />
-        <Button command="Profile" />
+        {profileMode ? (
+          <>
+            <Button command="About Us" onClick={goToAbout} />
+            <Button command="Contact Us" onClick={goToContact} />
+          </>
+        ) : (
+          <>
+            <Button command="Dashboard" onClick={goToDashboard} />
+            <Button command="Add Expense" onClick={goToExpense} />
+          </>
+        )}
+        <Button command="Profile" onClick={goToProfile}/>
         <Button command="Logout" onClick={handleLogout} />
       </div>
 
       {/* Hamburger Icon (mobile only) */}
-      <div className="md:hidden text-white text-2xl cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
+      <div
+        className="md:hidden text-white text-2xl cursor-pointer"
+        onClick={() => setIsOpen(!isOpen)}
+      >
         {isOpen ? <FaTimes /> : <FaBars />}
       </div>
 
       {/* Mobile Menu */}
       {isOpen && (
         <div className="absolute top-full left-0 w-full bg-blue-700 flex flex-col items-center gap-4 py-4 md:hidden shadow-lg">
-          <Button command="Dashboard" onClick={goToDashboard} />
-          <Button command="Add Expense" onClick={goToExpense} />
-          <Button command="Profile" />
+          {profileMode ? (
+            <>
+              <Button command="About Us" onClick={goToAbout} />
+              <Button command="Contact Us" onClick={goToContact} />
+            </>
+          ) : (
+            <>
+              <Button command="Dashboard" onClick={goToDashboard} />
+              <Button command="Add Expense" onClick={goToExpense} />
+            </>
+          )}
+          <Button command="Profile" onClick={goToProfile}/>
           <Button command="Logout" onClick={handleLogout} />
         </div>
       )}
