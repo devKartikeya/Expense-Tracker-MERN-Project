@@ -25,4 +25,4 @@ const sendResetEmail = async (to, resetLink) => {
   await transporter.sendMail(mailOptions);
 };
 
-module.exports = { sendResetEmail };
+module.exports = { sendResetEmail, transporter };
