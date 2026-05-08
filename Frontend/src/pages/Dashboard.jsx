@@ -4,6 +4,7 @@ import Card from "../components/Card";
 import Footer from "../components/Footer";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FaWallet, FaHistory, FaChartPie, FaCalendarAlt, FaClipboardCheck } from "react-icons/fa";
+import Confetti from "react-confetti";
 import { Pie, Bar, Line } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, PointElement, LineElement } from "chart.js";
 
@@ -141,22 +142,25 @@ const Dashboard = ({ user }) => {
 
       {/* Welcome Modal */}
       {showWelcomeModal && (
-        <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-          <div className="bg-white rounded-lg shadow-xl p-6 w-[90%] sm:w-[400px] animate-fadeIn">
-            <h3 className="text-2xl font-bold text-blue-600 mb-4 text-center">Welcome, {user.username}!</h3>
-            <p className="text-gray-700 mb-6 text-center">
-              🎉 Your account has been created successfully. Start exploring your dashboard and track your expenses with ease!
-            </p>
-            <div className="flex justify-center">
-              <button
-                className="px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg shadow-md hover:scale-105 transition-transform"
-                onClick={() => setShowWelcomeModal(false)}
-              >
-                Get Started
-              </button>
+        <>
+          <Confetti width={window.innerWidth} height={window.innerHeight} />
+          <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+            <div className="bg-white rounded-lg shadow-xl p-6 w-[90%] sm:w-[400px] animate-fadeIn">
+              <h3 className="text-2xl font-bold text-blue-600 mb-4 text-center">Welcome, {user.username}!</h3>
+              <p className="text-gray-700 mb-6 text-center">
+                🎉 Your account has been created successfully. Start exploring your dashboard and track your expenses with ease!
+              </p>
+              <div className="flex justify-center">
+                <button
+                  className="px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg shadow-md hover:scale-105 transition-transform"
+                  onClick={() => setShowWelcomeModal(false)}
+                >
+                  Get Started
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </>
       )}
 
       {/* Stats Cards */}
