@@ -6,6 +6,7 @@ import { FiUser, FiMail, FiCalendar, FiDollarSign, FiPieChart } from "react-icon
 const Profile = ({ user }) => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+  const [showDeleteSuccess, setShowDeleteSuccess] = useState(false);
   const [date, setDate] = useState("N/A");
   const [stats, setStats] = useState({
     totalExpenses: 0,
@@ -49,12 +50,16 @@ const Profile = ({ user }) => {
     });
     let response = await res.json();
     if (res.ok) {
-      alert(response.message);
-      navigate("/");
+      setShowModal(false);          // close confirmation modal
+      setShowDeleteSuccess(true);   // show success popup
+      setTimeout(() => {
+        navigate("/");              // redirect after a short delay
+      }, 5000);
     } else {
       alert(response.error);
     }
   };
+
 
   const goToDashboard = () => navigate("/dashboard");
   const changePassword = () => navigate("/change-password");
@@ -105,6 +110,31 @@ const Profile = ({ user }) => {
               </div>
             </div>
           </div>
+
+          {/* Delete Success Popup */}
+          {showDeleteSuccess && (
+            <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+              <div className="bg-white rounded-lg shadow-xl p-6 w-[90%] sm:w-[400px] animate-fadeIn">
+                <h3 className="text-2xl font-bold text-green-600 mb-4 text-center">
+                  Account Deleted
+                </h3>
+                <p className="text-gray-700 mb-6 text-center">
+                  Your account has been deleted successfully.
+                  Thank you for being a part of <span className="font-bold text-blue-600">Xpense Tracker</span>.
+                  We hope to see you again someday!
+                </p>
+                <div className="flex justify-center">
+                  <button
+                    className="px-6 py-2 bg-gradient-to-r from-green-500 to-teal-600 text-white rounded-lg shadow-md hover:scale-105 transition-transform"
+                    onClick={() => navigate("/")}
+                  >
+                    Go to Home
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
 
           {/* Settings */}
           <div className="mt-6">
