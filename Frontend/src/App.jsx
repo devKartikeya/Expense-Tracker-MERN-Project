@@ -13,6 +13,7 @@ import ContactUs from "./pages/Contact";
 import AboutUs from "./pages/About";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ProtectedRoute from "./components/ProtectedRoute";
+import TermsAndConditions from "./pages/TermsAndConditions";
 
 const App = () => {
   return (
@@ -81,6 +82,14 @@ const App = () => {
           element={
 
             <PrivacyPolicy />
+
+          }
+        />
+        <Route
+          path="/terms-conditions"
+          element={
+
+            <TermsAndConditions />
 
           }
         />

@@ -152,6 +152,13 @@ const Signup = () => {
          <p className="text-sm text-gray-200">
           Read our{" "}
           <Link
+            to="/terms-conditions"
+            className="text-blue-300 hover:text-blue-200 font-semibold underline"
+          >
+            Terms and Conditions
+          </Link>
+          <span> & </span>
+          <Link
             to="/privacy-policy"
             className="text-blue-300 hover:text-blue-200 font-semibold underline"
           >
