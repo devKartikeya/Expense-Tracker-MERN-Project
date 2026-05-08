@@ -34,7 +34,7 @@ const Footer = () => {
                 {/* Right Section - Socials */}
                 <div className="flex gap-4">
                     <a
-                        href="https://github.com/yourgithub"
+                        href="https://github.com/devKartikeya"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-yellow-300 transition"
@@ -42,7 +42,7 @@ const Footer = () => {
                         <FiGithub size={20} />
                     </a>
                     <a
-                        href="https://linkedin.com/in/yourlinkedin"
+                        href="https://linkedin.com/in/kartikeya-mishra-8199973a9"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-yellow-300 transition"
