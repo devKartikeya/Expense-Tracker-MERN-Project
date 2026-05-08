@@ -1,19 +1,19 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import Expense from "./pages/Expense";
-import Expenses from "./pages/Expenses";
-import ForgotPassword from "./pages/ForgotPassword";
-import ResetPassword from "./pages/ResetPassword";
-import Profile from "./pages/Profile";
-import ChangePassword from "./pages/ChangePassword";
-import ContactUs from "./pages/Contact";
 import AboutUs from "./pages/About";
+import Signup from "./pages/Signup";
+import Profile from "./pages/Profile";
+import Expense from "./pages/Expense";
+import ContactUs from "./pages/Contact";
+import Expenses from "./pages/Expenses";
+import Dashboard from "./pages/Dashboard";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import ResetPassword from "./pages/ResetPassword";
+import ForgotPassword from "./pages/ForgotPassword";
+import ChangePassword from "./pages/ChangePassword";
 import ProtectedRoute from "./components/ProtectedRoute";
 import TermsAndConditions from "./pages/TermsAndConditions";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
@@ -80,17 +80,13 @@ const App = () => {
         <Route
           path="/privacy-policy"
           element={
-
             <PrivacyPolicy />
-
           }
         />
         <Route
           path="/terms-conditions"
           element={
-
             <TermsAndConditions />
-
           }
         />
         <Route path="/reset-password" element={<ForgotPassword />} />

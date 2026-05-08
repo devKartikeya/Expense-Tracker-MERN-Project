@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {

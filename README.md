@@ -32,6 +32,8 @@ Forgot Password → Email reset link
 
 Secure token-based reset with expiry
 
+Terms and Conditions and Privacy Policy enabled
+
 Nodemailer integration with Gmail App Passwords
 
 Profile Page with User details, Change Password and Delete Account feature

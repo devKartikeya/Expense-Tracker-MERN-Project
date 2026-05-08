@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { useNavigate, Link } from "react-router-dom";
 import { FiUser, FiMail, FiCalendar, FiDollarSign, FiPieChart } from "react-icons/fi";
 
 const Profile = ({ user }) => {

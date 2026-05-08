@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import Card from "../components/Card";
+import Confetti from "react-confetti";
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { Pie, Bar, Line } from "react-chartjs-2";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FaWallet, FaHistory, FaChartPie, FaCalendarAlt, FaClipboardCheck } from "react-icons/fa";
-import Confetti from "react-confetti";
-import { Pie, Bar, Line } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, PointElement, LineElement } from "chart.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, PointElement, LineElement);

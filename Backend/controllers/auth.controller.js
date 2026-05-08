@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const { register, login, checkUser, deleteAccount, changePassword } = require('../services/auth.service');
 const { exists } = require('../models/users.model');
+const { register, login, checkUser, deleteAccount, changePassword } = require('../services/auth.service');
 
 async function authRegister(req, res) {
     const { username, password } = req.body;

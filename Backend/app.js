@@ -1,18 +1,18 @@
+const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
-const cookieParser = require('cookie-parser');
 const nodemailer = require('nodemailer');
+const cookieParser = require('cookie-parser');
 
 const connectDB = require('./config/db');
 const mailRoutes = require("./routes/mail.route");
-const { checkSignUp, checkLogin } = require('./middlewares/auth.middleware');
-const { authRegister, authLogin, authCheckUser, authCheckLogin, authLogout, authDeleteAccount, authChangePassword } = require('./controllers/auth.controller');
-const { addExpense, getExpenses } = require('./controllers/expense.controller');
-const { getTotalExpenses, getMonthlyExpenses, getTopCategory, getExpensesCount } = require('./controllers/services.controller');
-const { getExpensesByCategory, getMonthlyTotals, getDailyExpenses } = require('./controllers/charts.controller');
 const { getProfileData } = require("./controllers/profile.controller");
 const { contactController } = require("./controllers/contact.controller");
+const { checkSignUp, checkLogin } = require('./middlewares/auth.middleware');
+const { addExpense, getExpenses } = require('./controllers/expense.controller');
+const { getExpensesByCategory, getMonthlyTotals, getDailyExpenses } = require('./controllers/charts.controller');
+const { getTotalExpenses, getMonthlyExpenses, getTopCategory, getExpensesCount } = require('./controllers/services.controller');
+const { authRegister, authLogin, authCheckUser, authCheckLogin, authLogout, authDeleteAccount, authChangePassword } = require('./controllers/auth.controller');
 
 const app = express();
 app.use(cors({

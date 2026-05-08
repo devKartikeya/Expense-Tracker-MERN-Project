@@ -1,8 +1,8 @@
+const bcrypt = require("bcrypt");
 const mongoose = require('mongoose');
 const User = require('../models/users.model');
-const bcrypt = require("bcrypt");
-const { hashPassword, comparePassword } = require('../utils/bcrypt.utils');
 const { generateToken } = require('../utils/jwt.utils');
+const { hashPassword, comparePassword } = require('../utils/bcrypt.utils');
 
 async function register(username, password) {
     console.log('I am in the register service');
