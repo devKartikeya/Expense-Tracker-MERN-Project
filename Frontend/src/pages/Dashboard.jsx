@@ -1,8 +1,8 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
-import { useNavigate, Link } from "react-router-dom";
+import Footer from "../components/Footer";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FaWallet, FaHistory, FaChartPie, FaCalendarAlt, FaClipboardCheck } from "react-icons/fa";
 import { Pie, Bar, Line } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, PointElement, LineElement } from "chart.js";
@@ -11,8 +11,7 @@ ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarEle
 
 const Dashboard = ({ user }) => {
   const navigate = useNavigate();
-
-  console.log("User in Dashboard:", user);
+  const location = useLocation();
 
   const [expenses, setExpenses] = useState(0);
   const [totalExpenses, setTotalExpenses] = useState(0);
@@ -23,10 +22,21 @@ const Dashboard = ({ user }) => {
   const [monthlyTotals, setMonthlyTotals] = useState([]);
   const [dailyExpenses, setDailyExpenses] = useState([]);
 
+  // Welcome Modal state
+  const [showWelcomeModal, setShowWelcomeModal] = useState(location.state?.fromSignup || false);
+
   const pieOptions = {
     maintainAspectRatio: false,
     responsive: true,
   };
+
+  useEffect(() => {
+    if (location.state?.fromSignup) {
+      // clear the flag so it doesn't persist
+      navigate(location.pathname, { replace: true });
+    }
+  }, [location, navigate]);
+
 
   useEffect(() => {
     fetch("http://localhost:3000/expenses-by-category", { credentials: "include" })
@@ -73,7 +83,7 @@ const Dashboard = ({ user }) => {
         data: dailyExpenses.map(d => d.total),
         borderColor: "#FF6384",
         backgroundColor: "rgba(255,99,132,0.2)",
-        tension: 0.3, // smooth curve
+        tension: 0.3,
       },
     ],
   };
@@ -84,7 +94,6 @@ const Dashboard = ({ user }) => {
       credentials: "include",
     });
     let data = await response.json();
-    console.log("Fetched data:", data);
     setTotalExpenses(data.total);
   }
 
@@ -94,7 +103,6 @@ const Dashboard = ({ user }) => {
       credentials: "include",
     });
     let data = await response.json();
-    console.log("Monthly total:", data.total);
     setMonthlyTotal(data.total);
   }
 
@@ -104,7 +112,6 @@ const Dashboard = ({ user }) => {
       credentials: "include",
     });
     let data = await response.json();
-    console.log("Top category:", data);
     setTopCategory(data);
   }
 
@@ -114,18 +121,15 @@ const Dashboard = ({ user }) => {
       credentials: "include",
     });
     let data = await response.json();
-    console.log("Expenses count:", data);
     setExpenses(data.count);
   }
-
 
   useEffect(() => {
     fetchTotalExpenses();
     fetchMonthlyTotal();
     fetchTopCategory();
     fetchExpensesCount();
-  }, [])
-
+  }, []);
 
   const goToExpenses = () => {
     navigate("/expenses");
@@ -135,6 +139,27 @@ const Dashboard = ({ user }) => {
     <div id="dashboard" className="bg-gradient-to-br from-blue-500 to-blue-800 w-screen h-screen">
       <Navbar username={user.username} />
 
+      {/* Welcome Modal */}
+      {showWelcomeModal && (
+        <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+          <div className="bg-white rounded-lg shadow-xl p-6 w-[90%] sm:w-[400px] animate-fadeIn">
+            <h3 className="text-2xl font-bold text-blue-600 mb-4 text-center">Welcome, {user.username}!</h3>
+            <p className="text-gray-700 mb-6 text-center">
+              🎉 Your account has been created successfully. Start exploring your dashboard and track your expenses with ease!
+            </p>
+            <div className="flex justify-center">
+              <button
+                className="px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg shadow-md hover:scale-105 transition-transform"
+                onClick={() => setShowWelcomeModal(false)}
+              >
+                Get Started
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Stats Cards */}
       <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <Card
           title="Total This Month"
@@ -144,7 +169,7 @@ const Dashboard = ({ user }) => {
         />
         <Card
           title="Top Category"
-          value={topCategory.category ? `${topCategory.category ? topCategory.category : 'N/A'} (₹${topCategory.amount ? topCategory.amount.toLocaleString() : '0'})` : "No data"}
+          value={topCategory.category ? `${topCategory.category} (₹${topCategory.amount.toLocaleString()})` : "No data"}
           icon={<FaChartPie />}
           className="bg-gradient-to-r from-green-500 to-teal-600 justify-between"
         />
@@ -160,8 +185,8 @@ const Dashboard = ({ user }) => {
           icon={<FaClipboardCheck />}
           className="bg-gradient-to-r from-yellow-500 to-orange-600 justify-between"
         />
-
       </div>
+
       <Card
         title="See Your Expenses History"
         value="View Details"
@@ -174,14 +199,14 @@ const Dashboard = ({ user }) => {
       <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white rounded-lg shadow-md p-4">
           <h2 id="pie" className="text-xl font-bold mb-4">Expenses by Category</h2>
-          <div className="h-64"> {/* height control */}
-            <Pie  data={pieData} options={pieOptions} />
+          <div className="h-64">
+            <Pie data={pieData} options={pieOptions} />
           </div>
         </div>
 
         <div className="bg-white rounded-lg shadow-md p-4">
           <h2 id="bar" className="text-xl font-bold mb-4">Monthly Totals</h2>
-          <Bar  data={barData} />
+          <Bar data={barData} />
         </div>
 
         <div className="bg-white rounded-lg shadow-md p-4 lg:col-span-2">
@@ -191,6 +216,7 @@ const Dashboard = ({ user }) => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

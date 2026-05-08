@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import ChangePassword from "./pages/ChangePassword";
 import ContactUs from "./pages/Contact";
 import AboutUs from "./pages/About";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
@@ -73,6 +74,14 @@ const App = () => {
             <ProtectedRoute>
               <AboutUs />
             </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/privacy-policy"
+          element={
+
+            <PrivacyPolicy />
+
           }
         />
         <Route path="/reset-password" element={<ForgotPassword />} />

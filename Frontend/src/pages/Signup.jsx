@@ -31,7 +31,7 @@ const Signup = () => {
       const result = await response.json();
 
       if (result.flag === "success") {
-        navigate("/dashboard");
+        navigate("/dashboard", { state: { fromSignup: true } });
       } else {
         if (result.message === "Invalid password") {
           setError("password", { type: "server", message: "Invalid password" });
@@ -147,6 +147,15 @@ const Signup = () => {
             className="text-blue-300 hover:text-blue-200 font-semibold underline"
           >
             Login
+          </Link>
+        </p>
+         <p className="text-sm text-gray-200">
+          Read our{" "}
+          <Link
+            to="/privacy-policy"
+            className="text-blue-300 hover:text-blue-200 font-semibold underline"
+          >
+            Privacy Policy
           </Link>
         </p>
       </form>
