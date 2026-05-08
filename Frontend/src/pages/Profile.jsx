@@ -130,6 +130,21 @@ const Profile = ({ user }) => {
               </button>
             </div>
           </div>
+          <div className="flex justify-between items-center">
+
+            <Link
+              to="/terms-conditions"
+              className="text-blue-500 text-sm hover:text-blue-200 font-semibold"
+            >
+              Terms and Conditions
+            </Link>
+            <Link
+              to="/privacy-policy"
+              className="text-blue-500 text-sm hover:text-blue-200 font-semibold"
+            >
+              Privacy Policy
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -155,10 +170,12 @@ const Profile = ({ user }) => {
                 Yes, Delete
               </button>
             </div>
+
           </div>
+
         </div>
       )}
-      
+
     </div>
   );
 };
