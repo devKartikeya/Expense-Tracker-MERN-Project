@@ -40,7 +40,7 @@ app.post("/delete-account", checkLogin, authDeleteAccount);
 app.post("/change-password", checkLogin, authChangePassword);
 app.post("/expenses", checkLogin, addExpense);
 app.post("/contact-us", checkLogin, contactController);
-app.get("/auth/check", checkLogin, authCheckLogin);
+app.get("/check", checkLogin, authCheckLogin);
 app.get("/expenses", checkLogin, getExpenses);
 app.get("/total-expenses", checkLogin, getTotalExpenses);
 app.get("/monthly-expenses", checkLogin, getMonthlyExpenses);

@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    fetch("https://expense-tracker-mern-project-g2yt.onrender.com/auth/check", {
+    fetch("https://expense-tracker-mern-project-g2yt.onrender.com/check", {
       method: "GET",
       credentials: "include", // send cookie
     })
