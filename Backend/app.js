@@ -31,6 +31,9 @@ app.use(cookieParser());
 
 app.use("/auth", mailRoutes);
 
+console.log(process.env.EMAIL_USER);
+console.log(process.env.EMAIL_PASSWORD);
+
 app.post("/profile-data", checkLogin, getProfileData);
 app.post('/signup', checkSignUp, authRegister);
 app.post('/login', authLogin);

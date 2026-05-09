@@ -90,7 +90,7 @@ const App = () => {
           }
         />
         <Route path="/reset-password" element={<ForgotPassword />} />
-        <Route path="/reset-password/:token" element={<ResetPassword />} />
+        <Route path="/auth/reset-password/:token" element={<ResetPassword />} />
       </Routes>
     </Router>
   );
