@@ -9,7 +9,7 @@ const ContactUs = ({ user }) => {
 
     const onSubmit = async (data) => {
         try {
-            const res = await fetch("http://localhost:3000/contact-us", {
+            const res = await fetch("https://expense-tracker-mern-project-g2yt.onrender.com/contact-us", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),

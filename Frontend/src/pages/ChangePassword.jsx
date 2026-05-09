@@ -11,7 +11,7 @@ const ChangePassword = () => {
   const onSubmit = async (data) => {
     setMessage("");
     try {
-      const res = await fetch("http://localhost:3000/change-password", {
+      const res = await fetch("https://expense-tracker-mern-project-g2yt.onrender.com/change-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

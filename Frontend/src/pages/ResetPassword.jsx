@@ -11,7 +11,7 @@ const ResetPassword = () => {
   const navigate = useNavigate();
   const onSubmit = async (data) => {
     try {
-      const res = await fetch(`http://localhost:3000/auth/reset-password/${token}`, {
+      const res = await fetch(`https://expense-tracker-mern-project-g2yt.onrender.com/auth/reset-password/${token}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password: data.password }),

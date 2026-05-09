@@ -18,7 +18,7 @@ const Signup = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("http://localhost:3000/signup", {
+      const response = await fetch("https://expense-tracker-mern-project-g2yt.onrender.com/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -57,7 +57,7 @@ const Signup = () => {
 
     setCheckingUsername(true);
     try {
-      const response = await fetch("http://localhost:3000/check-username", {
+      const response = await fetch("https://expense-tracker-mern-project-g2yt.onrender.com/check-username", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username }),
@@ -149,7 +149,7 @@ const Signup = () => {
             Login
           </Link>
         </p>
-         <p className="text-sm text-gray-200">
+        <p className="text-sm text-gray-200">
           Read our{" "}
           <Link
             to="/terms-conditions"

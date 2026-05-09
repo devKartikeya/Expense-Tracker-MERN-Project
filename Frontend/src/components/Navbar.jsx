@@ -12,7 +12,7 @@ const Navbar = ({ username, profileMode = false }) => {
   const [showToast, setShowToast] = useState(false);
 
   const handleLogoutConfirm = async () => {
-    await fetch("http://localhost:3000/logout", {
+    await fetch("https://expense-tracker-mern-project-g2yt.onrender.com/logout", {
       method: "POST",
       credentials: "include"
     });

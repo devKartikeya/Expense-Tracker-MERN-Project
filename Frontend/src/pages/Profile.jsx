@@ -17,7 +17,7 @@ const Profile = ({ user }) => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        let res = await fetch("http://localhost:3000/profile-data", {
+        let res = await fetch("https://expense-tracker-mern-project-g2yt.onrender.com/profile-data", {
           method: "POST",
           credentials: "include",
         });
@@ -44,7 +44,7 @@ const Profile = ({ user }) => {
   }, []);
 
   const deleteAccount = async () => {
-    let res = await fetch("http://localhost:3000/delete-account", {
+    let res = await fetch("https://expense-tracker-mern-project-g2yt.onrender.com/delete-account", {
       method: "POST",
       credentials: "include",
     });

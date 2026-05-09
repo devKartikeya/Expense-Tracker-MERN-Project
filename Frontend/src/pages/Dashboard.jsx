@@ -40,17 +40,17 @@ const Dashboard = ({ user }) => {
 
 
   useEffect(() => {
-    fetch("http://localhost:3000/expenses-by-category", { credentials: "include" })
+    fetch("https://expense-tracker-mern-project-g2yt.onrender.com/expenses-by-category", { credentials: "include" })
       .then(res => res.json())
       .then(data => setExpensesByCategory(data));
 
-    fetch("http://localhost:3000/monthly-totals", { credentials: "include" })
+    fetch("https://expense-tracker-mern-project-g2yt.onrender.com/monthly-totals", { credentials: "include" })
       .then(res => res.json())
       .then(data => setMonthlyTotals(data));
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:3000/daily-expenses", { credentials: "include" })
+    fetch("https://expense-tracker-mern-project-g2yt.onrender.com/daily-expenses", { credentials: "include" })
       .then(res => res.json())
       .then(data => setDailyExpenses(data));
   }, []);
@@ -90,7 +90,7 @@ const Dashboard = ({ user }) => {
   };
 
   async function fetchTotalExpenses() {
-    let response = await fetch("http://localhost:3000/total-expenses", {
+    let response = await fetch("https://expense-tracker-mern-project-g2yt.onrender.com/total-expenses", {
       method: "GET",
       credentials: "include",
     });
@@ -99,7 +99,7 @@ const Dashboard = ({ user }) => {
   }
 
   async function fetchMonthlyTotal() {
-    let response = await fetch("http://localhost:3000/monthly-expenses", {
+    let response = await fetch("https://expense-tracker-mern-project-g2yt.onrender.com/monthly-expenses", {
       method: "GET",
       credentials: "include",
     });
@@ -108,7 +108,7 @@ const Dashboard = ({ user }) => {
   }
 
   async function fetchTopCategory() {
-    let response = await fetch("http://localhost:3000/top-category", {
+    let response = await fetch("https://expense-tracker-mern-project-g2yt.onrender.com/top-category", {
       method: "GET",
       credentials: "include",
     });
@@ -117,7 +117,7 @@ const Dashboard = ({ user }) => {
   }
 
   async function fetchExpensesCount() {
-    let response = await fetch("http://localhost:3000/expenses-count", {
+    let response = await fetch("https://expense-tracker-mern-project-g2yt.onrender.com/expenses-count", {
       method: "GET",
       credentials: "include",
     });

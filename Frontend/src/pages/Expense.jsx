@@ -7,7 +7,7 @@ const Expense = () => {
     const { register, handleSubmit } = useForm();
 
     const onSubmit = async (data) => {
-        let response = await fetch("http://localhost:3000/expenses", {
+        let response = await fetch("https://expense-tracker-mern-project-g2yt.onrender.com/expenses", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

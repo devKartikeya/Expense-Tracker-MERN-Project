@@ -15,7 +15,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     console.log("Form Data:", data);
-    let response = await fetch("http://localhost:3000/login", {
+    let response = await fetch("https://expense-tracker-mern-project-g2yt.onrender.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
