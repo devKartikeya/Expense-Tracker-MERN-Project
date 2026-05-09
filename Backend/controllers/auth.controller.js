@@ -28,7 +28,7 @@ async function authLogin(req, res) {
         if (user.flag === 'failure') {
             res.status(400).json({ message: user.message, flag: user.flag });
         } else {
-            res.cookie('token', user.token, { httpOnly: true, sameSite: 'Lax' });
+            res.cookie('token', user.token, { httpOnly: true, secure: true, sameSite: "none" });
             res.json({ message: 'Login successful', user: user.user, flag: user.flag });
         }
     } catch (error) {
