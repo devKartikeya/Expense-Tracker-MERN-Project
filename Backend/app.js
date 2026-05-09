@@ -16,7 +16,10 @@ const { authRegister, authLogin, authCheckUser, authCheckLogin, authLogout, auth
 
 const app = express();
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: [
+        "http://localhost:5173",                               // dev frontend
+        "https://expense-tracker-mern-project-seven.vercel.app" // prod frontend
+    ],
     credentials: true
 }));
 
