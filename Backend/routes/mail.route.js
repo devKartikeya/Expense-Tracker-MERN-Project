@@ -14,6 +14,7 @@ router.post("/forgot-password", async (req, res) => {
   const token = crypto.randomBytes(32).toString("hex");
   user.resetPasswordToken = token;
   user.resetPasswordExpires = Date.now() + 15 * 60 * 1000;
+  console.log(token);
   await user.save();
 
   const resetLink = `https://expense-tracker-mern-project-seven.vercel.app/auth/reset-password/${token}`;
