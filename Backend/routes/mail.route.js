@@ -16,7 +16,7 @@ router.post("/forgot-password", async (req, res) => {
   user.resetPasswordExpires = Date.now() + 15 * 60 * 1000;
   await user.save();
 
-  const resetLink = `http://localhost:5173/reset-password/${token}`;
+  const resetLink = `https://expense-tracker-mern-project-g2yt.onrender.com/reset-password/${token}`;
   await sendResetEmail(email, resetLink);
 
   res.json({ message: "Password reset link sent to your email." });
