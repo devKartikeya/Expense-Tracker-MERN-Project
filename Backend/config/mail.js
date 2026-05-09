@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 const sendResetEmail = async (to, resetLink) => {
   console.log('Sending to', to);
   const mailOptions = {
-    from: `"Xpense Tracker" <devkartikeya2122002@gmail.com>`,
+    from: `"Xpense Tracker" <aac2ff001@smtp-brevo.com>`,
     to,
     subject: "Password Reset Request",
     html: `
