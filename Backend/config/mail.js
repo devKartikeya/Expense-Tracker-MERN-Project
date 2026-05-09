@@ -1,39 +1,59 @@
-// config/mail.js
-const nodemailer = require("nodemailer");
-
-const transporter = nodemailer.createTransport({
-  host: "smtp-relay.brevo.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
-  },
-
-  connectionTimeout: 20000
-});
+const axios = require("axios");
 
 const sendResetEmail = async (to, resetLink) => {
-  console.log('Sending to', to);
-  const mailOptions = {
-    from: `"Xpense Tracker" <aac2ff001@smtp-brevo.com>`,
-    to,
-    subject: "Password Reset Request",
-    html: `
-      <h2>Password Reset</h2>
-      <p>You requested to reset your password. Click the link below:</p>
-      <a href="${resetLink}" target="_blank">${resetLink}</a>
-      <p>This link will expire in 15 minutes.</p>
-    `,
-  };
-
   try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log("Email sent:", info.response);
+
+    const response = await axios.post(
+      "https://api.brevo.com/v3/smtp/email",
+
+      {
+        sender: {
+          name: "Xpense Tracker",
+
+          email: "devkartikeya2122002@gmail.com",
+        },
+
+        to: [
+          {
+            email: to,
+          },
+        ],
+
+        subject: "Reset Your Password",
+
+        htmlContent: `
+          <h2>Password Reset</h2>
+
+          <p>Click below to reset password:</p>
+
+          <a href="${resetLink}">
+            Reset Password
+          </a>
+        `,
+      },
+
+      {
+        headers: {
+          accept: "application/json",
+
+          "api-key": process.env.BREVO_API_KEY,
+
+          "content-type": "application/json",
+        },
+      }
+    );
+
+    console.log("Email Sent:", response.data);
+
   } catch (error) {
-    console.error("Error sending email:", error);
+
+    console.log(
+      "Error sending email:",
+      error.response?.data || error.message
+    );
+
+    throw error;
   }
 };
 
-
-module.exports = { sendResetEmail, transporter };
+module.exports = { sendResetEmail };
