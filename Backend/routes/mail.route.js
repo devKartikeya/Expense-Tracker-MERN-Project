@@ -17,7 +17,7 @@ router.post("/forgot-password", async (req, res) => {
   console.log(token);
   await user.save();
 
-  const resetLink = `https://expense-tracker-mern-project-seven.vercel.app/auth/reset-password/${token}`;
+  const resetLink = `https://expense-tracker-mern-project-seven.vercel.app/reset-password/${token}`;
   await sendResetEmail(email, resetLink);
 
   res.json({ message: "Password reset link sent to your email." });

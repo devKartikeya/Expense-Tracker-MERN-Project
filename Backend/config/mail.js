@@ -2,9 +2,9 @@
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
+  host: "smtp-relay.brevo.com",
+  port: 567,
+  secure: false,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASSWORD,
@@ -12,8 +12,9 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendResetEmail = async (to, resetLink) => {
+  console.log('Sending to', to);
   const mailOptions = {
-    from: `"Xpense Tracker" <${process.env.EMAIL_USER}>`,
+    from: `"Xpense Tracker" <devkartikeya2122002@gmail.com>`,
     to,
     subject: "Password Reset Request",
     html: `
