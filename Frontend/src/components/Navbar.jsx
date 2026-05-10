@@ -4,6 +4,7 @@ import Button from './Button';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import Logout from './Logout';
 import Toast from './Toast';
+import logo from "/xpense-logo.png";
 
 const Navbar = ({ username, profileMode = false }) => {
   const navigate = useNavigate();
@@ -31,11 +32,18 @@ const Navbar = ({ username, profileMode = false }) => {
 
   return (
     <>
-      <nav className="bg-blue-800 p-3 font-poppins flex justify-between items-center shadow-lg relative">
+      <nav className="bg-gradient-to-r from-blue-700 via-purple-500 to-blue-600 p-3 font-poppins flex justify-between items-center shadow-lg relative">
         {/* App Name */}
-        <h1 className="text-2xl font-bold text-white">
-          <Link to="/about-us">Xpense Tracker</Link>
-        </h1>
+        <div className="flex items-center gap-2">
+          <img
+            src={logo}
+            alt="Xpense Tracker Logo"
+            className="w-12 h-12 sm:w-20 sm:h-20 object-contain"
+          />
+          <h1 className="text-xl sm:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-100 to-green-600">
+            <Link to="/about-us">Xpense Tracker</Link>
+          </h1>
+        </div>
 
         {/* Welcome */}
         <h1 className="hidden md:block text-xl font-semibold text-yellow-300">
@@ -48,7 +56,7 @@ const Navbar = ({ username, profileMode = false }) => {
             <>
               <Button command="About Us" onClick={goToAbout} />
               <Button command="Contact Us" onClick={goToContact} />
-            </> 
+            </>
           ) : (
             <>
               <Button command="Dashboard" onClick={goToDashboard} />

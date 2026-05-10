@@ -58,15 +58,23 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-600 via-blue-400 to-blue-500 flex justify-center items-center w-screen h-screen text-white">
+    <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 flex justify-center items-center w-screen h-screen text-white">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-[90%] md:w-[30%] flex flex-col items-center gap-6 bg-gradient-to-br from-blue-700 to-cyan-600 rounded-3xl shadow-2xl p-8"
       >
         {/* App Name */}
-        <h1 className="text-3xl font-bold text-yellow-300 tracking-wide drop-shadow-md">
-          Xpense Tracker
-        </h1>
+        {/* App Name with Logo */}
+        <div className="flex items-center gap-2 justify-center w-full">
+          <img
+            src="/xpense-logo.png"
+            alt="Xpense Tracker Logo"
+            className="w-16 h-16 sm:w-20 sm:h-20 object-contain"
+          />
+          <h1 className="text-2xl sm:text-3xl font-bold text-yellow-300 tracking-wide drop-shadow-md">
+            Xpense Tracker
+          </h1>
+        </div>
 
         {/* Title */}
         <h2 className="text-4xl font-extrabold tracking-wide text-white drop-shadow-lg">

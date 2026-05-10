@@ -8,6 +8,19 @@ import * as XLSX from "xlsx";
 const Expenses = ({ user }) => {
     const [expenses, setExpenses] = useState([]);
 
+     const addLogoToPDF = async (doc) => {
+        const img = await fetch("/xpense-logo.png")
+            .then(res => res.blob())
+            .then(blob => new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.readAsDataURL(blob);
+            }));
+
+        // Add logo to PDF (x, y, width, height)
+        doc.addImage(img, "PNG", 14, 10, 20, 20);
+    };
+
     useEffect(() => {
         fetch("https://expense-tracker-mern-project-g2yt.onrender.com/expenses", { credentials: "include" })
             .then((res) => res.json())
@@ -21,42 +34,48 @@ const Expenses = ({ user }) => {
     };
 
     // 🔹 Export to PDF
-    const exportToPDF = () => {
+    const exportToPDF = async () => {
         const doc = new jsPDF();
         const isMobile = window.innerWidth < 768;
 
-        // Header
-        doc.setFontSize(isMobile ? 12 : 16);
-        doc.text("Xpense Tracker – Expense Report", isMobile ? 8 : 14, 20);
-        doc.setFontSize(isMobile ? 8 : 10);
-        doc.text(`Generated on: ${new Date().toLocaleDateString()}`, isMobile ? 8 : 14, 28);
+        // Add logo
+        await addLogoToPDF(doc);
 
-        // Table
-        autoTable(doc, {
-            head: [["Amount", "Category", "Description", "Date"]],
-            body: expenses.map((exp) => [
-                `₹${exp.amount}`,
-                exp.category,
-                exp.description || "-",
-                new Date(exp.date).toLocaleDateString(),
-            ]),
-            styles: { fontSize: isMobile ? 8 : 10, cellPadding: isMobile ? 2 : 4, overflow: "linebreak" },
-            columnStyles: {
-                0: { halign: "right" },
-                1: { cellWidth: "wrap" },
-                2: { cellWidth: "auto" },
-                3: { cellWidth: "wrap" },
-            },
-            margin: { top: isMobile ? 25 : 35, left: isMobile ? 8 : 14, right: isMobile ? 8 : 14 },
-            didDrawPage: (data) => {
-                doc.setFontSize(isMobile ? 7 : 9);
-                doc.text(
-                    `Page ${doc.internal.getNumberOfPages()}`,
-                    data.settings.margin.left,
-                    doc.internal.pageSize.height - 10
-                );
-            },
-        });
+        if (isMobile) {
+            // Mobile: stack logo above text, all left-aligned
+            doc.setFontSize(12);
+            doc.text("Xpense Tracker – Expense Report", 14, 40); // same x as logo, lower y
+            doc.setFontSize(8);
+            doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 48);
+
+            autoTable(doc, {
+                head: [["Amount", "Category", "Description", "Date"]],
+                body: expenses.map((exp) => [
+                    `₹${exp.amount}`,
+                    exp.category,
+                    exp.description || "-",
+                    new Date(exp.date).toLocaleDateString(),
+                ]),
+                margin: { top: 55 }, // push table below logo+text
+            });
+        } else {
+            // Desktop: logo left, text beside it
+            doc.setFontSize(16);
+            doc.text("Xpense Tracker – Expense Report", 40, 20); // shifted right
+            doc.setFontSize(10);
+            doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 40, 28);
+
+            autoTable(doc, {
+                head: [["Amount", "Category", "Description", "Date"]],
+                body: expenses.map((exp) => [
+                    `₹${exp.amount}`,
+                    exp.category,
+                    exp.description || "-",
+                    new Date(exp.date).toLocaleDateString(),
+                ]),
+                margin: { top: 40 }, // enough space below header
+            });
+        }
 
         // Summary row
         autoTable(doc, {
@@ -70,7 +89,6 @@ const Expenses = ({ user }) => {
 
         doc.save("expenses-report.pdf");
     };
-
 
 
     // 🔹 Export to Excel
