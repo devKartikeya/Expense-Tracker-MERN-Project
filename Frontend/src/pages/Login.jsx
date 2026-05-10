@@ -69,7 +69,7 @@ const Login = () => {
           <img
             src="/xpense-logo.png"
             alt="Xpense Tracker Logo"
-            className="w-16 h-16 sm:w-20 sm:h-20 object-contain"
+            className="w-28 h-28 sm:w-32 sm:h-32 object-contain"
           />
           <h1 className="text-2xl sm:text-3xl font-bold text-yellow-300 tracking-wide drop-shadow-md">
             Xpense Tracker
