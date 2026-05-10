@@ -77,7 +77,7 @@ const Navbar = ({ username, profileMode = false }) => {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="absolute top-full left-0 w-full bg-blue-700 flex flex-col items-center gap-4 py-4 md:hidden shadow-lg">
+          <div className="absolute top-full left-0 w-full bg-gradient-to-r from-blue-700 via-purple-500 to-blue-600 flex flex-col items-center gap-4 py-4 md:hidden shadow-lg">
             {profileMode ? (
               <>
                 <Button command="About Us" onClick={goToAbout} />
