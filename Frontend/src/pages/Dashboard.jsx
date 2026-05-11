@@ -140,6 +140,10 @@ const Dashboard = ({ user }) => {
     navigate("/monthly-expenses");
   }
 
+  const goToCategories = () => {
+    navigate("/categories");
+  }
+
   return (
     <div id="dashboard" className="bg-gradient-to-br from-blue-500 via-indigo-500 to-indigo-700 w-screen h-screen">
       <Navbar username={user.username} />
@@ -178,6 +182,7 @@ const Dashboard = ({ user }) => {
         />
         <Card
           title="Top Category"
+          onClick={goToCategories}
           value={topCategory.category ? `${topCategory.category} (₹${topCategory.amount.toLocaleString()})` : "No data"}
           icon={<FaChartPie />}
           className="bg-gradient-to-r from-green-500 to-teal-600 justify-between"

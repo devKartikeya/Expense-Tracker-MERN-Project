@@ -14,6 +14,7 @@ import ChangePassword from "./pages/ChangePassword";
 import ProtectedRoute from "./components/ProtectedRoute";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import MonthlyExpenses from "./components/MonthlyExpenses";
+import Categories from "./pages/Categories";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {
@@ -51,6 +52,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <MonthlyExpenses />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/categories"
+          element={
+            <ProtectedRoute>
+              <Categories />
             </ProtectedRoute>
           }
         />
