@@ -15,6 +15,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import MonthlyExpenses from "./components/MonthlyExpenses";
 import Categories from "./pages/Categories";
+import CategoryExpenses from "./pages/CategoryExpenses";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {
@@ -60,6 +61,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Categories />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/category-expenses"
+          element={
+            <ProtectedRoute>
+              <CategoryExpenses />
             </ProtectedRoute>
           }
         />
