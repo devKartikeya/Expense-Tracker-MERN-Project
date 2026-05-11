@@ -8,7 +8,7 @@ const Categories = ({ user }) => {
     const [viewMode, setViewMode] = useState("overall"); // overall or monthly
 
     useEffect(() => {
-        fetch("http://localhost:3000/expenses", { credentials: "include" })
+        fetch("https://expense-tracker-mern-project-g2yt.onrender.com/expenses", { credentials: "include" })
             .then((res) => res.json())
             .then((data) => {
                 setExpenses(data);
