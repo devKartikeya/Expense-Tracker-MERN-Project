@@ -1,12 +1,11 @@
-// https://expense-tracker-mern-project-g2yt.onrender.com/expenses
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import * as XLSX from "xlsx";
 
-const Expenses = ({ user }) => {
+const MonthlyExpenses = ({ user }) => {
     const [expenses, setExpenses] = useState([]);
     const navigate = useNavigate();
 
@@ -19,24 +18,28 @@ const Expenses = ({ user }) => {
                 reader.readAsDataURL(blob);
             }));
 
-        // Add logo to PDF (x, y, width, height)
         doc.addImage(img, "PNG", 14, 10, 20, 20);
     };
-
 
     useEffect(() => {
         fetch("https://expense-tracker-mern-project-g2yt.onrender.com/expenses", { credentials: "include" })
             .then((res) => res.json())
             .then((data) => {
-                // Sort newest to oldest
-                const sorted = data.sort(
-                    (a, b) => new Date(b.date) - new Date(a.date)
-                );
-                setExpenses(sorted);
+                const now = new Date();
+                const currentMonth = now.getMonth();
+                const currentYear = now.getFullYear();
+
+                const filtered = data
+                    .filter((exp) => {
+                        const d = new Date(exp.date);
+                        return d.getMonth() === currentMonth && d.getFullYear() === currentYear;
+                    })
+                    .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                setExpenses(filtered);
             })
             .catch((err) => console.error("Error fetching expenses:", err));
     }, []);
-
 
     // 🔹 Print
     const handlePrint = () => {
@@ -44,18 +47,15 @@ const Expenses = ({ user }) => {
     };
 
     // 🔹 Export to PDF
-    // 🔹 Export to PDF
     const exportToPDF = async () => {
         const doc = new jsPDF();
         const isMobile = window.innerWidth < 768;
 
-        // Add logo
         await addLogoToPDF(doc);
 
         if (isMobile) {
-            // Mobile: stack logo above text, all left-aligned
             doc.setFontSize(12);
-            doc.text("Xpense Tracker – Expense Report", 14, 40); // same x as logo, lower y
+            doc.text("Xpense Tracker – Monthly Report", 14, 40);
             doc.setFontSize(8);
             doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 48);
 
@@ -67,12 +67,11 @@ const Expenses = ({ user }) => {
                     exp.description || "-",
                     new Date(exp.date).toLocaleDateString(),
                 ]),
-                margin: { top: 55 }, // push table below logo+text
+                margin: { top: 55 },
             });
         } else {
-            // Desktop: logo left, text beside it
             doc.setFontSize(16);
-            doc.text("Xpense Tracker – Expense Report", 40, 20); // shifted right
+            doc.text("Xpense Tracker – Monthly Report", 40, 20);
             doc.setFontSize(10);
             doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 40, 28);
 
@@ -84,11 +83,10 @@ const Expenses = ({ user }) => {
                     exp.description || "-",
                     new Date(exp.date).toLocaleDateString(),
                 ]),
-                margin: { top: 40 }, // enough space below header
+                margin: { top: 40 },
             });
         }
 
-        // Summary row
         autoTable(doc, {
             body: [
                 ["Total", "", "", `₹${expenses.reduce((sum, e) => sum + e.amount, 0)}`],
@@ -98,9 +96,8 @@ const Expenses = ({ user }) => {
             margin: { top: 10 },
         });
 
-        doc.save("expenses-report.pdf");
+        doc.save("monthly-expenses-report.pdf");
     };
-
 
     // 🔹 Export to Excel
     const exportToExcel = () => {
@@ -113,21 +110,24 @@ const Expenses = ({ user }) => {
             }))
         );
         const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, "Expenses");
-        XLSX.writeFile(workbook, "expenses-report.xlsx");
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Monthly Expenses");
+        XLSX.writeFile(workbook, "monthly-expenses-report.xlsx");
     };
 
-    const goToMonthlyExpenses = () => {
-        navigate("/monthly-expenses");
-    }
+    const goToExpenses = () => {
+        navigate("/expenses");
+    };
 
     return (
-        <div id="expenses-list" className="w-screen min-h-screen bg-blue-600">
+        <div id="monthly-expenses" className="w-screen min-h-screen bg-blue-600">
             <Navbar username={user.username} className="print:hidden" />
 
             <div className="p-6">
+                {/* Header + Buttons */}
                 <div className="flex flex-col sm:flex-row justify-between items-center mb-4 print:hidden gap-4">
-                    <h1 className="text-xl sm:text-2xl font-bold text-white">All Expenses</h1>
+                    <h1 className="text-xl sm:text-2xl font-bold text-white">
+                        Current Month Expenses
+                    </h1>
                     <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                         <button
                             onClick={handlePrint}
@@ -148,22 +148,6 @@ const Expenses = ({ user }) => {
                             Excel
                         </button>
                     </div>
-                </div>
-
-
-                {/* Summary for print */}
-                <div className="hidden print:block mb-6">
-                    <h2 className="text-xl font-bold">Expense Summary</h2>
-                    <p>Total: ₹{expenses.reduce((sum, e) => sum + e.amount, 0)}</p>
-                    <p>Categories: {new Set(expenses.map((e) => e.category)).size}</p>
-                    <p>
-                        Date Range:{" "}
-                        {expenses.length > 0
-                            ? `${new Date(expenses[0].date).toLocaleDateString()} - ${new Date(
-                                expenses[expenses.length - 1].date
-                            ).toLocaleDateString()}`
-                            : "N/A"}
-                    </p>
                 </div>
 
                 {/* Table */}
@@ -198,25 +182,26 @@ const Expenses = ({ user }) => {
                                         colSpan="4"
                                         className="py-6 text-center text-gray-500 font-medium"
                                     >
-                                        No expenses found.
+                                        No expenses found for this month.
                                     </td>
                                 </tr>
                             )}
                         </tbody>
                     </table>
                 </div>
+
+                {/* Bottom Button */}
                 <div className="flex justify-center mt-6">
                     <button
-                        onClick={goToMonthlyExpenses}
+                        onClick={goToExpenses}
                         className="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-md"
                     >
-                        Show Monthly Expenses
+                        Show All Expenses
                     </button>
                 </div>
-
             </div>
         </div>
     );
 };
 
-export default Expenses;
+export default MonthlyExpenses;

@@ -13,6 +13,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ChangePassword from "./pages/ChangePassword";
 import ProtectedRoute from "./components/ProtectedRoute";
 import TermsAndConditions from "./pages/TermsAndConditions";
+import MonthlyExpenses from "./components/MonthlyExpenses";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {
@@ -42,6 +43,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Expenses />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/monthly-expenses"
+          element={
+            <ProtectedRoute>
+              <MonthlyExpenses />
             </ProtectedRoute>
           }
         />

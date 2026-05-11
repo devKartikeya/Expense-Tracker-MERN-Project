@@ -136,6 +136,10 @@ const Dashboard = ({ user }) => {
     navigate("/expenses");
   };
 
+  const goToMonthlyExpenses = () => {
+    navigate("/monthly-expenses");
+  }
+
   return (
     <div id="dashboard" className="bg-gradient-to-br from-blue-500 via-indigo-500 to-indigo-700 w-screen h-screen">
       <Navbar username={user.username} />
@@ -168,6 +172,7 @@ const Dashboard = ({ user }) => {
         <Card
           title="Total This Month"
           value={`₹${monthlyTotal.toLocaleString()}`}
+          onClick={goToMonthlyExpenses}
           icon={<FaWallet />}
           className="bg-gradient-to-r from-purple-500 to-indigo-600 justify-between"
         />
