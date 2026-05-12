@@ -8,7 +8,7 @@ const MiniNavbar = () => {
 
                 {/* Left CTA Button + Animated Arrow */}
                 <div className="flex items-center gap-2">
-                    <span className="bg-gradient-to-br from-green-500 via-lime-400 to-yellow-300 text-white font-bold px-4 py-2 rounded-lg shadow-md">
+                    <span className="bg-gradient-to-br from-green-500 via-lime-400 to-yellow-300 text-white font-bold px-4 py-2 rounded-lg hover:text-blue-400 hover:bg-yellow-300 shadow-md">
                         Track Your Expenses Here
                     </span>
                     {/* Animated arrow with up-down movement */}
@@ -16,7 +16,7 @@ const MiniNavbar = () => {
                 </div>
 
                 {/* Links with icons */}
-                <div className="flex flex-col items-center sm:flex-row gap-2 sm:gap-6 mt-3 sm:mt-0">
+                <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6 mt-3 sm:mt-0">
                     <NavLink
                         to="/expenses"
                         className={({ isActive }) =>
@@ -37,7 +37,7 @@ const MiniNavbar = () => {
                             }`
                         }
                     >
-                        📅 Monthly
+                        📅 Monthly Expenses
                     </NavLink>
                     <NavLink
                         to="/category-expenses"
@@ -48,8 +48,19 @@ const MiniNavbar = () => {
                             }`
                         }
                     >
-                        🏷️ Category
+                        🏷️ Category Expenses
                     </NavLink>
+                    {/* <NavLink
+                        to="/categories"
+                        className={({ isActive }) =>
+                            `flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition ${isActive
+                                ? "bg-yellow-400 text-black shadow-md"
+                                : "text-white hover:bg-blue-600"
+                            }`
+                        }
+                    >
+                        📊 Categories Overview
+                    </NavLink> */}
                 </div>
             </div>
         </div>

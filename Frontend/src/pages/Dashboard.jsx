@@ -146,7 +146,7 @@ const Dashboard = ({ user }) => {
   }
 
   return (
-    <div id="dashboard" className="bg-gradient-to-br from-blue-500 via-indigo-500 to-indigo-700 w-screen h-screen">
+    <div id="dashboard" className="bg-gradient-to-br from-blue-500 via-indigo-500 to-indigo-700 pt-[75px] sm:pt-[105px] w-screen h-screen">
       <Navbar username={user.username} />
       <MiniNavbar/>
 

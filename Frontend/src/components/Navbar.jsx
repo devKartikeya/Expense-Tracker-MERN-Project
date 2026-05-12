@@ -32,7 +32,7 @@ const Navbar = ({ username, profileMode = false }) => {
 
   return (
     <>
-      <nav className="bg-gradient-to-r from-blue-700 via-purple-500 to-blue-600 p-3 font-poppins flex justify-between items-center shadow-lg relative">
+      <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-blue-700 via-purple-500 to-blue-600 p-3 font-poppins flex justify-between items-center shadow-lg">
         {/* App Name */}
         <div className="flex items-center gap-2">
           <img
@@ -77,22 +77,36 @@ const Navbar = ({ username, profileMode = false }) => {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="absolute top-full left-0 w-full bg-gradient-to-r from-blue-700 via-purple-500 to-blue-600 flex flex-col items-center gap-4 py-4 md:hidden shadow-lg">
-            {profileMode ? (
-              <>
-                <Button command="About Us" onClick={goToAbout} />
-                <Button command="Contact Us" onClick={goToContact} />
-              </>
-            ) : (
-              <>
-                <Button command="Dashboard" onClick={goToDashboard} />
-                <Button command="Add Expense" onClick={goToExpense} />
-              </>
-            )}
-            <Button command="Profile" onClick={goToProfile} />
-            <Button command="Logout" onClick={() => setShowLogoutModal(true)} />
-          </div>
+          <>
+            {/* Backdrop */}
+            <div
+              className={`backdrop ${isOpen ? "open" : "close"}`}
+              onClick={() => setIsOpen(false)}
+            ></div>
+
+            {/* Right Drawer Menu */}
+            <div
+              className={`drawer ${isOpen ? "open" : "close"}`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {profileMode ? (
+                <>
+                  <Button command="About Us" onClick={goToAbout} />
+                  <Button command="Contact Us" onClick={goToContact} />
+                </>
+              ) : (
+                <>
+                  <Button command="Dashboard" onClick={goToDashboard} />
+                  <Button command="Add Expense" onClick={goToExpense} />
+                </>
+              )}
+              <Button command="Profile" onClick={goToProfile} />
+              <Button command="Logout" onClick={() => setShowLogoutModal(true)} />
+            </div>
+          </>
         )}
+
+
       </nav>
 
       {/* Logout Modal */}
