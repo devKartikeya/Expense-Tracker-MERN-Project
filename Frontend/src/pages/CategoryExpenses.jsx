@@ -94,7 +94,7 @@ const CategoryExpenses = ({ user }) => {
     };
 
     return (
-        <div id="category-expenses" className="w-screen min-h-screen bg-blue-600">
+        <div id="category-expenses" className="w-screen min-h-screen bg-blue-600 pt-[100px]">
             <Navbar username={user.username} className="print:hidden" />
             <div className="p-6">
                 {/* Input Field */}

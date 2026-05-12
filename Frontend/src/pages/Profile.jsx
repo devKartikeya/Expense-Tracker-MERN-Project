@@ -65,7 +65,7 @@ const Profile = ({ user }) => {
   const changePassword = () => navigate("/change-password");
 
   return (
-    <div id="profile" className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500">
+    <div id="profile" className="pt-[100px] min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500">
       {/* Navbar with About Us + Contact Us */}
       <Navbar username={user.username} profileMode={true} />
 
