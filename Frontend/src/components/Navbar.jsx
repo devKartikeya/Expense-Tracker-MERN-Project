@@ -76,6 +76,8 @@ const Navbar = ({ username, profileMode = false }) => {
         </div>
 
         {/* Mobile Menu */}
+        {/* Mobile Menu Overlay */}
+        {/* Mobile Menu */}
         {isOpen && (
           <>
             {/* Backdrop */}
@@ -85,26 +87,54 @@ const Navbar = ({ username, profileMode = false }) => {
             ></div>
 
             {/* Right Drawer Menu */}
+            {/* Right Drawer Menu */}
             <div
               className={`drawer ${isOpen ? "open" : "close"}`}
               onClick={(e) => e.stopPropagation()}
             >
-              {profileMode ? (
-                <>
-                  <Button command="About Us" onClick={goToAbout} />
-                  <Button command="Contact Us" onClick={goToContact} />
-                </>
-              ) : (
-                <>
-                  <Button command="Dashboard" onClick={goToDashboard} />
-                  <Button command="Add Expense" onClick={goToExpense} />
-                </>
-              )}
-              <Button command="Profile" onClick={goToProfile} />
-              <Button command="Logout" onClick={() => setShowLogoutModal(true)} />
+              {/* Drawer Header */}
+              <div className="w-full flex flex-col items-center mb-6 border-b border-white/30 pb-4 -mt-5">
+                <img
+                  src={logo}
+                  alt="Xpense Tracker Logo"
+                  className="w-20 h-20 object-contain mb-1"
+                />
+                <h2 className="text-lg font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-green-400 to-blue-300">
+                  Xpense Tracker
+                </h2>
+              </div>
+
+              {/* Drawer Content */}
+              <div className="flex flex-col gap-4">
+                {profileMode ? (
+                  <>
+                    <Button command="About Us" onClick={goToAbout} />
+                    <Button command="Contact Us" onClick={goToContact} />
+                  </>
+                ) : (
+                  <>
+                    <Button command="Dashboard" onClick={goToDashboard} />
+                    <Button command="Add Expense" onClick={goToExpense} />
+                  </>
+                )}
+                <Button command="Profile" onClick={goToProfile} />
+              </div>
+
+              {/* Logout at bottom */}
+              <div className="mt-auto w-full border-t border-white/30 pt-4">
+                <button
+                  onClick={() => setShowLogoutModal(true)}
+                  className="w-full bg-gradient-to-r from-red-500 via-rose-600 to-rose-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:from-red-700 hover:to-red-900 transition"
+                >
+                  Logout
+                </button>
+              </div>
             </div>
+
+
           </>
         )}
+
 
 
       </nav>
