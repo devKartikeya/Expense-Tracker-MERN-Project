@@ -10,7 +10,7 @@ import {
     FaPhone, FaCode, FaClock, FaFan, FaSchool, FaBoxOpen, FaSnowflake, FaTable,
      FaBreadSlice, FaCheese, FaDrumstickBite, FaFish,
     FaCarrot, FaCookie, FaIceCream, FaCoffee, FaGlassWhiskey,
-    FaWineBottle, FaEgg, FaShoppingBasket, FaPrint, FaBox, FaApple
+    FaWineBottle, FaEgg, FaShoppingBasket, FaPrint, FaBox, FaApple, FaOm, FaCalendarDay
 } from "react-icons/fa";
 
 // Array for Expense.jsx (autocomplete)
@@ -25,8 +25,10 @@ export const categoryArray = [
     { name: "Watch", icon: <FaClock className="text-yellow-300" /> },
     { name: "Recharge", icon: <FaPhone className="text-yellow-300" /> },
     { name: "Code", icon: <FaCode className="text-green-500" /> },
+    { name: "God", icon: <FaOm className="text-green-500" /> },
     { name: "Vegetables", icon: <FaAppleAlt className="text-lime-600" /> },
     { name: "Rent", icon: <FaHome className="text-yellow-500" /> },
+    { name: "Daily", icon: <FaCalendarDay className="text-yellow-500" /> },
     { name: "Transport", icon: <FaBus className="text-blue-400" /> },
     { name: "Fuel", icon: <FaGasPump className="text-orange-600" /> },
     { name: "Water", icon: <FaWater className="text-cyan-500" /> },
