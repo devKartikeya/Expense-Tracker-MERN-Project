@@ -9,28 +9,12 @@ import {
     FaUtensils, FaShoppingBag, FaCar, FaHome, FaAppleAlt, FaBolt, FaLaptop,
     FaBook, FaHeartbeat, FaFilm, FaBus, FaFileInvoiceDollar, FaMoneyBillWave, FaEllipsisH
 } from "react-icons/fa";
+import { categoryIcons } from "../categories";
 
 const Expenses = ({ user }) => {
     const [expenses, setExpenses] = useState([]);
     const [expanded, setExpanded] = useState(null); // track expanded date row
     const navigate = useNavigate();
-
-    const categoryIcons = {
-        Food: <FaUtensils className="text-green-500" />,
-        Shopping: <FaShoppingBag className="text-pink-500" />,
-        Travel: <FaCar className="text-blue-500" />,
-        Rent: <FaHome className="text-yellow-500" />,
-        Vegetables: <FaAppleAlt className="text-lime-600" />,
-        Convenience: <FaBolt className="text-orange-500" />,
-        Electronics: <FaLaptop className="text-indigo-500" />,
-        Education: <FaBook className="text-purple-600" />,
-        Health: <FaHeartbeat className="text-red-500" />,
-        Entertainment: <FaFilm className="text-pink-400" />,
-        Transport: <FaBus className="text-blue-400" />,
-        Bills: <FaFileInvoiceDollar className="text-gray-600" />,
-        Salary: <FaMoneyBillWave className="text-green-600" />,
-        Misc: <FaEllipsisH className="text-gray-400" />,
-    };
 
     const addLogoToPDF = async (doc) => {
         const img = await fetch("/xpense-logo.png")
@@ -178,6 +162,7 @@ const Expenses = ({ user }) => {
                                                         {categoryIcons[exp.category] || null}
                                                         {exp.category}
                                                     </td>
+
                                                     <td className="py-2 px-4">{exp.description || "-"}</td>
                                                     <td className="py-2 px-4 text-gray-600">{new Date(exp.date).toLocaleTimeString()}</td>
                                                 </tr>
