@@ -8,9 +8,9 @@ import {
     FaSpa, FaTv, FaDonate, FaHandHoldingUsd, FaChartLine, FaUniversity,
     FaCoins, FaCalendarAlt, FaUmbrellaBeach, FaTheaterMasks, FaGlasses, FaGlassCheers, FaPhoneAlt,
     FaPhone, FaCode, FaClock, FaFan, FaSchool, FaBoxOpen, FaSnowflake, FaTable,
-    FaBreadSlice, FaCheese, FaDrumstickBite, FaFish,
+     FaBreadSlice, FaCheese, FaDrumstickBite, FaFish,
     FaCarrot, FaCookie, FaIceCream, FaCoffee, FaGlassWhiskey,
-    FaWineBottle, FaEgg, FaShoppingBasket, FaPrint, FaBox
+    FaWineBottle, FaEgg, FaShoppingBasket, FaPrint, FaBox, FaApple
 } from "react-icons/fa";
 
 // Array for Expense.jsx (autocomplete)
@@ -54,6 +54,9 @@ export const categoryArray = [
     { name: "Pets", icon: <FaDog className="text-brown-500" /> },
     { name: "Gardening", icon: <FaTree className="text-green-700" /> },
     { name: "Baby", icon: <FaBaby className="text-pink-400" /> },
+    { name: "Iphone", icon: <FaApple className="text-pink-400" /> },
+    { name: "Macbook", icon: <FaApple className="text-pink-400" /> },
+    { name: "Apple", icon: <FaApple className="text-pink-400" /> },
 
     // Groceries
     { name: "Milk", icon: <FaGlassWhiskey className="text-blue-400" /> },
