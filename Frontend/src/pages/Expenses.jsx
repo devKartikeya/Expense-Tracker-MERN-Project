@@ -1,14 +1,22 @@
-// https://expense-tracker-mern-project-g2yt.onrender.com/expenses
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import * as XLSX from "xlsx";
+import { FaChevronRight, FaChevronDown, FaUtensils, FaShoppingBag, FaCar, FaHome } from "react-icons/fa";
 
 const Expenses = ({ user }) => {
     const [expenses, setExpenses] = useState([]);
+    const [expanded, setExpanded] = useState(null); // track expanded date row
     const navigate = useNavigate();
+
+    const categoryIcons = {
+        Food: <FaUtensils className="text-green-500" />,
+        Shopping: <FaShoppingBag className="text-pink-500" />,
+        Travel: <FaCar className="text-blue-500" />,
+        Rent: <FaHome className="text-yellow-500" />,
+    };
 
     const addLogoToPDF = async (doc) => {
         const img = await fetch("/xpense-logo.png")
@@ -18,81 +26,60 @@ const Expenses = ({ user }) => {
                 reader.onloadend = () => resolve(reader.result);
                 reader.readAsDataURL(blob);
             }));
-
-        // Add logo to PDF (x, y, width, height)
         doc.addImage(img, "PNG", 14, 10, 20, 20);
     };
-
 
     useEffect(() => {
         fetch("https://expense-tracker-mern-project-g2yt.onrender.com/expenses", { credentials: "include" })
             .then((res) => res.json())
             .then((data) => {
-                // Sort newest to oldest
-                const sorted = data.sort(
-                    (a, b) => new Date(b.date) - new Date(a.date)
-                );
-                setExpenses(sorted);
+                const sorted = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+                // Group by date
+                const grouped = sorted.reduce((acc, exp) => {
+                    const dateKey = new Date(exp.date).toLocaleDateString();
+                    if (!acc[dateKey]) {
+                        acc[dateKey] = { date: dateKey, total: 0, items: [] };
+                    }
+                    acc[dateKey].total += exp.amount;
+                    acc[dateKey].items.push(exp);
+                    return acc;
+                }, {});
+
+                setExpenses(Object.values(grouped));
             })
             .catch((err) => console.error("Error fetching expenses:", err));
     }, []);
 
+    // Print
+    const handlePrint = () => window.print();
 
-    // 🔹 Print
-    const handlePrint = () => {
-        window.print();
-    };
-
-    // 🔹 Export to PDF
-    // 🔹 Export to PDF
+    // Export to PDF
     const exportToPDF = async () => {
         const doc = new jsPDF();
         const isMobile = window.innerWidth < 768;
-
-        // Add logo
         await addLogoToPDF(doc);
 
-        if (isMobile) {
-            // Mobile: stack logo above text, all left-aligned
-            doc.setFontSize(12);
-            doc.text("Xpense Tracker – Expense Report", 14, 40); // same x as logo, lower y
-            doc.setFontSize(8);
-            doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 48);
+        doc.setFontSize(isMobile ? 12 : 16);
+        doc.text("Xpense Tracker – Expense Report", isMobile ? 14 : 40, isMobile ? 40 : 20);
+        doc.setFontSize(isMobile ? 8 : 10);
+        doc.text(`Generated on: ${new Date().toLocaleDateString()}`, isMobile ? 14 : 40, isMobile ? 48 : 28);
 
-            autoTable(doc, {
-                head: [["Amount", "Category", "Description", "Date"]],
-                body: expenses.map((exp) => [
-                    `₹${exp.amount}`,
-                    exp.category,
-                    exp.description || "-",
-                    new Date(exp.date).toLocaleDateString(),
-                ]),
-                margin: { top: 55 }, // push table below logo+text
-            });
-        } else {
-            // Desktop: logo left, text beside it
-            doc.setFontSize(16);
-            doc.text("Xpense Tracker – Expense Report", 40, 20); // shifted right
-            doc.setFontSize(10);
-            doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 40, 28);
-
-            autoTable(doc, {
-                head: [["Amount", "Category", "Description", "Date"]],
-                body: expenses.map((exp) => [
-                    `₹${exp.amount}`,
-                    exp.category,
-                    exp.description || "-",
-                    new Date(exp.date).toLocaleDateString(),
-                ]),
-                margin: { top: 40 }, // enough space below header
-            });
-        }
-
-        // Summary row
         autoTable(doc, {
-            body: [
-                ["Total", "", "", `₹${expenses.reduce((sum, e) => sum + e.amount, 0)}`],
-            ],
+            head: [["Amount", "Category", "Description", "Date"]],
+            body: expenses.flatMap(day =>
+                day.items.map(exp => [
+                    `₹${exp.amount}`,
+                    exp.category,
+                    exp.description || "-",
+                    new Date(exp.date).toLocaleDateString(),
+                ])
+            ),
+            margin: { top: isMobile ? 55 : 40 },
+        });
+
+        autoTable(doc, {
+            body: [["Total", "", "", `₹${expenses.reduce((sum, d) => sum + d.total, 0)}`]],
             theme: "plain",
             styles: { fontStyle: "bold", halign: "right", fontSize: isMobile ? 8 : 10 },
             margin: { top: 10 },
@@ -101,69 +88,38 @@ const Expenses = ({ user }) => {
         doc.save("expenses-report.pdf");
     };
 
-
-    // 🔹 Export to Excel
+    // Export to Excel
     const exportToExcel = () => {
         const worksheet = XLSX.utils.json_to_sheet(
-            expenses.map((exp) => ({
-                Amount: exp.amount,
-                Category: exp.category,
-                Description: exp.description,
-                Date: new Date(exp.date).toLocaleDateString(),
-            }))
+            expenses.flatMap(day =>
+                day.items.map(exp => ({
+                    Amount: exp.amount,
+                    Category: exp.category,
+                    Description: exp.description,
+                    Date: new Date(exp.date).toLocaleDateString(),
+                }))
+            )
         );
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Expenses");
         XLSX.writeFile(workbook, "expenses-report.xlsx");
     };
 
-    const goToMonthlyExpenses = () => {
-        navigate("/monthly-expenses");
-    }
+    const goToMonthlyExpenses = () => navigate("/monthly-expenses");
 
     return (
         <div id="expenses-list" className="w-screen min-h-screen bg-blue-600 pt-[100px]">
             <Navbar username={user.username} className="print:hidden" />
 
             <div className="p-6">
+                {/* Header + Actions */}
                 <div className="flex flex-col sm:flex-row justify-between items-center mb-4 print:hidden gap-4">
                     <h1 className="text-xl sm:text-2xl font-bold text-white">All Expenses</h1>
                     <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-                        <button
-                            onClick={handlePrint}
-                            className="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow-md"
-                        >
-                            Print
-                        </button>
-                        <button
-                            onClick={exportToPDF}
-                            className="flex-1 bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-md"
-                        >
-                            PDF
-                        </button>
-                        <button
-                            onClick={exportToExcel}
-                            className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg shadow-md"
-                        >
-                            Excel
-                        </button>
+                        <button onClick={handlePrint} className="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow-md">Print</button>
+                        <button onClick={exportToPDF} className="flex-1 bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-md">PDF</button>
+                        <button onClick={exportToExcel} className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg shadow-md">Excel</button>
                     </div>
-                </div>
-
-
-                {/* Summary for print */}
-                <div className="hidden print:block mb-6">
-                    <h2 className="text-xl font-bold">Expense Summary</h2>
-                    <p>Total: ₹{expenses.reduce((sum, e) => sum + e.amount, 0)}</p>
-                    <p>Categories: {new Set(expenses.map((e) => e.category)).size}</p>
-                    <p>
-                        Date Range:{" "}
-                        {expenses.length > 0
-                            ? `${new Date(expenses[0].date).toLocaleDateString()} - ${new Date(
-                                expenses[expenses.length - 1].date
-                            ).toLocaleDateString()}`
-                            : "N/A"}
-                    </p>
                 </div>
 
                 {/* Table */}
@@ -179,25 +135,44 @@ const Expenses = ({ user }) => {
                         </thead>
                         <tbody>
                             {expenses.length > 0 ? (
-                                expenses.map((exp) => (
-                                    <tr
-                                        key={exp._id}
-                                        className="border-b border-gray-300 hover:bg-blue-50 transition"
-                                    >
-                                        <td className="py-3 px-4 font-semibold">₹{exp.amount}</td>
-                                        <td className="py-3 px-4">{exp.category}</td>
-                                        <td className="py-3 px-4">{exp.description}</td>
-                                        <td className="py-3 px-4">
-                                            {new Date(exp.date).toLocaleDateString()}
-                                        </td>
-                                    </tr>
+                                expenses.map((day, idx) => (
+                                    <React.Fragment key={idx}>
+                                        {/* Summary Row */}
+                                        <tr
+                                            className="border-b border-gray-300 bg-blue-100 cursor-pointer hover:bg-blue-200 transition"
+                                            onClick={() => setExpanded(expanded === idx ? null : idx)}
+                                        >
+                                            <td className="py-3 px-4 font-bold text-blue-900 flex items-center gap-2">
+                                                {expanded === idx ? (
+                                                    <FaChevronDown className="transition-transform duration-300" />
+                                                ) : (
+                                                    <FaChevronRight className="transition-transform duration-300" />
+                                                )}
+                                                ₹{day.total}
+                                            </td>
+                                            <td className="py-3 px-4">—</td>
+                                            <td className="py-3 px-4">—</td>
+                                            <td className="py-3 px-4 font-semibold">{day.date}</td>
+                                        </tr>
+
+                                        {/* Expanded Details */}
+                                        {expanded === idx &&
+                                            day.items.map((exp) => (
+                                                <tr key={exp._id} className="border-b border-gray-200 bg-white hover:bg-gray-50">
+                                                    <td className="py-2 px-8">₹{exp.amount}</td>
+                                                    <td className="py-2 px-4 flex items-center gap-2">
+                                                        {categoryIcons[exp.category] || null}
+                                                        {exp.category}
+                                                    </td>
+                                                    <td className="py-2 px-4">{exp.description || "-"}</td>
+                                                    <td className="py-2 px-4 text-gray-600">{new Date(exp.date).toLocaleTimeString()}</td>
+                                                </tr>
+                                            ))}
+                                    </React.Fragment>
                                 ))
                             ) : (
                                 <tr>
-                                    <td
-                                        colSpan="4"
-                                        className="py-6 text-center text-gray-500 font-medium"
-                                    >
+                                    <td colSpan="4" className="py-6 text-center text-gray-500 font-medium">
                                         No expenses found.
                                     </td>
                                 </tr>
@@ -205,6 +180,8 @@ const Expenses = ({ user }) => {
                         </tbody>
                     </table>
                 </div>
+
+                {/* Monthly Button */}
                 <div className="flex justify-center mt-6">
                     <button
                         onClick={goToMonthlyExpenses}
@@ -213,7 +190,6 @@ const Expenses = ({ user }) => {
                         Show Monthly Expenses
                     </button>
                 </div>
-
             </div>
         </div>
     );
