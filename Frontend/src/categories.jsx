@@ -10,7 +10,7 @@ import {
     FaPhone, FaCode, FaClock, FaFan, FaSchool, FaBoxOpen, FaSnowflake, FaTable,
     FaBreadSlice, FaCheese, FaDrumstickBite, FaFish,
     FaCarrot, FaCookie, FaIceCream, FaCoffee, FaGlassWhiskey,
-    FaWineBottle, FaEgg, FaShoppingBasket
+    FaWineBottle, FaEgg, FaShoppingBasket, FaPrint, FaBox
 } from "react-icons/fa";
 
 // Array for Expense.jsx (autocomplete)
@@ -21,6 +21,8 @@ export const categoryArray = [
     { name: "Glasses", icon: <FaGlasses className="text-blue-500" /> },
     { name: "Glass Cheers", icon: <FaGlassCheers className="text-blue-700" /> },
     { name: "Phone", icon: <FaPhoneAlt className="text-yellow-300" /> },
+    { name: "Masala", icon: <FaBox className="text-yellow-300" /> },
+    { name: "Watch", icon: <FaClock className="text-yellow-300" /> },
     { name: "Recharge", icon: <FaPhone className="text-yellow-300" /> },
     { name: "Code", icon: <FaCode className="text-green-500" /> },
     { name: "Vegetables", icon: <FaAppleAlt className="text-lime-600" /> },
@@ -30,11 +32,13 @@ export const categoryArray = [
     { name: "Water", icon: <FaWater className="text-cyan-500" /> },
     { name: "Electricity", icon: <FaLightbulb className="text-yellow-500" /> },
     { name: "Internet", icon: <FaWifi className="text-blue-400" /> },
+    { name: "Wifi", icon: <FaWifi className="text-blue-400" /> },
     { name: "Medicine", icon: <FaMedkit className="text-red-600" /> },
     { name: "Fan", icon: <FaFan className="text-blue-500" /> },
     { name: "College", icon: <FaUniversity className="text-purple-600" /> },
     { name: "School", icon: <FaSchool className="text-yellow-600" /> },
     { name: "Everyday Items", icon: <FaBoxOpen className="text-green-600" /> },
+    { name: "Health", icon: <FaHeartbeat className="text-red-600" /> },
     { name: "AC", icon: <FaSnowflake className="text-cyan-500" /> },
     { name: "Table", icon: <FaTable className="text-brown-500" /> },
 
@@ -60,6 +64,8 @@ export const categoryArray = [
     { name: "Vegetables", icon: <FaCarrot className="text-green-600" /> },
     { name: "Fruits", icon: <FaAppleAlt className="text-lime-600" /> },
     { name: "Snacks", icon: <FaCookie className="text-pink-500" /> },
+    { name: "Biscuits", icon: <FaCookie className="text-pink-500" /> },
+    { name: "Cookie", icon: <FaCookie className="text-pink-500" /> },
     { name: "Ice Cream", icon: <FaIceCream className="text-purple-400" /> },
     { name: "Coffee", icon: <FaCoffee className="text-brown-600" /> },
     { name: "Tea", icon: <FaCoffee className="text-brown-600" /> },
@@ -87,6 +93,7 @@ export const categoryArray = [
     { name: "Investments", icon: <FaChartLine className="text-green-500" /> },
     { name: "Loans", icon: <FaUniversity className="text-gray-700" /> },
     { name: "Taxes", icon: <FaCoins className="text-yellow-600" /> },
+    { name: "Print", icon: <FaPrint className="text-gray-600" /> },
 
     // Miscellaneous
     { name: "Repairs", icon: <FaTools className="text-gray-700" /> },
