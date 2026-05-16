@@ -4,7 +4,11 @@ import Navbar from "../components/Navbar";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import * as XLSX from "xlsx";
-import { FaChevronRight, FaChevronDown, FaUtensils, FaShoppingBag, FaCar, FaHome } from "react-icons/fa";
+import { FaChevronRight, FaChevronDown } from "react-icons/fa";
+import {
+    FaUtensils, FaShoppingBag, FaCar, FaHome, FaAppleAlt, FaBolt, FaLaptop,
+    FaBook, FaHeartbeat, FaFilm, FaBus, FaFileInvoiceDollar, FaMoneyBillWave, FaEllipsisH
+} from "react-icons/fa";
 
 const MonthlyExpenses = ({ user }) => {
     const [expenses, setExpenses] = useState([]);
@@ -16,6 +20,16 @@ const MonthlyExpenses = ({ user }) => {
         Shopping: <FaShoppingBag className="text-pink-500" />,
         Travel: <FaCar className="text-blue-500" />,
         Rent: <FaHome className="text-yellow-500" />,
+        Vegetables: <FaAppleAlt className="text-lime-600" />,
+        Convenience: <FaBolt className="text-orange-500" />,
+        Electronics: <FaLaptop className="text-indigo-500" />,
+        Education: <FaBook className="text-purple-600" />,
+        Health: <FaHeartbeat className="text-red-500" />,
+        Entertainment: <FaFilm className="text-pink-400" />,
+        Transport: <FaBus className="text-blue-400" />,
+        Bills: <FaFileInvoiceDollar className="text-gray-600" />,
+        Salary: <FaMoneyBillWave className="text-green-600" />,
+        Misc: <FaEllipsisH className="text-gray-400" />,
     };
 
     const addLogoToPDF = async (doc) => {
