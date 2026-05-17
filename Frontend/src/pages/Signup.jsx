@@ -84,14 +84,14 @@ const Signup = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 flex justify-center items-center w-screen h-screen text-white">
+    <div className="bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 flex justify-center items-center w-screen min-h-screen text-white p-2">
       <form
         id="signup-form"
         onSubmit={handleSubmit(onSubmit)}
-        className="h-[80%] w-[90%] md:w-[30%] flex flex-col items-center justify-evenly gap-2 bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl shadow-2xl px-6 py-3"
+        className="w-[95%] md:w-[30%] flex flex-col items-center gap-4 md:gap-6 bg-gradient-to-br from-blue-400 via-blue-700 to-blue-400 rounded-3xl shadow-2xl px-4 md:px-6 py-4 md:py-6 overflow-y-auto"
       >
         {/* App Name */}
-        <div className="flex items-center gap-2 justify-center w-full">
+        <div className="flex flex-col sm:flex-row items-center gap-2 justify-center w-full text-center">
           <img
             src="/xpense-logo.png"
             alt="Xpense Tracker Logo"
@@ -102,12 +102,10 @@ const Signup = () => {
           </h1>
         </div>
 
-
         {/* Title */}
-        <h2 className="text-4xl font-extrabold tracking-wide text-white drop-shadow-lg">
+        <h2 className="text-3xl md:text-4xl font-extrabold tracking-wide text-white drop-shadow-lg text-center">
           Create Account
         </h2>
-
 
         {/* Username */}
         <div className="w-full">
@@ -145,10 +143,13 @@ const Signup = () => {
         </div>
 
         {/* Button */}
-        <Button command="Register" className="w-full py-3 rounded-xl bg-blue-500 hover:bg-blue-700 transition duration-300 shadow-md" />
+        <Button
+          command="Register"
+          className="w-full py-3 rounded-xl bg-blue-500 hover:bg-blue-700 transition duration-300 shadow-md"
+        />
 
         {/* Footer */}
-        <p className="text-md text-gray-200">
+        <p className="text-sm md:text-md text-gray-200 text-center">
           Already have an account?{" "}
           <Link
             to="/login"
@@ -157,7 +158,7 @@ const Signup = () => {
             Login
           </Link>
         </p>
-        <p className="text-sm text-gray-200">
+        <p className="text-xs md:text-sm text-gray-200 text-center">
           Read our{" "}
           <Link
             to="/terms-conditions"
