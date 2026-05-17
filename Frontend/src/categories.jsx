@@ -11,7 +11,7 @@ import {
     FaBreadSlice, FaCheese, FaDrumstickBite, FaFish,
     FaCarrot, FaCookie, FaIceCream, FaCoffee, FaGlassWhiskey,
     FaWineBottle, FaEgg, FaShoppingBasket, FaPrint, FaBox, FaApple, FaOm, FaCalendarDay, FaShoePrints, FaMagic,
-    FaSprayCan, FaPaintBrush, FaHammer
+    FaSprayCan, FaPaintBrush, FaHammer, FaBath, FaToilet, FaReceipt
 } from "react-icons/fa";
 
 // Array for Expense.jsx (autocomplete)
@@ -46,6 +46,7 @@ export const categoryArray = [
     { name: "Health", icon: <FaHeartbeat className="text-red-600" /> },
     { name: "AC", icon: <FaSnowflake className="text-cyan-500" /> },
     { name: "Table", icon: <FaTable className="text-brown-500" /> },
+    { name: "FEES", icon: <FaReceipt className="text-blue-600" /> },
 
     // Lifestyle
     { name: "Shopping", icon: <FaShoppingBag className="text-pink-500" /> },
@@ -69,6 +70,8 @@ export const categoryArray = [
     { name: "Apple", icon: <FaApple className="text-pink-400" /> },
     { name: "Cosmetics", icon: <FaMagic className="text-pink-400" /> },
     { name: "Perfume", icon: <FaSprayCan className="text-pink-400" /> },
+    { name: "Bathroom", icon: <FaBath className="text-orange-400" /> },
+    { name: "Plumbing", icon: <FaToilet className="text-gray-400" /> },
 
     // Groceries
     { name: "Milk", icon: <FaGlassWhiskey className="text-blue-400" /> },
@@ -96,6 +99,7 @@ export const categoryArray = [
     { name: "Flights", icon: <FaPlane className="text-blue-600" /> },
     { name: "Hotels", icon: <FaHotel className="text-indigo-600" /> },
     { name: "Fitness", icon: <FaDumbbell className="text-gray-700" /> },
+    { name: "Gym", icon: <FaDumbbell className="text-black" /> },
     { name: "Spa", icon: <FaSpa className="text-pink-400" /> },
     { name: "Movies", icon: <FaTv className="text-red-500" /> },
     { name: "Beach", icon: <FaUmbrellaBeach className="text-blue-500" /> },

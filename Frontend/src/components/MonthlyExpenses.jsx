@@ -5,10 +5,6 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import * as XLSX from "xlsx";
 import { FaChevronRight, FaChevronDown } from "react-icons/fa";
-import {
-  FaUtensils, FaShoppingBag, FaCar, FaHome, FaAppleAlt, FaBolt, FaLaptop,
-  FaBook, FaHeartbeat, FaFilm, FaBus, FaFileInvoiceDollar, FaMoneyBillWave, FaEllipsisH
-} from "react-icons/fa";
 import { categoryIcons } from "../categories";
 
 const MonthlyExpenses = ({ user }) => {
