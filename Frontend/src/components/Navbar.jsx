@@ -52,17 +52,8 @@ const Navbar = ({ username, profileMode = false }) => {
 
         {/* Desktop Buttons */}
         <div className="hidden md:flex gap-5">
-          {profileMode ? (
-            <>
-              <Button command="About Us" onClick={goToAbout} />
-              <Button command="Contact Us" onClick={goToContact} />
-            </>
-          ) : (
-            <>
-              <Button command="Dashboard" onClick={goToDashboard} />
-              <Button command="Add Expense" onClick={goToExpense} />
-            </>
-          )}
+          <Button command="Dashboard" onClick={goToDashboard} />
+          <Button command="Add Expense" onClick={goToExpense} />
           <Button command="Profile" onClick={goToProfile} />
           <Button command="Logout" onClick={() => setShowLogoutModal(true)} />
         </div>
@@ -76,8 +67,6 @@ const Navbar = ({ username, profileMode = false }) => {
         </div>
 
         {/* Mobile Menu */}
-        {/* Mobile Menu Overlay */}
-        {/* Mobile Menu */}
         {isOpen && (
           <>
             {/* Backdrop */}
@@ -86,7 +75,6 @@ const Navbar = ({ username, profileMode = false }) => {
               onClick={() => setIsOpen(false)}
             ></div>
 
-            {/* Right Drawer Menu */}
             {/* Right Drawer Menu */}
             <div
               className={`drawer ${isOpen ? "open" : "close"}`}
@@ -106,17 +94,8 @@ const Navbar = ({ username, profileMode = false }) => {
 
               {/* Drawer Content */}
               <div className="flex flex-col gap-4">
-                {profileMode ? (
-                  <>
-                    <Button command="About Us" onClick={goToAbout} />
-                    <Button command="Contact Us" onClick={goToContact} />
-                  </>
-                ) : (
-                  <>
-                    <Button command="Dashboard" onClick={goToDashboard} />
-                    <Button command="Add Expense" onClick={goToExpense} />
-                  </>
-                )}
+                <Button command="Dashboard" onClick={goToDashboard} />
+                <Button command="Add Expense" onClick={goToExpense} />
                 <Button command="Profile" onClick={goToProfile} />
               </div>
 
@@ -130,13 +109,8 @@ const Navbar = ({ username, profileMode = false }) => {
                 </button>
               </div>
             </div>
-
-
           </>
         )}
-
-
-
       </nav>
 
       {/* Logout Modal */}
