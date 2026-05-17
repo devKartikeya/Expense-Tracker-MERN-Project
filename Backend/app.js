@@ -19,7 +19,7 @@ const { authRegister, authLogin, authCheckUser, authCheckLogin, authLogout, auth
 const adminRoutes = require("./routes/adminCategories.route");
 const categoryRoutes = require("./routes/category.route");
 const Admin = require("./models/admin.model");
-const User = require("./models/user.model");
+const User = require("./models/users.model");
 const bcrypt = require("bcrypt");
 
 const app = express();
