@@ -9,7 +9,7 @@ const adminLogin = async (req, res) => {
         const result = await admin(username, password);
         if (result.flag === "success") {
             const token = jwt.sign({ username, role: "admin" }, process.env.JWT_SECRET_KEY, { expiresIn: "1h" });
-            res.cookie("adminToken", token, { httpOnly: true, secure: false, sameSite: "Lax" });
+            res.cookie("adminToken", token, { httpOnly: true, secure: true, sameSite: "none" });
             return res.json({ flag: "success", message: "Admin authenticated" });
         } else {
             return res.json({ flag: "fail", message: result.message || "Authentication failed" });
