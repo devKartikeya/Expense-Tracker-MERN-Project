@@ -139,7 +139,7 @@ const AdminPanel = () => {
                                             <td className="py-3 px-4">{user.username}</td>
                                             <td className="py-3 px-4">{user.email}</td>
                                             <td className="py-3 px-4 flex gap-3">
-                                                <button className="bg-rose-600 hover:bg-rose-700 px-3 cursor-pointer py-1 rounded text-xs font-bold">
+                                                <button onClick={handleDeleteUser} className="bg-rose-600 hover:bg-rose-700 px-3 cursor-pointer py-1 rounded text-xs font-bold">
                                                     Delete
                                                 </button>
                                                 <button className="bg-yellow-500 hover:bg-yellow-600 px-3 py-1 cursor-pointer rounded text-xs font-bold">
