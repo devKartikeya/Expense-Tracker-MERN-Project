@@ -127,7 +127,7 @@ export const useCategories = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const res = await fetch("http://localhost:3000/admin/categories", {
+                const res = await fetch("https://expense-tracker-mern-project-g2yt.onrender.com/admin/categories", {
                     method: "GET",
                     credentials: "include",
                 });
