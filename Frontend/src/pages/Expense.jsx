@@ -107,35 +107,35 @@ const Expense = () => {
   const selectedIcon = categories.find(c => c.name === categoryInput)?.icon;
 
   return (
-    <div id="expense" className="w-screen h-screen flex justify-center items-center bg-gradient-to-br from-blue-600 to-blue-800">
+    <div id="expense" className="w-screen h-screen flex justify-center items-center bg-gradient-to-br from-blue-600 to-blue-800 p-2">
       <form
-        className="h-[90%] w-full sm:w-2/3 lg:w-1/3 bg-white flex flex-col items-center justify-between rounded-3xl shadow-2xl p-6"
+        className="h-auto max-h-[95%] w-full sm:w-4/5 lg:w-1/3 bg-white flex flex-col items-center justify-between rounded-2xl shadow-2xl p-4 sm:p-6 overflow-y-auto"
         onSubmit={handleSubmit(onSubmit)}
       >
         {/* Header */}
-        <div className="w-full rounded-2xl py-4 flex justify-center items-center bg-blue-500 shadow-md">
-          <h1 className="text-3xl font-bold text-white">Add Expense</h1>
+        <div className="w-full rounded-xl py-3 flex justify-center items-center bg-blue-500 shadow-md">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">Add Expense</h1>
         </div>
 
         {/* Inputs */}
-        <div className="flex flex-col gap-5 w-full px-4 mt-6">
+        <div className="flex flex-col gap-3 sm:gap-5 w-full px-2 sm:px-4 mt-4 sm:mt-6">
           <input
             {...register("amount", { required: true })}
             type="number"
             placeholder="Amount"
-            className="border border-gray-300 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold bg-blue-100 text-gray-800 placeholder-gray-500"
+            className="border border-gray-300 rounded-xl py-2 sm:py-3 px-3 sm:px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold bg-blue-100 text-gray-800 placeholder-gray-500"
           />
 
-          {/* Smart Category Input with pill preview */}
+          {/* Smart Category Input */}
           <div className="relative">
-            <div className="flex items-center gap-2 border border-gray-300 rounded-xl bg-blue-100 px-4 py-3 focus-within:ring-2 focus-within:ring-blue-500">
+            <div className="flex items-center gap-2 border border-gray-300 rounded-xl bg-blue-100 px-3 sm:px-4 py-2 sm:py-3 focus-within:ring-2 focus-within:ring-blue-500">
               {categoryInput ? (
-                <span className="flex items-center gap-2 bg-blue-200 px-3 py-1 rounded-full text-gray-800 font-semibold">
+                <span className="flex items-center gap-2 bg-blue-200 px-2 sm:px-3 py-1 rounded-full text-gray-800 font-semibold text-sm sm:text-base">
                   {selectedIcon}
                   {categoryInput}
                 </span>
               ) : (
-                <span className="text-gray-500">Category</span>
+                <span className="text-gray-500 text-sm sm:text-base">Category</span>
               )}
               <input
                 {...register("category", { required: true })}
@@ -155,7 +155,7 @@ const Expense = () => {
 
             {/* Suggestions Dropdown */}
             {showSuggestions && categoryInput && (
-              <ul className="absolute z-10 w-full bg-white border border-gray-300 rounded-xl mt-1 shadow-lg max-h-40 overflow-y-auto">
+              <ul className="absolute z-10 w-full bg-white border border-gray-300 rounded-xl mt-1 shadow-lg max-h-40 overflow-y-auto text-sm sm:text-base">
                 {filteredCategories.length > 0 ? (
                   filteredCategories.map((cat, idx) => (
                     <li
@@ -165,7 +165,7 @@ const Expense = () => {
                         setValue("category", cat.name);
                         setShowSuggestions(false);
                       }}
-                      className={`flex items-center gap-2 px-4 py-2 cursor-pointer transition ${highlightIndex === idx ? "bg-blue-100" : "hover:bg-blue-50"
+                      className={`flex items-center gap-2 px-3 sm:px-4 py-2 cursor-pointer transition ${highlightIndex === idx ? "bg-blue-100" : "hover:bg-blue-50"
                         }`}
                     >
                       {cat.icon}
@@ -174,9 +174,8 @@ const Expense = () => {
                   ))
                 ) : (
                   noMatchMessage && (
-                    <li className="px-4 py-2 text-gray-500">No matches, press Enter to add custom</li>
+                    <li className="px-3 sm:px-4 py-2 text-gray-500">No matches, press Enter to add custom</li>
                   )
-
                 )}
               </ul>
             )}
@@ -186,26 +185,26 @@ const Expense = () => {
             {...register("description")}
             type="text"
             placeholder="Description"
-            className="border border-gray-300 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold bg-blue-100 text-gray-800 placeholder-gray-500"
+            className="border border-gray-300 rounded-xl py-2 sm:py-3 px-3 sm:px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold bg-blue-100 text-gray-800 placeholder-gray-500"
           />
           <input
             {...register("date")}
             type="date"
-            className="border border-gray-300 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold bg-blue-100 text-gray-800"
+            className="border border-gray-300 rounded-xl py-2 sm:py-3 px-3 sm:px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold bg-blue-100 text-gray-800"
           />
         </div>
 
         {/* Buttons */}
-        <div className="flex flex-col gap-4 w-full px-4 mt-6">
+        <div className="flex flex-col gap-3 sm:gap-4 w-full px-2 sm:px-4 mt-4 sm:mt-6">
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-md transition duration-300"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 sm:py-3 rounded-xl shadow-md transition duration-300 text-sm sm:text-base"
           >
             Add Expense
           </button>
           <button
             type="button"
-            className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 rounded-xl shadow-md transition duration-300"
+            className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 sm:py-3 rounded-xl shadow-md transition duration-300 text-sm sm:text-base"
             onClick={goBack}
           >
             Go Back
