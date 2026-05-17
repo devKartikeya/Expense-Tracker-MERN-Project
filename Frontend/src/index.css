@@ -64,6 +64,10 @@ body {
     font-family: "Poppins";
 }
 
+#admin, #admin-panel, #admin-category {
+    font-family: "Poppins";
+}
+
 /* Drawer slide in/out */
 @keyframes slideInRight {
     from {
