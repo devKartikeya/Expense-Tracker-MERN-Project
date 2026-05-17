@@ -16,6 +16,9 @@ import TermsAndConditions from "./pages/TermsAndConditions";
 import MonthlyExpenses from "./components/MonthlyExpenses";
 import Categories from "./pages/Categories";
 import CategoryExpenses from "./pages/CategoryExpenses";
+import Admin from "./pages/Admin";
+import AdminPanel from "./pages/AdminPanel";
+import CategoryManagement from "./pages/CategoryManagement";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {
@@ -118,6 +121,30 @@ const App = () => {
         />
         <Route path="/reset-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <Admin />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin-panel"
+          element={
+            <ProtectedRoute>
+              <AdminPanel />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin-categories"
+          element={
+            <ProtectedRoute>
+              <CategoryManagement />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );

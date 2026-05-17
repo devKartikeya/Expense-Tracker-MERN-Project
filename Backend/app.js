@@ -3,16 +3,22 @@ const express = require('express');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 
 const connectDB = require('./config/db');
 const mailRoutes = require("./routes/mail.route");
 const { getProfileData } = require("./controllers/profile.controller");
 const { contactController } = require("./controllers/contact.controller");
 const { checkSignUp, checkLogin } = require('./middlewares/auth.middleware');
+const { checkAdmin } = require('./middlewares/admin.middleware');
+const { adminLogin } = require('./controllers/admin.controller');
 const { addExpense, getExpenses } = require('./controllers/expense.controller');
 const { getExpensesByCategory, getMonthlyTotals, getDailyExpenses } = require('./controllers/charts.controller');
 const { getTotalExpenses, getMonthlyExpenses, getTopCategory, getExpensesCount } = require('./controllers/services.controller');
 const { authRegister, authLogin, authCheckUser, authCheckLogin, authLogout, authDeleteAccount, authChangePassword } = require('./controllers/auth.controller');
+const adminRoutes = require("./routes/adminCategories.route");
+const categoryRoutes = require("./routes/category.route");
+const Admin = require("./models/admin.model");
 
 const app = express();
 app.use(cors({
@@ -30,6 +36,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/auth", mailRoutes);
+app.use("/admin", adminRoutes);
+app.use("/admin/categories", categoryRoutes);
 
 console.log(process.env.EMAIL_USER);
 console.log(process.env.EMAIL_PASSWORD);
@@ -52,6 +60,11 @@ app.get("/expenses-count", checkLogin, getExpensesCount);
 app.get("/expenses-by-category", checkLogin, getExpensesByCategory);
 app.get("/monthly-totals", checkLogin, getMonthlyTotals);
 app.get("/daily-expenses", checkLogin, getDailyExpenses);
+app.post("/admin-login", adminLogin);
+
+app.get("/admin-panel", checkAdmin, (req, res) => {
+    res.json({ message: "Welcome to Admin Panel" });
+});
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
