@@ -19,6 +19,8 @@ const { authRegister, authLogin, authCheckUser, authCheckLogin, authLogout, auth
 const adminRoutes = require("./routes/adminCategories.route");
 const categoryRoutes = require("./routes/category.route");
 const Admin = require("./models/admin.model");
+const User = require("./models/user.model");
+const bcrypt = require("bcrypt");
 
 const app = express();
 app.use(cors({
@@ -61,6 +63,21 @@ app.get("/expenses-by-category", checkLogin, getExpensesByCategory);
 app.get("/monthly-totals", checkLogin, getMonthlyTotals);
 app.get("/daily-expenses", checkLogin, getDailyExpenses);
 app.post("/admin-login", adminLogin);
+
+app.post("/verify-user", async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        const user = await User.findOne({ username });
+        if (!user) return res.status(401).json({ flag: "fail", message: "User not found" });
+
+        const match = await bcrypt.compare(password, user.password);
+        if (!match) return res.status(401).json({ flag: "fail", message: "Invalid password" });
+
+        res.json({ flag: "success" });
+    } catch (err) {
+        res.status(500).json({ flag: "fail", message: "Server error" });
+    }
+});
 
 app.get("/admin-panel", checkAdmin, (req, res) => {
     res.json({ message: "Welcome to Admin Panel" });
