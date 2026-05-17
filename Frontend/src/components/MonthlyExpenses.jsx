@@ -5,21 +5,26 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import * as XLSX from "xlsx";
 import { FaChevronRight, FaChevronDown } from "react-icons/fa";
-import { categoryIcons } from "../categories";
+import { useCategories } from "../categories"; // ✅ dynamic categories + icons
 
 const MonthlyExpenses = ({ user }) => {
   const [expenses, setExpenses] = useState([]);
-  const [expanded, setExpanded] = useState(null); // track expanded date row
+  const [expanded, setExpanded] = useState(null);
   const navigate = useNavigate();
+
+  const { categoryIcons } = useCategories(); // ✅ dynamic icons
 
   const addLogoToPDF = async (doc) => {
     const img = await fetch("/xpense-logo.png")
-      .then(res => res.blob())
-      .then(blob => new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result);
-        reader.readAsDataURL(blob);
-      }));
+      .then((res) => res.blob())
+      .then(
+        (blob) =>
+          new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.readAsDataURL(blob);
+          })
+      );
     doc.addImage(img, "PNG", 14, 10, 20, 20);
   };
 
@@ -70,8 +75,8 @@ const MonthlyExpenses = ({ user }) => {
 
     autoTable(doc, {
       head: [["Amount", "Category", "Description", "Date"]],
-      body: expenses.flatMap(day =>
-        day.items.map(exp => [
+      body: expenses.flatMap((day) =>
+        day.items.map((exp) => [
           `₹${exp.amount}`,
           exp.category,
           exp.description || "-",
@@ -94,8 +99,8 @@ const MonthlyExpenses = ({ user }) => {
   // Export to Excel
   const exportToExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(
-      expenses.flatMap(day =>
-        day.items.map(exp => ({
+      expenses.flatMap((day) =>
+        day.items.map((exp) => ({
           Amount: exp.amount,
           Category: exp.category,
           Description: exp.description,
@@ -167,7 +172,6 @@ const MonthlyExpenses = ({ user }) => {
                             {categoryIcons[exp.category] || null}
                             {exp.category}
                           </td>
-
                           <td className="py-2 px-4">{exp.description || "-"}</td>
                           <td className="py-2 px-4 text-gray-600">{new Date(exp.date).toLocaleTimeString()}</td>
                         </tr>
