@@ -55,7 +55,7 @@ const CategoryManagement = () => {
 
             <button
                 onClick={handleAddCategory}
-                className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 font-semibold px-4 py-2 rounded-lg w-full shadow-md transition-transform transform hover:scale-105"
+                className="bg-gradient-to-r text-white from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 font-semibold px-4 py-2 rounded-lg w-full shadow-md transition-transform transform hover:scale-105"
             >
                 + Add Category
             </button>
@@ -77,7 +77,7 @@ const CategoryManagement = () => {
                                 key={c._id}
                                 className="border-b border-gray-700 hover:bg-gray-800/50 transition"
                             >
-                                <td className="py-3 px-4 font-medium">{c.name}</td>
+                                <td className="py-3 px-4 font-medium text-lg text-white">{c.name}</td>
                                 <td className="py-3 px-4">
                                     {iconMap[c.iconKey] &&
                                         React.createElement(iconMap[c.iconKey], {
@@ -111,7 +111,7 @@ const CategoryManagement = () => {
                                         className: `${c.color} text-xl`,
                                     })}
                                 <div>
-                                    <p className="font-semibold">{c.name}</p>
+                                    <p className="font-semibold text-white">{c.name}</p>
                                     <p className="text-xs text-gray-400">{c.color}</p>
                                 </div>
                             </div>
