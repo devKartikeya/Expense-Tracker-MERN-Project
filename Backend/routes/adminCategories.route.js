@@ -43,6 +43,7 @@ router.get("/users", checkAdmin, async (req, res) => {
 
 //Delete user  
 router.delete("/users/:id", checkAdmin, async (req, res) => {
+    console.log("Received request to delete user with ID:", req.params.id);
     try {
         await User.findByIdAndDelete(req.params.id);
         res.json({ flag: "success", message: "User deleted successfully" });
@@ -53,6 +54,7 @@ router.delete("/users/:id", checkAdmin, async (req, res) => {
 
 //Reset user password
 router.post("/users/:id/reset-password", checkAdmin, async (req, res) => {
+    console.log("Received request to reset password for user ID:", req.params.id);
     try {
         // For now, set a default password (hashed)
         const bcrypt = require("bcrypt");

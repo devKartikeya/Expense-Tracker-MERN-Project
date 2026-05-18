@@ -51,6 +51,7 @@ const AdminPanel = () => {
     }, []);
 
     const handleDeleteUser = async (id) => {
+        console.log("Deleting user with ID:", id);
         await fetch(`https://expense-tracker-mern-project-g2yt.onrender.com/admin/users/${id}`, {
             method: "DELETE",
             credentials: "include",
@@ -59,6 +60,7 @@ const AdminPanel = () => {
     };
 
     const handleResetPassword = async (id) => {
+        console.log("Resetting password for user ID:", id);
         await fetch(`https://expense-tracker-mern-project-g2yt.onrender.com/admin/users/${id}/reset-password`, {
             method: "POST",
             credentials: "include",
@@ -81,7 +83,7 @@ const AdminPanel = () => {
     return (
         <div id="admin-panel" className="w-screen h-screen bg-gray-950 text-white flex flex-col font-poppins">
             {/* Header */}
-            <header className="w-full bg-gradient-to-r bg-black p-5 flex justify-between items-center shadow-xl border-b border-gray-700">
+            <header className="w-full bg-gradient-to-r bg-black p-5 flex justify-between items-center shadow-xl border-b border-gray-70">
                 <h1 className="text-3xl font-bold tracking-wide uppercase">Admin Panel</h1>
                 <button
                     onClick={() => setShowLogoutConfirm(true)}
@@ -94,7 +96,7 @@ const AdminPanel = () => {
             {/* Main Content */}
             <main className="flex-1 p-8 grid grid-cols-1 lg:grid-cols-2 gap-8 overflow-y-auto">
                 {/* Dashboard Overview */}
-                <section className="bg-black backdrop-blur-md rounded-xl p-6 shadow-lg border border-gray-700 hover:border-blue-500 transition-all">
+                <section className="bg-black backdrop-blur-md rounded-xl p-6 shadow-lg border border-gray-700 hover:border-blue-500 transition-all lg:col-span-2">
                     <h2 className="text-xl font-bold uppercase tracking-wider mb-4">Dashboard</h2>
                     <div className="space-y-3 text-lg">
                         <p className="flex justify-between">
