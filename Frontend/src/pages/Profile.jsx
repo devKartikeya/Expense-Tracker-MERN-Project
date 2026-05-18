@@ -143,12 +143,6 @@ const Profile = ({ user }) => {
                 Change Password
               </button>
               <button
-                onClick={() => setShowAdminAuth(true)}
-                className="h-10 w-full bg-gradient-to-r from-gray-900 via-black to-gray-900 rounded-lg text-white font-semibold shadow-md hover:scale-105 transition-transform"
-              >
-                Admin Panel
-              </button>
-              <button
                 className="h-10 w-full bg-gradient-to-r from-red-500 to-orange-500 rounded-lg text-white font-semibold shadow-md hover:scale-105 transition-transform"
                 onClick={() => setShowModal(true)}
               >
@@ -173,6 +167,12 @@ const Profile = ({ user }) => {
           </div>
         </div>
       </div>
+      <button
+        onClick={() => setShowAdminAuth(true)}
+        className="h-10 w-full bg-gradient-to-r from-gray-900 via-black to-gray-900 rounded-lg text-white font-semibold shadow-md hover:scale-105 transition-transform"
+      >
+        Admin Panel
+      </button>
 
       {/* Strict Admin Verification Modal */}
       {showAdminAuth && (
