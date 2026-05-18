@@ -20,14 +20,16 @@ const Admin = () => {
             const result = await response.json();
             if (result.flag === "success") {
                 navigate("/admin-panel"); // redirect to actual Admin Panel
-                alert("Admin authenticated! (Redirect to Admin Panel)");
+                alert("Admin authenticated! (Redirecting to Admin Panel)");
                 reset(); // clear form
             } else {
-                alert(result.message || "Authentication failed. Try again.");
+                alert(`${result.message} Access Denied` || "Authentication failed. Try again.");
+                reset({ password: "" }); // clear only password field
             }
         } catch (error) {
             console.error("Error:", error);
             alert("Server error. Try again later.");
+            reset({ password: "" }); // clear only password field
         }
     };
 
@@ -35,7 +37,7 @@ const Admin = () => {
         <div id="admin" className="w-screen h-screen flex justify-center items-center bg-gradient-to-br from-black via-gray-900 to-black text-white">
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="w-[90%] sm:w-[70%] md:w-[30%] bg-gray-800 rounded-2xl shadow-2xl p-6 flex flex-col gap-6 items-center border border-red-600/40"
+                className="w-[90%] sm:w-[70%] md:w-[30%] bg-black rounded-2xl shadow-2xl p-6 flex flex-col gap-6 items-center border border-red-600/40"
             >
                 {/* Logo + Title */}
                 <div className="flex flex-col items-center gap-3">
@@ -56,13 +58,13 @@ const Admin = () => {
                     {...register("username", { required: true })}
                     type="text"
                     placeholder="Admin Username"
-                    className="w-full border border-gray-600 rounded-lg py-3 px-4 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="w-full border border-gray-900 rounded-lg py-3 px-4 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-red-500"
                 />
                 <input
                     {...register("password", { required: true })}
                     type="password"
                     placeholder="Admin Password"
-                    className="w-full border border-gray-600 rounded-lg py-3 px-4 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="w-full border border-gray-900 rounded-lg py-3 px-4 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-red-500"
                 />
 
                 {/* Button */}

@@ -10,7 +10,7 @@ const admin = (username, password) => {
             }
             const isMatch = await bcrypt.compare(password, admin.password);
             if (!isMatch) {
-                return resolve({ flag: "fail", message: "Invalid password" });
+                return resolve({ flag: "fail", message: "Invalid Credentials" });
             }
             resolve({ flag: "success", message: "Admin authenticated" });
         } catch (error) {

@@ -169,7 +169,7 @@ const Profile = ({ user }) => {
       </div>
       <button
         onClick={() => setShowAdminAuth(true)}
-        className="h-10 w-full bg-gradient-to-r from-gray-900 via-black to-gray-900 rounded-lg text-white font-semibold shadow-md hover:scale-105 transition-transform"
+        className="h-10 w-full bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white font-semibold shadow-md hover:scale-105 transition-transform"
       >
         Admin Panel
       </button>
