@@ -225,6 +225,7 @@ const Dashboard = ({ user }) => {
 
         <Card
           title="Total Expenses"
+          onClick={goToExpenses}
           value={`₹${totalExpenses.toLocaleString()}`}
           icon={<FaClipboardCheck />}
           className="bg-gradient-to-r from-rose-500 to-red-500 justify-between"
@@ -249,7 +250,6 @@ const Dashboard = ({ user }) => {
       <Card
         title="See Your Expenses History"
         value="View Details"
-        onClick={goToExpenses}
         icon={<FaHistory />}
         className="bg-gradient-to-r from-pink-500 to-red-600 justify-between w-3/4 mx-auto mt-10 cursor-pointer hover:scale-105 transition-transform duration-300"
       />
