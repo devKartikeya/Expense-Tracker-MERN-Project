@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import MiniNavbar from "../components/MiniNavbar";
 import { Pie, Bar, Line } from "react-chartjs-2";
 import { useNavigate, useLocation } from "react-router-dom";
-import { FaWallet, FaHistory, FaChartPie, FaCalendarAlt, FaClipboardCheck } from "react-icons/fa";
+import { FaWallet, FaHistory, FaCoins, FaChartPie, FaCalendarAlt, FaClipboardCheck } from "react-icons/fa";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, PointElement, LineElement } from "chart.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, PointElement, LineElement);
@@ -19,6 +19,9 @@ const Dashboard = ({ user }) => {
   const [totalExpenses, setTotalExpenses] = useState(0);
   const [monthlyTotal, setMonthlyTotal] = useState(0);
   const [topCategory, setTopCategory] = useState({ category: "", amount: 0 });
+
+  const [totalIncome, setTotalIncome] = useState(0)
+  const [monthlyIncome, setMonthlyIncome] = useState(0)
 
   const [expensesByCategory, setExpensesByCategory] = useState([]);
   const [monthlyTotals, setMonthlyTotals] = useState([]);
@@ -55,6 +58,19 @@ const Dashboard = ({ user }) => {
       .then(res => res.json())
       .then(data => setDailyExpenses(data));
   }, []);
+
+  useEffect(() => {
+    fetch("https://expense-tracker-mern-project-g2yt.onrender.com/total-income", { credentials: "include" })
+      .then(res => res.json())
+      .then(data => setTotalIncome(data)).then(() => console.log(totalIncome));
+  }, [])
+
+  useEffect(() => {
+    fetch("https://expense-tracker-mern-project-g2yt.onrender.com/monthly-income", { credentials: "include" })
+      .then(res => res.json())
+      .then(data => setMonthlyIncome(data.total));
+    console.log(monthlyIncome);
+  }, [])
 
   const pieData = {
     labels: expensesByCategory.map(e => e.category),
@@ -141,6 +157,10 @@ const Dashboard = ({ user }) => {
     navigate("/monthly-expenses");
   }
 
+  const goToMonthlyIncome = () => {
+    navigate("/monthly-incomes");
+  };
+
   const goToCategories = () => {
     navigate("/categories");
   }
@@ -148,7 +168,7 @@ const Dashboard = ({ user }) => {
   return (
     <div id="dashboard" className="bg-gradient-to-br from-blue-500 via-indigo-500 to-indigo-700 pt-[75px] sm:pt-[105px] w-screen h-screen">
       <Navbar username={user.username} />
-      <MiniNavbar/>
+      <MiniNavbar />
 
       {/* Welcome Modal */}
       {showWelcomeModal && (
@@ -183,6 +203,13 @@ const Dashboard = ({ user }) => {
           className="bg-gradient-to-r from-purple-500 to-indigo-600 justify-between"
         />
         <Card
+          title="Income this Month"
+          onClick={goToMonthlyIncome}
+          value={`₹${monthlyIncome.toLocaleString()}`}
+          icon={<FaCoins />}
+          className="bg-gradient-to-r from-yellow-500 to-orange-600 justify-between"
+        />
+        <Card
           title="Top Category"
           onClick={goToCategories}
           value={topCategory.category ? `${topCategory.category} (₹${topCategory.amount.toLocaleString()})` : "No data"}
@@ -190,16 +217,22 @@ const Dashboard = ({ user }) => {
           className="bg-gradient-to-r from-green-500 to-teal-600 justify-between"
         />
         <Card
-          title="Expenses Logged"
-          value={expenses}
-          icon={<FaCalendarAlt />}
-          className="bg-gradient-to-r from-pink-500 to-red-600 justify-between"
-        />
-        <Card
           title="Total Expenses"
           value={`₹${totalExpenses.toLocaleString()}`}
           icon={<FaClipboardCheck />}
           className="bg-gradient-to-r from-yellow-500 to-orange-600 justify-between"
+        />
+        <Card
+          title="Total Income"
+          value={`₹${totalIncome.toLocaleString()}`}
+          icon={<FaCoins />}
+          className="bg-gradient-to-r from-yellow-500 to-orange-600 justify-between"
+        />
+        <Card
+          title="Expenses Logged"
+          value={expenses}
+          icon={<FaCalendarAlt />}
+          className="bg-gradient-to-r from-pink-500 to-red-600 justify-between"
         />
       </div>
 

@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 import AboutUs from "./pages/About";
 import Signup from "./pages/Signup";
+import Income from "./pages/Income";
 import Profile from "./pages/Profile";
 import Expense from "./pages/Expense";
 import ContactUs from "./pages/Contact";
@@ -17,6 +18,7 @@ import ChangePassword from "./pages/ChangePassword";
 import CategoryExpenses from "./pages/CategoryExpenses";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MonthlyExpenses from "./components/MonthlyExpenses";
+import MonthlyIncome from "./components/MonthlyInceom";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import CategoryManagement from "./pages/CategoryManagement";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -44,6 +46,14 @@ const App = () => {
           }
         />
         <Route
+          path="/income"
+          element={
+            <ProtectedRoute>
+              <Income />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/expenses"
           element={
             <ProtectedRoute>
@@ -56,6 +66,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <MonthlyExpenses />
+            </ProtectedRoute>
+          }
+        />
+         <Route
+          path="/monthly-incomes"
+          element={
+            <ProtectedRoute>
+              <MonthlyIncome />
             </ProtectedRoute>
           }
         />

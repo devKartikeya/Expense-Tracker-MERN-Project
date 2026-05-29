@@ -29,6 +29,7 @@ const Navbar = ({ username, profileMode = false }) => {
   const goToAbout = () => navigate("/about-us");
   const goToContact = () => navigate("/contact-us");
   const goToProfile = () => navigate("/profile");
+  const goToIncome = () => navigate("/income")
 
   return (
     <>
@@ -54,6 +55,7 @@ const Navbar = ({ username, profileMode = false }) => {
         <div className="hidden md:flex gap-5">
           <Button command="Dashboard" onClick={goToDashboard} />
           <Button command="Add Expense" onClick={goToExpense} />
+          <Button command="Add Income" onClick={goToIncome} />
           <Button command="Profile" onClick={goToProfile} />
           <Button command="Logout" onClick={() => setShowLogoutModal(true)} />
         </div>
@@ -96,6 +98,7 @@ const Navbar = ({ username, profileMode = false }) => {
               <div className="flex flex-col gap-4">
                 <Button command="Dashboard" onClick={goToDashboard} />
                 <Button command="Add Expense" onClick={goToExpense} />
+                <Button command="Add Income" onClick={goToIncome} />
                 <Button command="Profile" onClick={goToProfile} />
               </div>
 

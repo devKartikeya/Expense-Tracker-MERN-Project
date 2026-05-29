@@ -21,6 +21,8 @@ const { addExpense, getExpenses } = require('./controllers/expense.controller');
 const { getExpensesByCategory, getMonthlyTotals, getDailyExpenses } = require('./controllers/charts.controller');
 const { getTotalExpenses, getMonthlyExpenses, getTopCategory, getExpensesCount } = require('./controllers/services.controller');
 const { authRegister, authLogin, authCheckUser, authCheckLogin, authLogout, authDeleteAccount, authChangePassword } = require('./controllers/auth.controller');
+const Income = require("./models/income.model");
+const { addIncome, getIncomes, getMonthlyIncome, getIncomeList } = require("./controllers/income.controller");
 
 const app = express();
 app.use(cors({
@@ -64,6 +66,12 @@ app.get("/monthly-totals", checkLogin, getMonthlyTotals);
 app.get("/daily-expenses", checkLogin, getDailyExpenses);
 app.get("/monthly-expenses", checkLogin, getMonthlyExpenses);
 app.get("/expenses-by-category", checkLogin, getExpensesByCategory);
+
+app.post("/income", checkLogin, addIncome);
+app.get("/income", checkLogin, getIncomeList);
+
+app.get("/total-income", checkLogin, getIncomes);
+app.get("/monthly-income", checkLogin, getMonthlyIncome);
 
 app.post("/verify-user", async (req, res) => {
     const { username, password } = req.body;
