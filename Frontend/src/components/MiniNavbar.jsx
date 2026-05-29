@@ -4,19 +4,10 @@ import { NavLink } from "react-router-dom";
 const MiniNavbar = () => {
     return (
         <div className="bg-blue-600 shadow-md">
-            <div className="flex flex-col sm:flex-row items-center justify-between px-6 py-3">
-
-                {/* Left CTA Button + Animated Arrow */}
-                <div className="flex items-center gap-2">
-                    <span className="bg-gradient-to-br from-green-500 via-lime-400 to-yellow-300 text-white font-bold px-4 py-2 rounded-lg hover:text-blue-400 hover:bg-yellow-300 shadow-md">
-                        Track Your Expenses Here
-                    </span>
-                    {/* Animated arrow with up-down movement */}
-                    <span className="text-yellow-300 text-2xl animate-bounce">➡️</span>
-                </div>
+            <div className="flex flex-col sm:flex-row items-center justify-between px-1 py-2">
 
                 {/* Links with icons */}
-                <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6 mt-3 sm:mt-0">
+                <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-2 mt-3 sm:mt-0">
                     <NavLink
                         to="/expenses"
                         className={({ isActive }) =>

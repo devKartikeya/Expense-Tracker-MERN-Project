@@ -195,44 +195,49 @@ const Dashboard = ({ user }) => {
 
       {/* Stats Cards */}
       <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <Card
+         <Card
           title="Total This Month"
           value={`₹${monthlyTotal.toLocaleString()}`}
           onClick={goToMonthlyExpenses}
           icon={<FaWallet />}
           className="bg-gradient-to-r from-purple-500 to-indigo-600 justify-between"
         />
+
         <Card
           title="Income this Month"
           onClick={goToMonthlyIncome}
           value={`₹${monthlyIncome.toLocaleString()}`}
           icon={<FaCoins />}
-          className="bg-gradient-to-r from-yellow-500 to-orange-600 justify-between"
+          className="bg-gradient-to-r from-yellow-400 to-amber-500 justify-between"
         />
+
         <Card
           title="Top Category"
           onClick={goToCategories}
           value={topCategory.category ? `${topCategory.category} (₹${topCategory.amount.toLocaleString()})` : "No data"}
           icon={<FaChartPie />}
-          className="bg-gradient-to-r from-green-500 to-teal-600 justify-between"
+          className="bg-gradient-to-r from-green-600 to-green-500 justify-between"
         />
+
         <Card
           title="Total Expenses"
           value={`₹${totalExpenses.toLocaleString()}`}
           icon={<FaClipboardCheck />}
-          className="bg-gradient-to-r from-yellow-500 to-orange-600 justify-between"
+          className="bg-gradient-to-r from-rose-500 to-red-500 justify-between"
         />
+
         <Card
           title="Total Income"
           value={`₹${totalIncome.toLocaleString()}`}
           icon={<FaCoins />}
-          className="bg-gradient-to-r from-yellow-500 to-orange-600 justify-between"
+          className="bg-gradient-to-r from-lime-500 to-green-600 justify-between"
         />
+
         <Card
           title="Expenses Logged"
           value={expenses}
           icon={<FaCalendarAlt />}
-          className="bg-gradient-to-r from-pink-500 to-red-600 justify-between"
+          className="bg-gradient-to-r from-pink-500 to-red-500 justify-between"
         />
       </div>
 
