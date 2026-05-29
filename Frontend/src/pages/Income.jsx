@@ -15,6 +15,38 @@ const Expense = () => {
     const [noMatchMessage, setNoMatchMessage] = useState(false);
     const [highlightIndex, setHighlightIndex] = useState(-1);
 
+    // Auto-hide "no match" message
+    useEffect(() => {
+        if (noMatchMessage) {
+            const timer = setTimeout(() => setNoMatchMessage(false), 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [noMatchMessage]);
+
+    // Debounce filtering
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            if (categoryInput) {
+                const filtered = categoryArray.filter((cat) =>
+                    cat.name.toLowerCase().includes(categoryInput.toLowerCase())
+                );
+                setFilteredCategories(filtered);
+
+                if (filtered.length === 0) {
+                    setNoMatchMessage(true);
+                } else {
+                    setNoMatchMessage(false);
+                }
+            } else {
+                setFilteredCategories(categoryArray);
+                setNoMatchMessage(false);
+            }
+            setHighlightIndex(-1);
+        }, 300);
+
+        return () => clearTimeout(handler);
+    }, [categoryInput, categoryArray]);
+
     const onSubmit = async (data) => {
         let response = await fetch("https://expense-tracker-mern-project-g2yt.onrender.com/income", {
             method: "POST",
@@ -30,6 +62,33 @@ const Expense = () => {
     };
 
     const goBack = () => window.history.back();
+
+    // Keyboard navigation
+    const handleKeyDown = (e) => {
+        if (!showSuggestions) return;
+        if (e.key === "ArrowDown") {
+            e.preventDefault();
+            setHighlightIndex((prev) => (prev + 1) % filteredCategories.length);
+        } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            setHighlightIndex(
+                (prev) => (prev - 1 + filteredCategories.length) % filteredCategories.length
+            );
+        } else if (e.key === "Enter") {
+            if (highlightIndex >= 0 && filteredCategories[highlightIndex]) {
+                e.preventDefault();
+                const selected = filteredCategories[highlightIndex];
+                setCategoryInput(selected.name);
+                setValue("category", selected.name);
+                setShowSuggestions(false);
+            }
+        } else if (e.key === "Escape") {
+            setShowSuggestions(false);
+        }
+    };
+
+    // Find icon for selected category
+    const selectedIcon = categoryArray.find((c) => c.name === categoryInput)?.icon;
 
     return (
         <div
@@ -78,6 +137,34 @@ const Expense = () => {
                                 className="absolute inset-0 opacity-0 cursor-text"
                             />
                         </div>
+                        {/* Suggestions Dropdown */}
+                        {showSuggestions && categoryInput && (
+                            <ul className="absolute z-10 w-full bg-white border border-gray-300 rounded-xl mt-1 shadow-lg max-h-40 overflow-y-auto">
+                                {filteredCategories.length > 0 ? (
+                                    filteredCategories.map((cat, idx) => (
+                                        <li
+                                            key={idx}
+                                            onClick={() => {
+                                                setCategoryInput(cat.name);
+                                                setValue("category", cat.name);
+                                                setShowSuggestions(false);
+                                            }}
+                                            className={`flex items-center gap-2 px-4 py-2 cursor-pointer transition ${highlightIndex === idx ? "bg-blue-100" : "hover:bg-blue-50"
+                                                }`}
+                                        >
+                                            {cat.icon}
+                                            <span>{cat.name}</span>
+                                        </li>
+                                    ))
+                                ) : (
+                                    noMatchMessage && (
+                                        <li className="px-4 py-2 text-gray-500">
+                                            No matches, press Enter to add custom
+                                        </li>
+                                    )
+                                )}
+                            </ul>
+                        )}
                     </div>
 
                     <input

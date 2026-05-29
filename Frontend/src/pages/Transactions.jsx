@@ -5,12 +5,16 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import * as XLSX from "xlsx";
 import { FaChevronRight, FaChevronDown } from "react-icons/fa";
+import { useCategories } from "../categories"; // ✅ fetch categories + icons
 
 const Transactions = ({ user }) => {
     const [transactions, setTransactions] = useState([]);
     const [expanded, setExpanded] = useState(null);
     const [filter, setFilter] = useState("all"); // default filter
     const navigate = useNavigate();
+
+    const { categoryIcons } = useCategories(); // ✅ dynamic icons
+
 
     const addLogoToPDF = async (doc) => {
         const img = await fetch("/xpense-logo.png")
@@ -198,7 +202,11 @@ const Transactions = ({ user }) => {
                                                         {t.type === "income" ? `+₹${t.amount}` : `-₹${t.amount}`}
                                                     </td>
                                                     <td className="py-2 px-4 capitalize">{t.type}</td>
-                                                    <td className="py-2 px-4">{t.category}</td>
+                                                    {/* <td className="py-2 px-4">{t.category}</td> */}
+                                                    <td className="py-2 px-4 flex items-center gap-2">
+                                                        {categoryIcons[t.category] || null}
+                                                        {t.category}
+                                                    </td>
                                                     <td className="py-2 px-4">{t.description || "-"}</td>
                                                     <td className="py-2 px-4 text-gray-600">
                                                         {new Date(t.date).toLocaleTimeString()}
