@@ -18,7 +18,7 @@ import ChangePassword from "./pages/ChangePassword";
 import CategoryExpenses from "./pages/CategoryExpenses";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MonthlyExpenses from "./components/MonthlyExpenses";
-import MonthlyIncome from "./components/MonthlyInceom";
+import MonthlyIncome from "./components/MonthlyIncome";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import CategoryManagement from "./pages/CategoryManagement";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
