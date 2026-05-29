@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
 const mongoose = require('mongoose');
 const User = require('../models/users.model');
+const Expense = require("../models/expenses.model");
+const Income = require("../models/income.model");
 const { generateToken } = require('../utils/jwt.utils');
 const { hashPassword, comparePassword } = require('../utils/bcrypt.utils');
 
@@ -46,11 +48,19 @@ async function checkUser({ username }) {
 
 async function deleteAccount(userId) {
     try {
+        // Delete the user
         await User.findByIdAndDelete(userId);
-        return { message: "Account deleted successfully" };
+
+        // Delete all expenses linked to this user
+        await Expense.deleteMany({ userId });
+
+        // Delete all incomes linked to this user
+        await Income.deleteMany({ userId });
+
+        return { message: "Account, expenses, and incomes deleted successfully" };
     } catch (error) {
         console.error("Error deleting account:", error);
-        return { error: "Failed to delete account" };
+        return { error: "Failed to delete account and related data" };
     }
 }
 
