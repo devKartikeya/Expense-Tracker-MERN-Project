@@ -200,7 +200,7 @@ const Dashboard = ({ user }) => {
       {/* Stats Cards */}
       <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <Card
-          title="Total This Month"
+          title="Expenses This Month"
           value={`₹${monthlyTotal.toLocaleString()}`}
           onClick={goToMonthlyExpenses}
           icon={<FaWallet />}
@@ -208,7 +208,7 @@ const Dashboard = ({ user }) => {
         />
 
         <Card
-          title="Income this Month"
+          title="Income This Month"
           onClick={goToMonthlyIncome}
           value={`₹${monthlyIncome.toLocaleString()}`}
           icon={<FaCoins />}
@@ -248,7 +248,7 @@ const Dashboard = ({ user }) => {
       </div>
 
       <Card
-        title="See Your Expenses History"
+        title="See Your Transactions History"
         value="View Details"
         icon={<FaHistory />}
         className="bg-gradient-to-r from-pink-500 to-red-600 justify-between w-3/4 mx-auto mt-10 cursor-pointer hover:scale-105 transition-transform duration-300"
