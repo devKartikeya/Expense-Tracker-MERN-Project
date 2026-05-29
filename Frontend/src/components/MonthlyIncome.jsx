@@ -124,9 +124,9 @@ const MonthlyIncome = ({ user }) => {
                 <div className="flex flex-col sm:flex-row justify-between items-center mb-4 print:hidden gap-4">
                     <h1 className="text-xl sm:text-2xl font-bold text-white">Current Month Income</h1>
                     <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-                        <button onClick={handlePrint} className="flex-1 bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg shadow-md">Print</button>
-                        <button onClick={exportToPDF} className="flex-1 bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-md">PDF</button>
-                        <button onClick={exportToExcel} className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg shadow-md">Excel</button>
+                        <button onClick={handlePrint} className="flex-1 bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg shadow-md cursor-pointer">Print</button>
+                        <button onClick={exportToPDF} className="flex-1 bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-md cursor-pointer">PDF</button>
+                        <button onClick={exportToExcel} className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg shadow-md cursor-pointer">Excel</button>
                     </div>
                 </div>
 
@@ -187,6 +187,14 @@ const MonthlyIncome = ({ user }) => {
                             )}
                         </tbody>
                     </table>
+                </div>
+                <div className="flex justify-center mt-6">
+                    <button
+                        onClick={goToIncome}
+                        className="w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-md"
+                    >
+                        Show Total Income
+                    </button>
                 </div>
             </div>
         </div>

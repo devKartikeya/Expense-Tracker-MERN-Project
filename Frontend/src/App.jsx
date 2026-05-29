@@ -12,14 +12,15 @@ import Incomes from "./pages/Incomes";
 import Dashboard from "./pages/Dashboard";
 import AdminPanel from "./pages/AdminPanel";
 import Categories from "./pages/Categories";
+import Transactions from "./pages/Transactions";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ResetPassword from "./pages/ResetPassword";
 import ForgotPassword from "./pages/ForgotPassword";
 import ChangePassword from "./pages/ChangePassword";
+import MonthlyIncome from "./components/MonthlyIncome";
 import CategoryExpenses from "./pages/CategoryExpenses";
 import ProtectedRoute from "./components/ProtectedRoute";
 import MonthlyExpenses from "./components/MonthlyExpenses";
-import MonthlyIncome from "./components/MonthlyIncome";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import CategoryManagement from "./pages/CategoryManagement";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -169,6 +170,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <CategoryManagement />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/transactions"
+          element={
+            <ProtectedRoute>
+              <Transactions />
             </ProtectedRoute>
           }
         />

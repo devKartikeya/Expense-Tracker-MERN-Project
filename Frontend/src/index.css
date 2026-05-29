@@ -68,6 +68,10 @@ body {
     font-family: "Poppins";
 }
 
+#transactions {
+    font-family: "Poppins";
+}
+
 /* Drawer slide in/out */
 @keyframes slideInRight {
     from {

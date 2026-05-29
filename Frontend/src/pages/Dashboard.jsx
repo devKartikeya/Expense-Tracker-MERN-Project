@@ -169,6 +169,10 @@ const Dashboard = ({ user }) => {
     navigate("/incomes");
   }
 
+  const goToTransactions = () => {
+    navigate("/transactions");
+  }
+
   return (
     <div id="dashboard" className="bg-gradient-to-br from-blue-500 via-indigo-500 to-indigo-700 pt-[75px] sm:pt-[105px] w-screen h-screen">
       <Navbar username={user.username} />
@@ -249,6 +253,7 @@ const Dashboard = ({ user }) => {
 
       <Card
         title="See Your Transactions History"
+        onClick={goToTransactions}
         value="View Details"
         icon={<FaHistory />}
         className="bg-gradient-to-r from-pink-500 to-red-600 justify-between w-3/4 mx-auto mt-10 cursor-pointer hover:scale-105 transition-transform duration-300"
