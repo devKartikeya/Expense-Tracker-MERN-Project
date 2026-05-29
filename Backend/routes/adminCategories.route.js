@@ -1,11 +1,11 @@
 // routes/admin.route.js
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 const User = require("../models/users.model");       // your user schema
 const Expense = require("../models/expenses.model"); // your expense schema
 const Category = require("../models/category.model"); // your category schema
 const { checkAdmin } = require("../middlewares/admin.middleware");
-const bcrypt = require("bcrypt");
 
 // Dashboard Overview
 router.get("/dashboard", checkAdmin, async (req, res) => {

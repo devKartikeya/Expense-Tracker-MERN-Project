@@ -4,23 +4,23 @@ const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const bcrypt = require("bcrypt");
 
 const connectDB = require('./config/db');
+const User = require("./models/users.model");
+const Admin = require("./models/admin.model");
 const mailRoutes = require("./routes/mail.route");
+const categoryRoutes = require("./routes/category.route");
+const adminRoutes = require("./routes/adminCategories.route");
+const { checkAdmin } = require('./middlewares/admin.middleware');
+const { adminLogin } = require('./controllers/admin.controller');
 const { getProfileData } = require("./controllers/profile.controller");
 const { contactController } = require("./controllers/contact.controller");
 const { checkSignUp, checkLogin } = require('./middlewares/auth.middleware');
-const { checkAdmin } = require('./middlewares/admin.middleware');
-const { adminLogin } = require('./controllers/admin.controller');
 const { addExpense, getExpenses } = require('./controllers/expense.controller');
 const { getExpensesByCategory, getMonthlyTotals, getDailyExpenses } = require('./controllers/charts.controller');
 const { getTotalExpenses, getMonthlyExpenses, getTopCategory, getExpensesCount } = require('./controllers/services.controller');
 const { authRegister, authLogin, authCheckUser, authCheckLogin, authLogout, authDeleteAccount, authChangePassword } = require('./controllers/auth.controller');
-const adminRoutes = require("./routes/adminCategories.route");
-const categoryRoutes = require("./routes/category.route");
-const Admin = require("./models/admin.model");
-const User = require("./models/users.model");
-const bcrypt = require("bcrypt");
 
 const app = express();
 app.use(cors({
@@ -44,25 +44,26 @@ app.use("/admin/categories", categoryRoutes);
 console.log(process.env.EMAIL_USER);
 console.log(process.env.EMAIL_PASSWORD);
 
-app.post("/profile-data", checkLogin, getProfileData);
-app.post('/signup', checkSignUp, authRegister);
 app.post('/login', authLogin);
-app.post('/check-username', authCheckUser);
 app.post("/logout", authLogout);
+app.post('/check-username', authCheckUser);
+app.post("/expenses", checkLogin, addExpense);
+app.post('/signup', checkSignUp, authRegister);
+app.post("/profile-data", checkLogin, getProfileData);
+app.post("/contact-us", checkLogin, contactController);
 app.post("/delete-account", checkLogin, authDeleteAccount);
 app.post("/change-password", checkLogin, authChangePassword);
-app.post("/expenses", checkLogin, addExpense);
-app.post("/contact-us", checkLogin, contactController);
+
+app.post("/admin-login", adminLogin);
 app.get("/check", checkLogin, authCheckLogin);
 app.get("/expenses", checkLogin, getExpenses);
-app.get("/total-expenses", checkLogin, getTotalExpenses);
-app.get("/monthly-expenses", checkLogin, getMonthlyExpenses);
 app.get("/top-category", checkLogin, getTopCategory);
+app.get("/total-expenses", checkLogin, getTotalExpenses);
 app.get("/expenses-count", checkLogin, getExpensesCount);
-app.get("/expenses-by-category", checkLogin, getExpensesByCategory);
 app.get("/monthly-totals", checkLogin, getMonthlyTotals);
 app.get("/daily-expenses", checkLogin, getDailyExpenses);
-app.post("/admin-login", adminLogin);
+app.get("/monthly-expenses", checkLogin, getMonthlyExpenses);
+app.get("/expenses-by-category", checkLogin, getExpensesByCategory);
 
 app.post("/verify-user", async (req, res) => {
     const { username, password } = req.body;
