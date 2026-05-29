@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import Expense from "./pages/Expense";
 import ContactUs from "./pages/Contact";
 import Expenses from "./pages/Expenses";
+import Incomes from "./pages/Incomes";
 import Dashboard from "./pages/Dashboard";
 import AdminPanel from "./pages/AdminPanel";
 import Categories from "./pages/Categories";
@@ -62,6 +63,14 @@ const App = () => {
           }
         />
         <Route
+          path="/incomes"
+          element={
+            <ProtectedRoute>
+              <Incomes />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/monthly-expenses"
           element={
             <ProtectedRoute>
@@ -69,7 +78,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-         <Route
+        <Route
           path="/monthly-incomes"
           element={
             <ProtectedRoute>

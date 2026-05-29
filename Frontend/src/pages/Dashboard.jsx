@@ -165,6 +165,10 @@ const Dashboard = ({ user }) => {
     navigate("/categories");
   }
 
+  const goToIncomes = () => {
+    navigate("/incomes");
+  }
+
   return (
     <div id="dashboard" className="bg-gradient-to-br from-blue-500 via-indigo-500 to-indigo-700 pt-[75px] sm:pt-[105px] w-screen h-screen">
       <Navbar username={user.username} />
@@ -195,7 +199,7 @@ const Dashboard = ({ user }) => {
 
       {/* Stats Cards */}
       <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-         <Card
+        <Card
           title="Total This Month"
           value={`₹${monthlyTotal.toLocaleString()}`}
           onClick={goToMonthlyExpenses}
@@ -228,6 +232,7 @@ const Dashboard = ({ user }) => {
 
         <Card
           title="Total Income"
+          onClick={goToIncomes}
           value={`₹${totalIncome.toLocaleString()}`}
           icon={<FaCoins />}
           className="bg-gradient-to-r from-lime-500 to-green-600 justify-between"
