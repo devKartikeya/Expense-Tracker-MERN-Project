@@ -148,9 +148,9 @@ const Transactions = ({ user }) => {
                         </select>
                     </div>
                     <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-                        <button onClick={handlePrint} className="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow-md">Print</button>
-                        <button onClick={exportToPDF} className="flex-1 bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-md">PDF</button>
-                        <button onClick={exportToExcel} className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg shadow-md">Excel</button>
+                        <button onClick={handlePrint} className="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow-md cursor-pointer">Print</button>
+                        <button onClick={exportToPDF} className="flex-1 bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-md cursor-pointer">PDF</button>
+                        <button onClick={exportToExcel} className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 cursor-pointer rounded-lg shadow-md">Excel</button>
                     </div>
                 </div>
 
@@ -204,11 +204,11 @@ const Transactions = ({ user }) => {
                                                     <td className={`py-2 px-8 font-semibold capitalize ${t.type === "income" ? "text-green-600" : "text-red-600"
                                                         }`}>{t.type}</td>
                                                     {/* <td className="py-2 px-4">{t.category}</td> */}
-                                                    <td className="py-2 px-4 flex items-center gap-2">
+                                                    <td className="py-2 px-4 flex items-center gap-2 font-medium">
                                                         {categoryIcons[t.category] || null}
                                                         {t.category}
                                                     </td>
-                                                    <td className="py-2 px-4">{t.description || "-"}</td>
+                                                    <td className="py-2 px-4 font-medium">{t.description || "-"}</td>
                                                     <td className="py-2 px-4 text-gray-600">
                                                         {new Date(t.date).toLocaleTimeString()}
                                                     </td>
