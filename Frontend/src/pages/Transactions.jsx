@@ -201,7 +201,8 @@ const Transactions = ({ user }) => {
                                                     >
                                                         {t.type === "income" ? `+₹${t.amount}` : `-₹${t.amount}`}
                                                     </td>
-                                                    <td className="py-2 px-4 capitalize">{t.type}</td>
+                                                    <td className={`py-2 px-8 font-semibold capitalize ${t.type === "income" ? "text-green-600" : "text-red-600"
+                                                        }`}>{t.type}</td>
                                                     {/* <td className="py-2 px-4">{t.category}</td> */}
                                                     <td className="py-2 px-4 flex items-center gap-2">
                                                         {categoryIcons[t.category] || null}
