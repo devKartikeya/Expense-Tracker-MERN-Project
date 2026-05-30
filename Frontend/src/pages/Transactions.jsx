@@ -5,6 +5,8 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import * as XLSX from "xlsx";
 import { FaChevronRight, FaChevronDown } from "react-icons/fa";
+import TransactionCharts from "../components/TransactionCharts";
+import TransactionSummary from "../components/TransactionSummary";
 import { useCategories } from "../categories"; // ✅ fetch categories + icons
 
 const Transactions = ({ user }) => {
@@ -129,6 +131,9 @@ const Transactions = ({ user }) => {
     return (
         <div id="transactions" className="w-screen min-h-screen bg-gray-800 pt-[100px]">
             <Navbar username={user.username} className="print:hidden" />
+
+            <TransactionSummary transactions={filteredTransactions} />
+            <TransactionCharts transactions={filteredTransactions} />
 
             <div className="p-6">
                 {/* Header + Filters + Actions */}
