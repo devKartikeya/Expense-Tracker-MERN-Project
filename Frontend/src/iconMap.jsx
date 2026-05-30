@@ -10,7 +10,7 @@ import {
     FaBoxOpen, FaSnowflake, FaTable, FaBreadSlice, FaCheese, FaDrumstickBite,
     FaFish, FaCarrot, FaCookie, FaIceCream, FaCoffee, FaGlassWhiskey,
     FaWineBottle, FaEgg, FaShoppingBasket, FaPrint, FaBox, FaApple, FaBath,
-    FaToilet, FaReceipt, FaHands
+    FaToilet, FaReceipt, FaHands, FaCookieBite, FaGlassMartiniAlt, FaHandScissors, FaPizzaSlice, FaOm, FaUsers, FaGraduationCap, FaExchangeAlt, FaMoneyCheckAlt, FaCreditCard, FaOilCan, FaThLarge, FaMotorcycle, FaMoneyBill, FaRupeeSign, FaTrain, FaRing, FaSuitcase 
 } from "react-icons/fa";
 
 export const iconMap = {
@@ -25,5 +25,5 @@ export const iconMap = {
     FaBoxOpen, FaSnowflake, FaTable, FaBreadSlice, FaCheese, FaDrumstickBite,
     FaFish, FaCarrot, FaCookie, FaIceCream, FaCoffee, FaGlassWhiskey,
     FaWineBottle, FaEgg, FaShoppingBasket, FaPrint, FaBox, FaApple, FaBath,
-    FaToilet, FaReceipt, FaHands
+    FaToilet, FaReceipt, FaHands, FaCookieBite, FaGlassMartiniAlt, FaHandScissors, FaPizzaSlice, FaOm, FaUsers, FaGraduationCap, FaExchangeAlt, FaMoneyCheckAlt, FaCreditCard, FaOilCan, FaThLarge, FaMotorcycle, FaMoneyBill, FaRupeeSign, FaTrain, FaRing, FaSuitcase
 };
