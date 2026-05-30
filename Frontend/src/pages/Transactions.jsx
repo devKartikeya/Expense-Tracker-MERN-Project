@@ -228,7 +228,7 @@ const Transactions = ({ user }) => {
                                                         <td className={`py-2 px-8 font-semibold capitalize ${t.type === "income" ? "text-green-600" : "text-red-600"
                                                             }`}>{t.type}</td>
                                                         {/* <td className="py-2 px-4">{t.category}</td> */}
-                                                        <td className="py-2 px-4 flex items-center gap-2 font-medium">
+                                                        <td className="py-6 px-4 flex items-center gap-2 font-medium">
                                                             {categoryIcons[t.category] || null}
                                                             {t.category}
                                                         </td>
