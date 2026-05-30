@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useCategories } from "../categories";te // custom hook fetching cagories from backend
+import { useCategories } from "../categories"; // custom hook fetching cagories from backend
 
 const Expense = () => {
     const navigate = useNavigate();

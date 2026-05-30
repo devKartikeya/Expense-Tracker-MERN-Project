@@ -6,7 +6,11 @@ import babel from '@rolldown/plugin-babel'
 // https://vite.dev/config/
 export default defineConfig({
   server: { port: 5173 },
-  build: { outDir: "dist" },
+  build: {
+    outDir: "dist",
+    minify: false,
+    sourcemap: true
+  },
   plugins: [
     react(),
     tailwindcss(),
