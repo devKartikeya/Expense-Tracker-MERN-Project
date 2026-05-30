@@ -49,7 +49,7 @@ const TransactionCharts = ({ transactions }) => {
     const netData = labels.map((d) => dailyMap[d].income - dailyMap[d].expense);
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6 px-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4 px-2">
             {/* Pie Chart */}
             <div className="bg-white p-4 rounded-lg shadow-md">
                 <h2 className="text-lg font-bold mb-2">Income vs Expenses</h2>
