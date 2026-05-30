@@ -5,14 +5,14 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import * as XLSX from "xlsx";
 import { FaChevronRight, FaChevronDown } from "react-icons/fa";
-import { useCategories } from "../categories"; // ✅ dynamic categories + icons
+import { useCategories } from "../categories"; // dynamic categories + icons
 
 const Incomes = ({ user }) => {
     const [income, setIncome] = useState([]);
     const [expanded, setExpanded] = useState(null);
     const navigate = useNavigate();
 
-    const { categoryIcons } = useCategories(); // ✅ dynamic icons
+    const { categoryIcons } = useCategories(); // dynamic icons
 
     const addLogoToPDF = async (doc) => {
         const img = await fetch("/xpense-logo.png")

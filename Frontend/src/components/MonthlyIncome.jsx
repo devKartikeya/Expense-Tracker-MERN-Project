@@ -5,14 +5,14 @@ import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import * as XLSX from "xlsx";
 import { FaChevronRight, FaChevronDown } from "react-icons/fa";
-import { useCategories } from "../categories"; // ✅ dynamic categories + icons
+import { useCategories } from "../categories";
 
 const MonthlyIncome = ({ user }) => {
     const [income, setIncome] = useState([]);
     const [expanded, setExpanded] = useState(null);
     const navigate = useNavigate();
 
-    const { categoryIcons } = useCategories(); // ✅ dynamic icons
+    const { categoryIcons } = useCategories();
 
     const addLogoToPDF = async (doc) => {
         const img = await fetch("/xpense-logo.png")
@@ -113,7 +113,7 @@ const MonthlyIncome = ({ user }) => {
         XLSX.writeFile(workbook, "monthly-income-report.xlsx");
     };
 
-    const goToIncome = () => navigate("/income");
+    const goToIncome = () => navigate("/incomes");
 
     return (
         <div id="monthly-income" className="w-screen min-h-screen bg-green-600 pt-[100px]">

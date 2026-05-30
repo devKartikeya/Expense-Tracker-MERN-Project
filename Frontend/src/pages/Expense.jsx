@@ -2,11 +2,11 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useCategories } from "../categories"; // ✅ custom hook fetching categories from backend
+import { useCategories } from "../categories"; // custom hook fetching categories from backend
 
 const Expense = () => {
   const navigate = useNavigate();
-  const { categoryArray } = useCategories(); // ✅ dynamic categories
+  const { categoryArray } = useCategories(); // dynamic categories
   const { register, handleSubmit, setValue } = useForm();
 
   const [categoryInput, setCategoryInput] = useState("");
