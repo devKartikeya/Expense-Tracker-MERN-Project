@@ -187,13 +187,13 @@ const Expense = () => {
         <div className="flex flex-col gap-4 w-full mt-4">
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-md transition duration-300"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-md transition duration-300 cursor-pointer"
           >
             Add Expense
           </button>
           <button
             type="button"
-            className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 rounded-xl shadow-md transition duration-300"
+            className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 rounded-xl shadow-md transition duration-300 cursor-pointer"
             onClick={goBack}
           >
             Go Back
