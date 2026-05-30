@@ -62,9 +62,44 @@ Category Management
 
 ---
 
-📊 Transaction Analytics & Ledger
+📊 🎯 Budget Planning & Tracking
 
-A dedicated financial analytics system designed to provide complete visibility into spending and earnings.
+Take control of monthly spending with a dedicated budgeting system.
+
+💰 Monthly Budget Management
+
+- Set a monthly spending budget
+- Update budget limits anytime
+- Budget data stored securely in MongoDB
+- Personalized budget tracking for every user
+
+📊 Budget Analytics
+
+- Real-time budget utilization tracking
+- Monitor how much of your budget has been consumed
+- Remaining budget calculations
+- Overspending detection
+- Budget performance insights
+
+📈 Budget Visualizations
+
+- Interactive budget progress charts
+- Budget vs Actual Spending comparison
+- Remaining Budget graphs
+- Monthly spending trend analysis
+- Visual indicators showing proximity to budget limits
+
+🚨 Smart Budget Insights
+
+- Percentage of budget utilized
+- Remaining spending capacity
+- Overspending alerts
+- Financial health overview
+- Monthly budget performance summary
+
+---
+
+📊 Transaction Analytics & Ledger
 
 📈 Financial Overview
 
@@ -74,6 +109,8 @@ A dedicated financial analytics system designed to provide complete visibility i
 - Net balance tracking
 - Profit/Loss analysis
 - Savings insights
+- Budget utilization tracking
+- Budget vs Spending comparison
 
 💹 Financial Metrics
 
@@ -83,25 +120,8 @@ A dedicated financial analytics system designed to provide complete visibility i
 - Net Profit
 - Net Loss
 - Monthly Performance Overview
-
-📒 Transaction Ledger
-
-- Unified transaction history
-- Day-wise financial records
-- Income and Expense entries together
-- Daily Profit/Loss calculations
-- Running balance calculations
-- Complete transaction tracking
-
-🔍 Ledger Filters
-
-Filter analytics and records by:
-
-- Current Month
-- Last 2 Months
-- Last 6 Months
-- Current Year
-- All Time
+- Budget Utilized (%)
+- Remaining Budget
 
 ---
 
@@ -112,8 +132,10 @@ Filter analytics and records by:
 - Line Charts
 - Expense Category Analysis
 - Income vs Expense Visualization
+- Budget vs Spending Analysis
 - Monthly Spending Trends
 - Financial Growth Tracking
+- Budget Utilization Graphs
 - Animated Statistics Cards
 - Responsive Data Visualizations
 
@@ -127,24 +149,10 @@ Filter analytics and records by:
 - Financial Statistics
 - Expense Summary
 - Income Summary
+- Budget Overview
+- Monthly Spending Progress
 - Change Password
 - Secure Account Deletion
-
----
-
-🛡️ Advanced Admin Panel
-
-A dedicated administrative dashboard with strict security and full platform control.
-
-🔒 Admin Security Flow
-
-Before accessing the Admin Panel:
-
-1. User verifies personal credentials
-2. Admin credentials are verified separately
-3. Access granted only after successful dual verification
-
-This provides a double-layer authentication mechanism for enhanced security.
 
 ---
 
