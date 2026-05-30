@@ -168,60 +168,77 @@ const Transactions = ({ user }) => {
                         </thead>
                         <tbody>
                             {groupedArray.length > 0 ? (
-                                groupedArray.map((day, idx) => (
-                                    <React.Fragment key={idx}>
-                                        {/* Summary Row */}
-                                        <tr
-                                            className="border-b border-gray-300 bg-gray-100 cursor-pointer hover:bg-gray-200 transition"
-                                            onClick={() => setExpanded(expanded === idx ? null : idx)}
-                                        >
-                                            <td className="py-3 px-4 font-bold text-gray-900 flex items-center gap-2">
-                                                {expanded === idx ? (
-                                                    <FaChevronDown className="transition-transform duration-300" />
-                                                ) : (
-                                                    <FaChevronRight className="transition-transform duration-300" />
-                                                )}
-                                                {day.date}
-                                            </td>
-                                            <td colSpan="4" className="py-3 px-4 text-gray-700 font-semibold">
-                                                {day.items.length} transactions
-                                            </td>
-                                        </tr>
+                                groupedArray.map((day, idx) => {
+                                    // Calculate net balance for the day
+                                    const net = day.items.reduce((sum, t) => {
+                                        return sum + (t.type === "income" ? t.amount : -t.amount);
+                                    }, 0);
 
-                                        {/* Expanded Details */}
-                                        {expanded === idx &&
-                                            day.items.map((t) => (
-                                                <tr
-                                                    key={t._id}
-                                                    className="border-b border-gray-200 bg-white hover:bg-gray-50"
+                                    return (
+                                        <React.Fragment key={idx}>
+                                            {/* Summary Row */}
+                                            <tr
+                                                className="border-b border-gray-300 bg-gray-100 cursor-pointer hover:bg-gray-200 transition"
+                                                onClick={() => setExpanded(expanded === idx ? null : idx)}
+                                            >
+                                                {/* Amount column → net profit/loss */}
+                                                <td
+                                                    className={`py-3 px-4 font-bold flex items-center gap-2 ${net >= 0 ? "text-green-600" : "text-red-600"
+                                                        }`}
                                                 >
-                                                    <td
-                                                        className={`py-2 px-8 font-semibold ${t.type === "income" ? "text-green-600" : "text-red-600"
-                                                            }`}
+                                                    {expanded === idx ? (
+                                                        <FaChevronDown className="transition-transform duration-300" />
+                                                    ) : (
+                                                        <FaChevronRight className="transition-transform duration-300" />
+                                                    )}
+                                                    {net >= 0 ? `+₹${net}` : `-₹${Math.abs(net)}`}
+                                                </td>
+
+                                                {/* Type column → just a dash */}
+                                                <td className="py-3 px-4">—</td>
+
+                                                {/* Category column → dash */}
+                                                <td className="py-3 px-4">—</td>
+
+                                                {/* Description column → dash */}
+                                                <td className="py-3 px-4">—</td>
+
+                                                {/* Date column → summary date */}
+                                                <td className="py-3 px-4 font-semibold">{day.date}</td>
+                                            </tr>
+
+                                            {/* Expanded Details */}
+                                            {expanded === idx &&
+                                                day.items.map((t) => (
+                                                    <tr
+                                                        key={t._id}
+                                                        className="border-b border-gray-200 bg-white hover:bg-gray-50"
                                                     >
-                                                        {t.type === "income" ? `+₹${t.amount}` : `-₹${t.amount}`}
-                                                    </td>
-                                                    <td className={`py-2 px-8 font-semibold capitalize ${t.type === "income" ? "text-green-600" : "text-red-600"
-                                                        }`}>{t.type}</td>
-                                                    {/* <td className="py-2 px-4">{t.category}</td> */}
-                                                    <td className="py-2 px-4 flex items-center gap-2 font-medium">
-                                                        {categoryIcons[t.category] || null}
-                                                        {t.category}
-                                                    </td>
-                                                    <td className="py-2 px-4 font-medium">{t.description || "-"}</td>
-                                                    <td className="py-2 px-4 text-gray-600">
-                                                        {new Date(t.date).toLocaleTimeString()}
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                    </React.Fragment>
-                                ))
+                                                        <td
+                                                            className={`py-2 px-8 font-semibold ${t.type === "income" ? "text-green-600" : "text-red-600"
+                                                                }`}
+                                                        >
+                                                            {t.type === "income" ? `+₹${t.amount}` : `-₹${t.amount}`}
+                                                        </td>
+                                                        <td className={`py-2 px-8 font-semibold capitalize ${t.type === "income" ? "text-green-600" : "text-red-600"
+                                                            }`}>{t.type}</td>
+                                                        {/* <td className="py-2 px-4">{t.category}</td> */}
+                                                        <td className="py-2 px-4 flex items-center gap-2 font-medium">
+                                                            {categoryIcons[t.category] || null}
+                                                            {t.category}
+                                                        </td>
+                                                        <td className="py-2 px-4">{t.description || "-"}</td>
+                                                        <td className="py-2 px-4 text-gray-600">
+                                                            {new Date(t.date).toLocaleTimeString()}
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                        </React.Fragment>
+                                    );
+                                })
                             ) : (
                                 <tr>
-                                    <td
-                                        colSpan="5"
-                                        className="py-6 text-center text-gray-500 font-medium"
-                                    >
+                                    <td colSpan="5" className="py-6 text-center text-gray-500 font-medium">
                                         No transactions found for this filter.
                                     </td>
                                 </tr>
