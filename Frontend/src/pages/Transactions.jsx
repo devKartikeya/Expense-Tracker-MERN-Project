@@ -129,8 +129,25 @@ const Transactions = ({ user }) => {
     };
 
     return (
-        <div id="transactions" className="w-screen min-h-screen bg-gray-800 pt-[100px]">
+        <div id="transactions" className="w-screen min-h-screen bg-gray-800 pt-[100px] px-4">
             <Navbar username={user.username} className="print:hidden" />
+
+            <div className="flex flex-col sm:flex-row justify-between items-center print:hidden gap-3">
+                <h1 className="text-xl sm:text-2xl font-bold mx-5 sm:mt-4 text-white">Transactions</h1>
+                <div className="flex gap-2 sm:mt-4 mx-4">
+                    <select
+                        value={filter}
+                        onChange={(e) => setFilter(e.target.value)}
+                        className="px-3 py-2  rounded-xl border cursor-pointer border-gray-300 text-white bg-black"
+                    >
+                        <option value="all">All Time</option>
+                        <option value="month">Current Month</option>
+                        <option value="2months">Last 2 Months</option>
+                        <option value="6months">Last 6 Months</option>
+                        <option value="year">Last Year</option>
+                    </select>
+                </div>
+            </div>
 
             <TransactionSummary transactions={filteredTransactions} />
             <TransactionCharts transactions={filteredTransactions} />
@@ -138,20 +155,6 @@ const Transactions = ({ user }) => {
             <div className="p-6">
                 {/* Header + Filters + Actions */}
                 <div className="flex flex-col sm:flex-row justify-between items-center mb-4 print:hidden gap-4">
-                    <h1 className="text-xl sm:text-2xl font-bold text-white">Transactions</h1>
-                    <div className="flex gap-2">
-                        <select
-                            value={filter}
-                            onChange={(e) => setFilter(e.target.value)}
-                            className="px-3 py-2 rounded-lg border border-gray-300 text-white bg-blue-700"
-                        >
-                            <option value="all">All Time</option>
-                            <option value="month">Current Month</option>
-                            <option value="2months">Last 2 Months</option>
-                            <option value="6months">Last 6 Months</option>
-                            <option value="year">Last Year</option>
-                        </select>
-                    </div>
                     <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                         <button onClick={handlePrint} className="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow-md cursor-pointer">Print</button>
                         <button onClick={exportToPDF} className="flex-1 bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-md cursor-pointer">PDF</button>
