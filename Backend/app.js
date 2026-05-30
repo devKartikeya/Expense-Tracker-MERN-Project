@@ -88,6 +88,23 @@ app.post("/verify-user", async (req, res) => {
     }
 });
 
+app.post("/set-budget", checkLogin, async (req, res) => {
+    try {
+        const { budget } = req.body;
+        const userId = req.user.id; // or however you track logged-in user
+        await User.findByIdAndUpdate(userId, { monthlyBudget: budget });
+        res.json({ message: "Budget updated successfully" });
+    } catch (err) {
+        res.status(500).json({ error: "Failed to update budget" });
+    }
+});
+
+app.get("/profile", checkLogin, async (req, res) => {
+    const userId = req.user.id;
+    const user = await User.findById(userId);
+    res.json(user);
+})
+
 app.get("/admin-panel", checkAdmin, (req, res) => {
     res.json({ message: "Welcome to Admin Panel" });
 });

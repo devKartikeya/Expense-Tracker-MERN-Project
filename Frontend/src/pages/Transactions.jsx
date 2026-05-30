@@ -12,6 +12,7 @@ import { useCategories } from "../categories"; // ✅ fetch categories + icons
 const Transactions = ({ user }) => {
     const [transactions, setTransactions] = useState([]);
     const [expanded, setExpanded] = useState(null);
+    const [budget, setBudget] = useState(0);
     const [filter, setFilter] = useState("all"); // default filter
     const navigate = useNavigate();
 
@@ -36,14 +37,16 @@ const Transactions = ({ user }) => {
         Promise.all([
             fetch("https://expense-tracker-mern-project-g2yt.onrender.com/expenses", { credentials: "include" }).then((res) => res.json()),
             fetch("https://expense-tracker-mern-project-g2yt.onrender.com/income", { credentials: "include" }).then((res) => res.json()),
+            fetch("https://expense-tracker-mern-project-g2yt.onrender.com/profile", { credentials: "include" }).then((res) => res.json()) // ✅ fetch user profile
         ])
-            .then(([expenses, income]) => {
+            .then(([expenses, income, profile]) => {
                 const expData = expenses.map((e) => ({ ...e, type: "expense" }));
                 const incData = income.map((i) => ({ ...i, type: "income" }));
                 const combined = [...expData, ...incData].sort(
                     (a, b) => new Date(b.date) - new Date(a.date)
                 );
                 setTransactions(combined);
+                setBudget(profile.monthlyBudget || 0); // store budget 
             })
             .catch((err) => console.error("Error fetching transactions:", err));
     }, []);
@@ -149,7 +152,7 @@ const Transactions = ({ user }) => {
                 </div>
             </div>
 
-            <TransactionSummary transactions={filteredTransactions} />
+            <TransactionSummary transactions={filteredTransactions} budget={budget}/>
             <TransactionCharts transactions={filteredTransactions} />
 
             <div className="p-6">

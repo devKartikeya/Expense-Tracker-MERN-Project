@@ -12,6 +12,12 @@ const Profile = ({ user }) => {
   const [adminPass, setAdminPass] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [date, setDate] = useState("N/A");
+
+  const [showBudgetModal, setShowBudgetModal] = useState(false);
+  const [budget, setBudget] = useState(user.monthlyBudget || 0);
+  const [popupMessage, setPopupMessage] = useState("");
+  const [popupType, setPopupType] = useState(""); // "success" or "error
+
   const [stats, setStats] = useState({
     totalExpenses: 0,
     monthlyTotals: "N/A",
@@ -84,6 +90,30 @@ const Profile = ({ user }) => {
     }
   };
 
+  const saveBudget = async () => {
+    try {
+      const res = await fetch("https://expense-tracker-mern-project-g2yt.onrender.com/set-budget", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ budget }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setPopupMessage("Budget updated successfully!");
+        setPopupType("success");
+        // optional: auto-close after 2s
+        setTimeout(() => setShowBudgetModal(false), 2000);
+      } else {
+        setPopupMessage(data.error || "Failed to update budget");
+        setPopupType("error");
+      }
+    } catch (err) {
+      setPopupMessage("Server error while updating budget");
+      setPopupType("error");
+    }
+  };
+
   const goToDashboard = () => navigate("/dashboard");
   const changePassword = () => navigate("/change-password");
 
@@ -143,6 +173,12 @@ const Profile = ({ user }) => {
                 Change Password
               </button>
               <button
+                className="h-10 w-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg text-white font-semibold shadow-md hover:scale-105 transition-transform"
+                onClick={() => setShowBudgetModal(true)}
+              >
+                Set Budget
+              </button>
+              <button
                 className="h-10 w-full bg-gradient-to-r from-red-500 to-orange-500 rounded-lg text-white font-semibold shadow-md hover:scale-105 transition-transform"
                 onClick={() => setShowModal(true)}
               >
@@ -173,6 +209,65 @@ const Profile = ({ user }) => {
       >
         Admin Panel
       </button>
+
+      {/* Budget Modal */}
+      {showBudgetModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+          <div className="bg-white rounded-xl shadow-2xl p-6 w-[90%] sm:w-[420px] animate-fadeIn">
+            <h2 className="text-2xl font-bold mb-4 text-blue-600 text-center">
+              Set Monthly Budget
+            </h2>
+
+            {/* Inline popup message */}
+            {popupMessage && (
+              <div
+                className={`mb-4 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${popupType === "success"
+                  ? "bg-green-100 text-green-700 border border-green-300"
+                  : "bg-red-100 text-red-700 border border-red-300"
+                  }`}
+              >
+                {popupMessage}
+              </div>
+            )}
+
+            {/* Input field */}
+            <label className="block text-gray-700 font-semibold mb-2">
+              Enter Budget Amount (₹)
+            </label>
+            <input
+              type="number"
+              min="0"
+              value={budget}
+              onChange={(e) => setBudget(e.target.value)}
+              className="w-full border-2 border-gray-300 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="e.g. 50000"
+            />
+
+            {/* Preview card */}
+            <div className="bg-gray-100 rounded-lg p-3 mb-4 text-center">
+              <p className="text-sm text-gray-600">Your new monthly budget:</p>
+              <p className="text-xl font-bold text-blue-700">₹{budget || 0}</p>
+            </div>
+
+            {/* Action buttons */}
+            <div className="flex justify-end gap-3">
+              <button
+                className="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400 transition"
+                onClick={() => setShowBudgetModal(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className="px-4 py-2 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-lg shadow-md hover:scale-105 transition-transform"
+                onClick={saveBudget}
+                disabled={!budget || budget <= 0}
+              >
+                Save Budget
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Strict Admin Verification Modal */}
       {showAdminAuth && (
