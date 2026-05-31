@@ -14,6 +14,7 @@ const Signup = () => {
     setError,
     clearErrors,
     formState: { errors },
+    watch
   } = useForm();
 
   const onSubmit = async (data) => {
@@ -132,7 +133,21 @@ const Signup = () => {
             type="password"
             {...register("password", {
               required: "Password is required",
-              minLength: { value: 6, message: "Password must be at least 6 characters" },
+              minLength: {
+                value: 8,
+                message: "Password must be at least 8 characters",
+              },
+              validate: {
+                hasUpper: (value) =>
+                  /[A-Z]/.test(value) || "Must include at least one uppercase letter",
+                hasLower: (value) =>
+                  /[a-z]/.test(value) || "Must include at least one lowercase letter",
+                hasNumber: (value) =>
+                  /\d/.test(value) || "Must include at least one number",
+                hasSpecial: (value) =>
+                  /[!@#$%^&*(),.?":{}|<>]/.test(value) ||
+                  "Must include at least one special character",
+              },
             })}
           />
           {errors.password && (
@@ -141,6 +156,12 @@ const Signup = () => {
             </p>
           )}
         </div>
+
+        {watch("password") && (
+          <p className="text-xs mt-1 text-gray-200">
+            Strength: {watch("password").length >= 12 ? "Strong ✅" : "Weak ⚠️"}
+          </p>
+        )}
 
         {/* Button */}
         <Button
