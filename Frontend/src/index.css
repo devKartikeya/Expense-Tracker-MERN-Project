@@ -72,6 +72,10 @@ body {
     font-family: "Poppins";
 }
 
+#loader {
+    font-family: "Poppins";
+}
+
 /* Drawer slide in/out */
 @keyframes slideInRight {
     from {
