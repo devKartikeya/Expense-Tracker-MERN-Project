@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { iconMap } from "../iconMap";
+import { colorMap } from "../colorMap";
 
 const CategoryManagement = () => {
     const [categories, setCategories] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [newCategory, setNewCategory] = useState({ name: "", iconKey: "", color: "" });
+
+    const iconOptions = Object.keys(iconMap);
+    const colorOptions = Object.keys(colorMap);
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -89,7 +93,7 @@ const CategoryManagement = () => {
                                 <td className="py-3 px-4">
                                     <button
                                         onClick={() => handleDeleteCategory(c._id)}
-                                        className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-xs font-bold shadow-md transition-transform transform hover:scale-105"
+                                        className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-xs font-bold shadow-md transition-transform transform cursor-pointer hover:scale-105"
                                     >
                                         Delete
                                     </button>
@@ -118,7 +122,7 @@ const CategoryManagement = () => {
                             </div>
                             <button
                                 onClick={() => handleDeleteCategory(c._id)}
-                                className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-xs font-bold shadow-md"
+                                className="bg-red-600 hover:bg-red-700 px-3 py-1 cursor-pointer rounded text-xs font-bold shadow-md"
                             >
                                 Delete
                             </button>
@@ -128,8 +132,8 @@ const CategoryManagement = () => {
             </div>
 
             {showModal && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-                    <div className="bg-gray-800 rounded-xl shadow-lg p-6 w-[90%] md:w-[400px]">
+                <div className="fixed inset-0 flex justify-center bg-black/50 z-50">
+                    <div className="bg-gray-800 sticky top-20 rounded-xl shadow-lg p-6 w-[90%] md:w-[400px] md:h-[350px] h-[350px]">
                         <h2 className="text-xl font-bold text-white mb-4">Add New Category</h2>
 
                         <input
@@ -140,32 +144,50 @@ const CategoryManagement = () => {
                             className="w-full mb-3 px-3 py-2 rounded bg-gray-700 text-white"
                         />
 
-                        <input
-                            type="text"
-                            placeholder="Icon Key (e.g., FaUtensils)"
+                        {/* Icon Dropdown */}
+                        <select
                             value={newCategory.iconKey}
                             onChange={(e) => setNewCategory({ ...newCategory, iconKey: e.target.value })}
                             className="w-full mb-3 px-3 py-2 rounded bg-gray-700 text-white"
-                        />
+                        >
+                            <option value="">Select Icon</option>
+                            {iconOptions.map((icon) => (
+                                <option key={icon} value={icon}>{icon}</option>
+                            ))}
+                        </select>
 
-                        <input
-                            type="text"
-                            placeholder="Tailwind Color (e.g., text-blue-500)"
+                        {/* Color Dropdown */}
+                        <select
                             value={newCategory.color}
                             onChange={(e) => setNewCategory({ ...newCategory, color: e.target.value })}
                             className="w-full mb-3 px-3 py-2 rounded bg-gray-700 text-white"
-                        />
+                        >
+                            <option value="">Select Color</option>
+                            {colorOptions.map((color) => (
+                                <option key={color} value={color}>{colorMap[color]}</option>
+                            ))}
+                        </select>
+
+                        {/* 🔹 Live Preview */}
+                        <div className="flex items-center gap-2 mt-3">
+                            <span className="text-white">Preview:</span>
+                            {newCategory.iconKey && (
+                                <span className={`${newCategory.color} text-2xl`}>
+                                    {React.createElement(iconMap[newCategory.iconKey])}
+                                </span>
+                            )}
+                        </div>
 
                         <div className="flex justify-end gap-3 mt-4">
                             <button
                                 onClick={() => setShowModal(false)}
-                                className="px-4 py-2 rounded bg-gray-600 hover:bg-gray-700 text-white"
+                                className="px-4 cursor-pointer py-2 rounded bg-gray-600 hover:bg-gray-700 text-white"
                             >
                                 Cancel
                             </button>
                             <button
                                 onClick={handleAddCategory}
-                                className="px-4 py-2 rounded bg-blue-500 hover:bg-blue-600 text-white font-semibold"
+                                className="px-4 cursor-pointer py-2 rounded bg-blue-500 hover:bg-blue-600 text-white font-semibold"
                             >
                                 Save
                             </button>
