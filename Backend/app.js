@@ -54,7 +54,7 @@ app.post("/income", checkLogin, addIncome);
 app.post("/expenses", checkLogin, addExpense);
 app.post('/signup', checkSignUp, authRegister);
 app.post("/profile-data", checkLogin, getProfileData);
-app.post("/profile", checkLogin, profile);
+app.get("/profile", checkLogin, profile);
 app.post("/set-budget", checkLogin, setBudget);
 app.post("/contact-us", checkLogin, contactController);
 app.post("/delete-account", checkLogin, authDeleteAccount);
