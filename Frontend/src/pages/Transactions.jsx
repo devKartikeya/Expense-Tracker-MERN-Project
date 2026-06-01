@@ -13,7 +13,7 @@ const Transactions = ({ user }) => {
     const [transactions, setTransactions] = useState([]);
     const [expanded, setExpanded] = useState(null);
     const [budget, setBudget] = useState(0);
-    const [filter, setFilter] = useState("all"); // default filter
+    const [filter, setFilter] = useState("month"); // default filter
     const navigate = useNavigate();
 
     const { categoryIcons } = useCategories(); // ✅ dynamic icons

@@ -38,7 +38,7 @@ const TransactionSummary = ({ transactions, budget }) => {
             {/* Budget Usage */}
             <div className="bg-yellow-100 p-4 rounded-lg shadow-md text-center">
                 <h2 className="text-lg font-bold text-yellow-700">Budget Usage</h2>
-                <p className="text-2xl font-semibold text-yellow-600">{percentUsed}%</p>
+                <p className={`text-2xl font-semibold ${percentUsed > 50 ? "text-red-600" : "text-yellow-500"}`}>{percentUsed > 50 ? `${percentUsed}% !` : `${percentUsed}%`}</p>
                 <p className="text-sm text-gray-600">of ₹{budget} monthly budget</p>
             </div>
         </div>
