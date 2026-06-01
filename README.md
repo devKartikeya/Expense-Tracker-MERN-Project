@@ -17,6 +17,7 @@ The platform combines powerful analytics, secure authentication, dynamic categor
 - Protected routes using authentication middleware
 - Dynamic frontend updates from backend data
 - Responsive design across devices
+- Enhanced User Experience by beautiful loader during navigation 
 
 ---
 
@@ -25,6 +26,7 @@ The platform combines powerful analytics, secure authentication, dynamic categor
 - JWT-based authentication
 - Secure Signup & Login system
 - Password hashing with bcrypt
+- Enforcing Strong and complex passwords at registration 
 - Protected backend routes
 - Token-based authorization
 - Secure Logout functionality
@@ -372,6 +374,7 @@ The platform combines:
 - Expense Tracking
 - Income Tracking
 - Transaction Management
+- Complete User's Account Security and Privacy 
 - Financial Analytics
 - Profit/Loss Reporting
 - Interactive Dashboards
@@ -394,6 +397,7 @@ into one complete modern full-stack financial management solution.
 - Dark Mode
 - Push Notifications
 - Multi-Currency Support
+- Modern UX Practises 
 - AI-Based Expense Insights
 - Mobile Application Version
 
