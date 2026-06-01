@@ -42,4 +42,16 @@ const profileData = async (userID) => {
     };
 };
 
-module.exports = { profileData };
+const Profile = async (userID) => {
+    const user = await User.findById(userID);
+    if (!user) throw new Error("User not found");
+    return user;
+};
+
+const Budget = async (userID, budget) => {
+    const user = await User.findByIdAndUpdate(userID, { monthlyBudget: budget });
+    if (!user) throw new Error("User not found");
+    return user;
+}
+
+module.exports = { profileData, Profile, Budget };

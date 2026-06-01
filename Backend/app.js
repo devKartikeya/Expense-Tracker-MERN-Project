@@ -9,19 +9,19 @@ const bcrypt = require("bcrypt");
 const connectDB = require('./config/db');
 const User = require("./models/users.model");
 const Admin = require("./models/admin.model");
+const Income = require("./models/income.model");
 const mailRoutes = require("./routes/mail.route");
 const categoryRoutes = require("./routes/category.route");
 const adminRoutes = require("./routes/adminCategories.route");
 const { checkAdmin } = require('./middlewares/admin.middleware');
 const { adminLogin } = require('./controllers/admin.controller');
-const { getProfileData } = require("./controllers/profile.controller");
+const { getProfileData, profile, setBudget } = require("./controllers/profile.controller");
 const { contactController } = require("./controllers/contact.controller");
 const { checkSignUp, checkLogin } = require('./middlewares/auth.middleware');
 const { addExpense, getExpenses } = require('./controllers/expense.controller');
 const { getExpensesByCategory, getMonthlyTotals, getDailyExpenses } = require('./controllers/charts.controller');
 const { getTotalExpenses, getMonthlyExpenses, getTopCategory, getExpensesCount } = require('./controllers/services.controller');
 const { authRegister, authLogin, authCheckUser, authCheckLogin, authLogout, authDeleteAccount, authChangePassword } = require('./controllers/auth.controller');
-const Income = require("./models/income.model");
 const { addIncome, getIncomes, getMonthlyIncome, getIncomeList } = require("./controllers/income.controller");
 
 const app = express();
@@ -48,30 +48,30 @@ console.log(process.env.EMAIL_PASSWORD);
 
 app.post('/login', authLogin);
 app.post("/logout", authLogout);
+app.post("/admin-login", adminLogin);
 app.post('/check-username', authCheckUser);
+app.post("/income", checkLogin, addIncome);
 app.post("/expenses", checkLogin, addExpense);
 app.post('/signup', checkSignUp, authRegister);
 app.post("/profile-data", checkLogin, getProfileData);
+app.post("/profile", checkLogin, profile);
+app.post("/set-budget", checkLogin, setBudget);
 app.post("/contact-us", checkLogin, contactController);
 app.post("/delete-account", checkLogin, authDeleteAccount);
 app.post("/change-password", checkLogin, authChangePassword);
 
-app.post("/admin-login", adminLogin);
 app.get("/check", checkLogin, authCheckLogin);
+app.get("/income", checkLogin, getIncomeList);
 app.get("/expenses", checkLogin, getExpenses);
+app.get("/total-income", checkLogin, getIncomes);
 app.get("/top-category", checkLogin, getTopCategory);
 app.get("/total-expenses", checkLogin, getTotalExpenses);
 app.get("/expenses-count", checkLogin, getExpensesCount);
 app.get("/monthly-totals", checkLogin, getMonthlyTotals);
 app.get("/daily-expenses", checkLogin, getDailyExpenses);
+app.get("/monthly-income", checkLogin, getMonthlyIncome);
 app.get("/monthly-expenses", checkLogin, getMonthlyExpenses);
 app.get("/expenses-by-category", checkLogin, getExpensesByCategory);
-
-app.post("/income", checkLogin, addIncome);
-app.get("/income", checkLogin, getIncomeList);
-
-app.get("/total-income", checkLogin, getIncomes);
-app.get("/monthly-income", checkLogin, getMonthlyIncome);
 
 app.post("/verify-user", async (req, res) => {
     const { username, password } = req.body;
@@ -87,23 +87,6 @@ app.post("/verify-user", async (req, res) => {
         res.status(500).json({ flag: "fail", message: "Server error" });
     }
 });
-
-app.post("/set-budget", checkLogin, async (req, res) => {
-    try {
-        const { budget } = req.body;
-        const userId = req.user.id; // or however you track logged-in user
-        await User.findByIdAndUpdate(userId, { monthlyBudget: budget });
-        res.json({ message: "Budget updated successfully" });
-    } catch (err) {
-        res.status(500).json({ error: "Failed to update budget" });
-    }
-});
-
-app.get("/profile", checkLogin, async (req, res) => {
-    const userId = req.user.id;
-    const user = await User.findById(userId);
-    res.json(user);
-})
 
 app.get("/admin-panel", checkAdmin, (req, res) => {
     res.json({ message: "Welcome to Admin Panel" });
