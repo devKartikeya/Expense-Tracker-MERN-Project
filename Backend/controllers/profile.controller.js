@@ -26,7 +26,7 @@ const setBudget = async (req, res) => {
     try {
         const { budget } = req.body;
         const userId = req.user.id; // or however you track logged-in user
-        const user = Budget(userId, budget);
+        const user = await Budget(userId, budget);
         res.json({ message: "Budget updated successfully", user });
     } catch (err) {
         res.status(500).json({ error: "Failed to update budget" });
