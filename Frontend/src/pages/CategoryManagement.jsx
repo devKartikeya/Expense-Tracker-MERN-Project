@@ -3,6 +3,8 @@ import { iconMap } from "../iconMap";
 
 const CategoryManagement = () => {
     const [categories, setCategories] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [newCategory, setNewCategory] = useState({ name: "", iconKey: "", color: "" });
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -21,19 +23,18 @@ const CategoryManagement = () => {
     }, []);
 
     const handleAddCategory = async () => {
-        const name = prompt("Enter category name:");
-        const iconKey = prompt("Enter icon key (e.g., FaUtensils):");
-        const color = prompt("Enter Tailwind color class:");
-        if (!name || !iconKey || !color) return;
+        if (!newCategory.name || !newCategory.iconKey || !newCategory.color) return;
 
         const res = await fetch("https://expense-tracker-mern-project-g2yt.onrender.com/admin/categories", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
-            body: JSON.stringify({ name, iconKey, color }),
+            body: JSON.stringify(newCategory),
         });
         const data = await res.json();
         setCategories([...categories, data.category]);
+        setShowModal(false); // close modal after save
+        setNewCategory({ name: "", iconKey: "", color: "" }); // reset form
     };
 
     const handleDeleteCategory = async (id) => {
@@ -54,7 +55,7 @@ const CategoryManagement = () => {
             </h2>
 
             <button
-                onClick={handleAddCategory}
+                onClick={() => setShowModal(true)}
                 className="bg-gradient-to-r text-white from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 font-semibold px-4 py-2 rounded-lg w-full shadow-md transition-transform transform hover:scale-105"
             >
                 + Add Category
@@ -125,6 +126,54 @@ const CategoryManagement = () => {
                     ))}
                 </div>
             </div>
+
+            {showModal && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+                    <div className="bg-gray-800 rounded-xl shadow-lg p-6 w-[90%] md:w-[400px]">
+                        <h2 className="text-xl font-bold text-white mb-4">Add New Category</h2>
+
+                        <input
+                            type="text"
+                            placeholder="Category Name"
+                            value={newCategory.name}
+                            onChange={(e) => setNewCategory({ ...newCategory, name: e.target.value })}
+                            className="w-full mb-3 px-3 py-2 rounded bg-gray-700 text-white"
+                        />
+
+                        <input
+                            type="text"
+                            placeholder="Icon Key (e.g., FaUtensils)"
+                            value={newCategory.iconKey}
+                            onChange={(e) => setNewCategory({ ...newCategory, iconKey: e.target.value })}
+                            className="w-full mb-3 px-3 py-2 rounded bg-gray-700 text-white"
+                        />
+
+                        <input
+                            type="text"
+                            placeholder="Tailwind Color (e.g., text-blue-500)"
+                            value={newCategory.color}
+                            onChange={(e) => setNewCategory({ ...newCategory, color: e.target.value })}
+                            className="w-full mb-3 px-3 py-2 rounded bg-gray-700 text-white"
+                        />
+
+                        <div className="flex justify-end gap-3 mt-4">
+                            <button
+                                onClick={() => setShowModal(false)}
+                                className="px-4 py-2 rounded bg-gray-600 hover:bg-gray-700 text-white"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleAddCategory}
+                                className="px-4 py-2 rounded bg-blue-500 hover:bg-blue-600 text-white font-semibold"
+                            >
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
         </section>
     );
 };
