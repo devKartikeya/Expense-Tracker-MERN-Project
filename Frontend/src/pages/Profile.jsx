@@ -149,7 +149,8 @@ const Profile = ({ user }) => {
     const data = await res.json();
     console.log(data);
     if (data.success) {
-      setPic(data.url);
+      setPic(data.url);       // show new Cloudinary image
+      setProfilePic(null);    // clear preview state ✅
     }
   };
 
@@ -168,19 +169,51 @@ const Profile = ({ user }) => {
 
           {/* Basic Info */}
           <div className="flex flex-col gap-4">
+            {/* Profile Image */}
             <img
               src={pic || "/Avatar.jpg"}
               alt="Profile"
               className="w-32 h-32 rounded-full border-4 mx-auto border-white object-cover"
             />
+
+            {/* Hidden File Input */}
             <input
               type="file"
               accept="image/*"
+              id="profilePicInput"
               onChange={(e) => setProfilePic(e.target.files[0])}
+              className="hidden"
             />
+
+            {/* Custom Upload Button */}
+            <label
+              htmlFor="profilePicInput"
+              className="cursor-pointer h-10 w-full bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg text-white font-semibold shadow-md hover:scale-105 transition-transform flex items-center justify-center"
+            >
+              Select Profile Picture
+            </label>
+
+            {/* Show File Name (optional) */}
+            {profilePic && (
+              <p className="text-sm text-gray-300 text-center">
+                Selected: {profilePic.name}
+              </p>
+            )}
+
+            {/* Live Preview Before Upload */}
+            {profilePic && (
+              <img
+                src={URL.createObjectURL(profilePic)}
+                alt="Preview"
+                className="w-24 h-24 rounded-full border-2 border-white object-cover mt-3 mx-auto"
+              />
+            )}
+
+            {/* Upload Button */}
             <button
               onClick={handleUpload}
-              className="h-10 w-full bg-gradient-to-r from-green-500 to-green-300 rounded-lg text-white font-semibold shadow-md hover:scale-105 transition-transform"
+              disabled={!profilePic}
+              className="h-10 w-full bg-gradient-to-r from-green-500 to-green-300 rounded-lg text-white font-semibold shadow-md hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Update Profile Picture
             </button>
