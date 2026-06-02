@@ -49,6 +49,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+
 app.use("/auth", mailRoutes);
 app.use("/admin", adminRoutes);
 app.use("/admin/categories", categoryRoutes);
