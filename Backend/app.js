@@ -5,6 +5,10 @@ const nodemailer = require('nodemailer');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
+// import { v2 as cloudinary } from "cloudinary";
+const cloudinary = require("cloudinary").v2;
+// import multer from "multer";
+const multer = require("multer");
 
 const connectDB = require('./config/db');
 const User = require("./models/users.model");
@@ -34,6 +38,12 @@ app.use(cors({
 }));
 
 connectDB();
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API,
+    api_secret: process.env.CLOUDINARY_SECRET,
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -90,6 +100,33 @@ app.post("/verify-user", async (req, res) => {
 
 app.get("/admin-panel", checkAdmin, (req, res) => {
     res.json({ message: "Welcome to Admin Panel" });
+});
+
+app.get("/profile-pic", checkLogin, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        res.json({ success: true, url: user.profilePicUrl });
+    } catch (err) {
+        res.json({ success: false, error: err.message });
+    }
+});
+
+app.post("/upload-profile-pic", checkLogin, upload.single("profilePic"), async (req, res) => {
+    try {
+        cloudinary.uploader.upload_stream(
+            { folder: "profile_pics" },
+            async (error, result) => {
+                if (error) return res.json({ success: false, error });
+
+                // Save Cloudinary URL in MongoDB
+                await User.findByIdAndUpdate(req.user.id, { profilePicUrl: result.secure_url });
+
+                res.json({ success: true, url: result.secure_url });
+            }
+        ).end(req.file.buffer);
+    } catch (err) {
+        res.json({ success: false, error: err.message });
+    }
 });
 
 app.listen(process.env.PORT, () => {

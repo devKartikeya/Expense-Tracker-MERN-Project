@@ -18,6 +18,9 @@ const Profile = ({ user }) => {
   const [popupMessage, setPopupMessage] = useState("");
   const [popupType, setPopupType] = useState(""); // "success" or "error
 
+  const [profilePic, setProfilePic] = useState(null);
+  const [pic, setPic] = useState(null);
+
   const [stats, setStats] = useState({
     totalExpenses: 0,
     monthlyTotals: "N/A",
@@ -51,6 +54,25 @@ const Profile = ({ user }) => {
     };
 
     fetchProfileData();
+  }, []);
+
+  useEffect(() => {
+    const fetchProfilePic = async () => {
+      try {
+        const res = await fetch("https://expense-tracker-mern-project-g2yt.onrender.com/profile-pic", {
+          method: "GET",
+          credentials: "include",
+        });
+        const data = await res.json();
+        if (data.success) {
+          setPic(data.url);
+        }
+      } catch (err) {
+        console.error("Error fetching profile picture:", err);
+      }
+    };
+
+    fetchProfilePic();
   }, []);
 
   const deleteAccount = async () => {
@@ -114,6 +136,23 @@ const Profile = ({ user }) => {
     }
   };
 
+  const handleUpload = async () => {
+    const formData = new FormData();
+    formData.append("profilePic", profilePic);
+
+    const res = await fetch("https://expense-tracker-mern-project-g2yt.onrender.com/upload-profile-pic", {
+      method: "POST",
+      credentials: "include",
+      body: formData,
+    });
+
+    const data = await res.json();
+    console.log(data);
+    if (data.success) {
+      setPic(data.url);
+    }
+  };
+
   const goToDashboard = () => navigate("/dashboard");
   const changePassword = () => navigate("/change-password");
 
@@ -129,6 +168,22 @@ const Profile = ({ user }) => {
 
           {/* Basic Info */}
           <div className="flex flex-col gap-4">
+            <img
+              src={pic || "/Avatar.jpg"}
+              alt="Profile"
+              className="w-32 h-32 rounded-full border-4 mx-auto border-white object-cover"
+            />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setProfilePic(e.target.files[0])}
+            />
+            <button
+              onClick={handleUpload}
+              className="h-10 w-full bg-gradient-to-r from-green-500 to-green-300 rounded-lg text-white font-semibold shadow-md hover:scale-105 transition-transform"
+            >
+              Update Profile Picture
+            </button>
             <div className="flex items-center gap-3">
               <FiUser className="text-blue-600 text-xl" />
               <p className="font-semibold">{user.username}</p>

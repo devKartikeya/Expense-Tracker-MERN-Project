@@ -10,7 +10,8 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    monthlyBudget: { type: Number, default: 0 } // ✅ safe addition
+    monthlyBudget: { type: Number, default: 0 },
+    profilePicUrl: { type: String, default: "" }
 });
 
 const User = mongoose.model('User', userSchema);
