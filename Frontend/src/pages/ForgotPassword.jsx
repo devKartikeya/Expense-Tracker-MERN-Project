@@ -38,7 +38,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500">
+    <div id="forgot-password" className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-white/90 backdrop-blur-md rounded-xl shadow-2xl p-8 w-[90%] sm:w-[420px] flex flex-col gap-5 animate-fadeIn"

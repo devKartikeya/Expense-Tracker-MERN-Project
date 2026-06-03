@@ -70,26 +70,19 @@ const Login = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div id="login-form" className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 flex justify-center items-center w-screen h-screen text-white">
+        <div id="login-form" className="bg-black flex flex-col sm:flex-row sm:justify-evenly items-center w-screen h-screen text-white">
+          <img
+            src="/Copilot_20260603_103749.png"
+            alt="Xpense Tracker Logo"
+            width={330}
+            className="sm:w-[580px] sm:h-[580px] object-contain bg-black"
+          />
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="w-[90%] md:w-[30%] flex flex-col items-center gap-6 bg-gradient-to-br from-blue-700 to-cyan-600 rounded-3xl shadow-2xl p-8"
+            className="w-[95%] sm:w-[60%] flex flex-col items-center justify-center gap-4 sm:gap-6 bg-black rounded-3xl shadow-2xl px-4 sm:px-6 py-2 sm:py-6 overflow-y-auto"
           >
-            {/* App Name */}
-            {/* App Name with Logo */}
-            <div className="flex items-center gap-2 justify-center w-full">
-              <img
-                src="/xpense-logo.png"
-                alt="Xpense Tracker Logo"
-                className="w-28 h-28 sm:w-32 sm:h-32 object-contain"
-              />
-              <h1 className="text-2xl sm:text-3xl font-bold text-yellow-300 tracking-wide drop-shadow-md">
-                Xpense Tracker
-              </h1>
-            </div>
-
             {/* Title */}
-            <h2 className="text-4xl font-extrabold tracking-wide text-white drop-shadow-lg">
+            <h2 className="sm:text-7xl text-5xl font-bold  text-white drop-shadow-lg sm:my-4 my-2 ml-3">
               Welcome Back
             </h2>
 
@@ -102,7 +95,7 @@ const Login = () => {
                 {...register("username", { required: "Username is required" })}
               />
               {errors.username && (
-                <p className="text-red-400 text-sm font-semibold mt-1">
+                <p className="text-red-400 text-sm font-semibold mt-3 sm:ml-4 ml-3">
                   {errors.username.message}
                 </p>
               )}
@@ -122,7 +115,7 @@ const Login = () => {
                 })}
               />
               {errors.password && (
-                <p className="text-red-400 text-sm font-semibold mt-1">
+                <p className="text-red-400 text-sm font-semibold mt-3 sm:ml-4 ml-3">
                   {errors.password.message}
                 </p>
               )}
@@ -131,7 +124,11 @@ const Login = () => {
             {/* Button */}
             <Button
               command="Login"
-              className="w-full py-3 rounded-xl bg-blue-500 hover:bg-blue-700 transition duration-300 shadow-md"
+              className="w-full py-3 rounded-xl transition duration-300 shadow-md"
+              from_bg="pink-500"
+              to_bg="pink-600"
+              hover_from="pink-600"
+              hover_to="pink-700"
             />
 
             {/* Footer */}

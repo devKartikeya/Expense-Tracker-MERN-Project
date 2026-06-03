@@ -3,7 +3,6 @@ import Card from "../components/Card";
 import Confetti from "react-confetti";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import MiniNavbar from "../components/MiniNavbar";
 import { Pie, Bar, Line } from "react-chartjs-2";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FaWallet, FaHistory, FaCoins, FaChartPie, FaCalendarAlt, FaClipboardCheck } from "react-icons/fa";
@@ -176,7 +175,6 @@ const Dashboard = ({ user }) => {
   return (
     <div id="dashboard" className="bg-gradient-to-br from-blue-500 via-indigo-500 to-indigo-700 pt-[75px] sm:pt-[105px] w-screen h-screen">
       <Navbar username={user.username} />
-      <MiniNavbar />
 
       {/* Welcome Modal */}
       {showWelcomeModal && (

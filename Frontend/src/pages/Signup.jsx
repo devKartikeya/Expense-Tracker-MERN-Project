@@ -85,42 +85,38 @@ const Signup = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 flex justify-center items-center w-screen min-h-screen text-white p-2">
+    <div className="bg-gradient-to-br bg-black flex flex-col sm:flex-row sm:justify-evenly items-center w-screen min-h-screen text-white p-2">
+      <img
+        src="/Copilot_20260603_103749.png"
+        alt="Xpense Tracker Logo"
+        width={330}
+        className="sm:w-[580px] sm:h-[580px] object-contain bg-black"
+      />
       <form
         id="signup-form"
         onSubmit={handleSubmit(onSubmit)}
-        className="w-[95%] md:w-[30%] flex flex-col items-center gap-4 md:gap-6 bg-gradient-to-br from-blue-400 via-blue-700 to-blue-400 rounded-3xl shadow-2xl px-4 md:px-6 py-4 md:py-6 overflow-y-auto"
+        className="w-[95%] sm:w-[60%] flex flex-col items-center justify-center gap-4 sm:gap-6 bg-black rounded-3xl shadow-2xl px-4 sm:px-6 py-2 sm:py-6 overflow-y-auto"
       >
-        {/* App Name */}
-        <div className="flex flex-col sm:flex-row items-center gap-2 justify-center w-full text-center">
-          <img
-            src="/xpense-logo.png"
-            alt="Xpense Tracker Logo"
-            className="w-28 h-28 sm:w-32 sm:h-32 object-contain"
-          />
-          <h1 className="text-2xl sm:text-3xl font-bold text-yellow-300 tracking-wide drop-shadow-md">
-            Xpense Tracker
-          </h1>
-        </div>
 
         {/* Title */}
-        <h2 className="text-3xl md:text-4xl font-extrabold tracking-wide text-white drop-shadow-lg text-center">
-          Create Account
+        <h2 className="text-center font-bold drop-shadow-lg md:my-5 my-3">
+          <span className="block md:inline text-7xl sm:text-7xl m-2 text-white">Create</span>
+          <span className="block md:inline text-6xl sm:text-7xl sm:ml-2 m-1 text-white">Account</span>
         </h2>
 
         {/* Username */}
         <div className="w-full">
           <Input
-            placeholder="Enter your Username"
+            placeholder="Username"
             type="text"
             {...register("username", { required: "Username is required" })}
             onBlur={checkUsernameAvailable}
           />
           {checkingUsername && (
-            <p className="text-sm text-yellow-300 mt-1">Checking availability...</p>
+            <p className="text-sm text-yellow-300 mt-2">Checking availability...</p>
           )}
           {errors.username && (
-            <p className="text-red-400 text-sm font-semibold mt-1">
+            <p className="text-red-400 text-sm font-semibold mt-3 sm:ml-4 ml-3">
               {errors.username.message}
             </p>
           )}
@@ -129,7 +125,7 @@ const Signup = () => {
         {/* Password */}
         <div className="w-full">
           <Input
-            placeholder="Enter your Password"
+            placeholder="Password"
             type="password"
             {...register("password", {
               required: "Password is required",
@@ -151,14 +147,14 @@ const Signup = () => {
             })}
           />
           {errors.password && (
-            <p className="text-red-400 text-sm font-semibold mt-1">
+            <p className="text-red-400 text-sm font-semibold mt-3 sm:ml-4 ml-3">
               {errors.password.message}
             </p>
           )}
         </div>
 
         {watch("password") && (
-          <p className="text-xs mt-1 text-gray-200">
+          <p className="text-xs mt-2 text-gray-200">
             Strength: {watch("password").length >= 12 ? "Strong ✅" : "Weak ⚠️"}
           </p>
         )}
@@ -166,7 +162,11 @@ const Signup = () => {
         {/* Button */}
         <Button
           command="Register"
-          className="w-full py-3 rounded-xl bg-blue-500 hover:bg-blue-700 transition duration-300 shadow-md"
+          className="py-3 rounded-xl bg-blue-500 hover:bg-blue-700 transition duration-300 shadow-md"
+          from_bg="blue-500"
+          to_bg="blue-600"
+          hover_from="blue-600"
+          hover_to="blue-700"
         />
 
         {/* Footer */}
@@ -180,7 +180,7 @@ const Signup = () => {
           </Link>
         </p>
         <p className="text-xs md:text-sm text-gray-200 text-center">
-          Read our{" "}
+          By continuing, you agree to our{" "}
           <Link
             to="/terms-conditions"
             className="text-blue-300 hover:text-blue-200 font-semibold underline"
