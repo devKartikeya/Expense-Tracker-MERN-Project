@@ -97,10 +97,14 @@ const Navbar = ({ username, profileMode = false }) => {
 
               {/* Drawer Content */}
               <div className="flex flex-col gap-4">
-                <DashboardButton command="Dashboard" onClick={goToDashboard} />
-                <DashboardButton command="Add Expense" onClick={goToExpense} />
-                <DashboardButton command="Add Income" onClick={goToIncome} />
-                <DashboardButton command="Profile" onClick={goToProfile} />
+                <div className="flex flex-col border-b border-white/30 pb-4 gap-2">
+                  <DashboardButton command="Dashboard" onClick={goToDashboard} />
+                  <DashboardButton command="Profile" onClick={goToProfile} />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <DashboardButton command="Add Expense" onClick={goToExpense} />
+                  <DashboardButton command="Add Income" onClick={goToIncome} />
+                </div>
               </div>
 
 
