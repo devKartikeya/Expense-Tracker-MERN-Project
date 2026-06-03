@@ -103,6 +103,8 @@ const Navbar = ({ username, profileMode = false }) => {
                 <DashboardButton command="Profile" onClick={goToProfile} />
               </div>
 
+
+
               {/* Logout at bottom */}
               <div className="mt-auto w-full border-t border-white/30 pt-4">
                 <button
