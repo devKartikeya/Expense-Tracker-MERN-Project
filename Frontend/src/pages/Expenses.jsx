@@ -136,11 +136,11 @@ const Expenses = ({ user }) => {
 
             <div className="p-6">
                 {/* Header + Actions */}
-                <div className="flex flex-col sm:flex-row justify-between items-center mb-4 print:hidden gap-4">
+                <div className="flex flex-col sm:flex-row justify-between items-center mb-12 print:hidden gap-4 sm:mt-4">
                     <h1 className="text-xl sm:text-2xl font-bold text-white">
                         All Expenses
                     </h1>
-                    <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                    <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                         <button
                             onClick={handlePrint}
                             className="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow-md cursor-pointer"
@@ -234,7 +234,7 @@ const Expenses = ({ user }) => {
                 </div>
 
                 {/* Monthly Button */}
-                <div className="flex justify-center mt-6">
+                <div className="flex justify-center mt-12">
                     <button
                         onClick={goToMonthlyExpenses}
                         className="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-md"

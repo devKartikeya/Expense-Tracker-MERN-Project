@@ -200,7 +200,7 @@ const Dashboard = ({ user }) => {
       )}
 
       {/* Stats Cards */}
-      <div className="p-6 border-b-2 border-purple-500/50 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 my-4">
+      <div className="p-6 border-b-2 border-purple-500/50 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-4">
         <Card
           title="Expenses This Month"
           value={`₹${monthlyTotal.toLocaleString()}`}
@@ -258,7 +258,7 @@ const Dashboard = ({ user }) => {
       />
 
       {/* Charts */}
-      <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 border-t-2  border-purple-500/50 mt-9 border-b border-purple-500/50 mb-6">
+      <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 border-t-2  border-purple-500/50 mt-9 border-b border-purple-500/50 mb-6">
         <div className="bg-white rounded-lg shadow-md p-4">
           <h2 id="pie" className="text-xl font-bold mb-4">Expenses by Category</h2>
           <div className="h-64">

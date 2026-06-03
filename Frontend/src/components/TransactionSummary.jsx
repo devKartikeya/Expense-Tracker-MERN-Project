@@ -13,7 +13,7 @@ const TransactionSummary = ({ transactions, budget }) => {
     const percentUsed = budget > 0 ? ((totalExpenses / budget) * 100).toFixed(1) : 0;
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 my-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 my-6">
             {/* Income */}
             <div className="bg-green-100 p-4 rounded-lg shadow-md text-center">
                 <h2 className="text-lg font-bold text-green-700">Total Income</h2>
