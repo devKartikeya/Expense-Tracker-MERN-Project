@@ -107,7 +107,7 @@ const Incomes = ({ user }) => {
     const goToMonthlyIncome = () => navigate("/monthly-incomes");
 
     return (
-        <div id="income-list" className="w-screen min-h-screen bg-green-600 pt-[100px]">
+        <div id="income-list" className="w-screen min-h-screen bg-black pt-[100px]">
             <Navbar username={user.username} className="print:hidden" />
 
             <div className="p-6">
@@ -124,7 +124,7 @@ const Incomes = ({ user }) => {
                 {/* Table */}
                 <div className="bg-white rounded-lg shadow-md overflow-x-auto print:shadow-none print:bg-transparent">
                     <table className="w-full border-collapse min-w-[600px] print:min-w-full">
-                        <thead className="bg-green-800 text-white print:bg-gray-200 print:text-black">
+                        <thead className="bg-gradient-to-r from-pink-500 to-purple-500 text-white print:bg-gray-200 print:text-black">
                             <tr>
                                 <th className="py-3 px-4 text-left">Amount</th>
                                 <th className="py-3 px-4 text-left">Category</th>

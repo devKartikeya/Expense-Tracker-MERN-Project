@@ -55,7 +55,7 @@ const Categories = ({ user }) => {
     );
 
     return (
-        <div id="categories" className="w-screen min-h-screen bg-blue-600 pt-[100px]">
+        <div id="categories" className="w-screen min-h-screen bg-black pt-[100px]">
             <Navbar username={user.username} className="print:hidden" />
 
             <div className="p-6">
@@ -69,7 +69,7 @@ const Categories = ({ user }) => {
                     <select
                         value={viewMode}
                         onChange={(e) => setViewMode(e.target.value)}
-                        className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-yellow-300"
+                        className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white text-gray-800 font-semibold"
                     >
                         <option value="overall">Overall Totals</option>
                         <option value="monthly">Current Month Totals</option>
@@ -81,14 +81,14 @@ const Categories = ({ user }) => {
                         placeholder="Search categories..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="w-full sm:w-1/2 px-4 py-2 rounded-lg border text-white font-bold bg-green-500 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        className="w-full sm:w-1/2 px-4 py-2 rounded-lg border text-black font-bold bg-white border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
                     />
                 </div>
 
                 {/* Categories Table */}
                 <div className="bg-white rounded-lg shadow-md overflow-x-auto">
                     <table className="w-full border-collapse min-w-[400px]">
-                        <thead className="bg-blue-800 text-white">
+                        <thead className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white">
                             <tr>
                                 <th className="py-3 px-4 text-left">Category</th>
                                 <th className="py-3 px-4 text-left">Total Amount</th>

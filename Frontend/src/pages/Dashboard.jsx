@@ -258,7 +258,7 @@ const Dashboard = ({ user }) => {
       />
 
       {/* Charts */}
-      <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 border-t-2  border-purple-500/50 mt-6 border-b border-purple-500/50 mb-6">
+      <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 border-t-2  border-purple-500/50 mt-9 border-b border-purple-500/50 mb-6">
         <div className="bg-white rounded-lg shadow-md p-4">
           <h2 id="pie" className="text-xl font-bold mb-4">Expenses by Category</h2>
           <div className="h-64">

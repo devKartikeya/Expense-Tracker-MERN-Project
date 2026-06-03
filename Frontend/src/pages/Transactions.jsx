@@ -141,7 +141,7 @@ const Transactions = ({ user }) => {
                     <select
                         value={filter}
                         onChange={(e) => setFilter(e.target.value)}
-                        className="px-3 py-2  rounded-xl border cursor-pointer border-gray-300 text-white bg-black"
+                        className="px-3 py-2 font-semibold  rounded-xl border cursor-pointer border-gray-300 text-black bg-white"
                     >
                         <option value="all">All Time</option>
                         <option value="month">Current Month</option>
@@ -152,8 +152,12 @@ const Transactions = ({ user }) => {
                 </div>
             </div>
 
-            <TransactionSummary transactions={filteredTransactions} budget={budget}/>
+            <TransactionSummary transactions={filteredTransactions} budget={budget} />
+
+            <div className="border border-purple-500/50 my-9"></div>
             <TransactionCharts transactions={filteredTransactions} />
+
+            <div className="border border-purple-500/50 my-9"></div>
 
             <div className="p-6">
                 {/* Header + Filters + Actions */}
