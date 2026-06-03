@@ -13,7 +13,7 @@ nav {
 }
 
 body {
-    background-color: rgb(37, 89, 233);
+    background-color: black;
 }
 
 #reset-form {
@@ -112,7 +112,7 @@ body {
     height: 100%;
     width: 16rem;
     /* 64 Tailwind units */
-    background: linear-gradient(to right, #1e3a8a, #9333ea, #2563eb);
+    background: black;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;

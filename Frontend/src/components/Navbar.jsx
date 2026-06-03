@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Button from './Button';
+import DashboardButton from './DashboardButton';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import Logout from './Logout';
 import Toast from './Toast';
@@ -33,31 +34,31 @@ const Navbar = ({ username, profileMode = false }) => {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-blue-700 via-purple-500 to-blue-600 p-3 font-poppins flex justify-between items-center shadow-lg">
+      <nav className="fixed top-0 left-0 w-full z-50 bg-black p-3 font-poppins flex justify-between items-center shadow-lg border-b-2 border-purple-500/50">
         {/* App Name */}
-        <div className="flex items-center gap-2">
-          <img
+        <div className="flex items-center">
+          {/* <img
             src={logo}
             alt="Xpense Tracker Logo"
             className="w-12 h-12 sm:w-20 sm:h-20 object-contain"
-          />
-          <h1 className="text-xl sm:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-100 to-green-600">
+          /> */}
+          <h1 className="text-xl sm:text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 mx-5">
             <Link to="/about-us">Xpense Tracker</Link>
           </h1>
         </div>
 
         {/* Welcome */}
-        <h1 className="hidden md:block text-xl font-semibold text-yellow-300">
-          Welcome, {username}!
+        <h1 className="hidden md:block text-xl font-semibold text-purple-500">
+          Welcome, <span className="text-pink-400">{username} !</span>
         </h1>
 
         {/* Desktop Buttons */}
         <div className="hidden md:flex gap-5">
-          <Button command="Dashboard" onClick={goToDashboard} />
-          <Button command="Add Expense" onClick={goToExpense} />
-          <Button command="Add Income" onClick={goToIncome} />
-          <Button command="Profile" onClick={goToProfile} />
-          <Button command="Logout" onClick={() => setShowLogoutModal(true)} />
+          <DashboardButton command="Dashboard" onClick={goToDashboard} />
+          <DashboardButton command="Add Expense" onClick={goToExpense} />
+          <DashboardButton command="Add Income" onClick={goToIncome} />
+          <DashboardButton command="Profile" onClick={goToProfile} />
+          <DashboardButton command="Logout" onClick={() => setShowLogoutModal(true)} />
         </div>
 
         {/* Hamburger Icon (mobile only) */}
@@ -96,10 +97,10 @@ const Navbar = ({ username, profileMode = false }) => {
 
               {/* Drawer Content */}
               <div className="flex flex-col gap-4">
-                <Button command="Dashboard" onClick={goToDashboard} />
-                <Button command="Add Expense" onClick={goToExpense} />
-                <Button command="Add Income" onClick={goToIncome} />
-                <Button command="Profile" onClick={goToProfile} />
+                <DashboardButton command="Dashboard" onClick={goToDashboard} />
+                <DashboardButton command="Add Expense" onClick={goToExpense} />
+                <DashboardButton command="Add Income" onClick={goToIncome} />
+                <DashboardButton command="Profile" onClick={goToProfile} />
               </div>
 
               {/* Logout at bottom */}

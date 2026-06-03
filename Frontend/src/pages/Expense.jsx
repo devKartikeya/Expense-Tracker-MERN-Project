@@ -93,7 +93,7 @@ const Expense = () => {
   return (
     <div
       id="expense"
-      className="w-screen min-h-screen flex justify-center items-center bg-gradient-to-br from-blue-600 to-blue-800 p-2"
+      className="w-screen min-h-screen flex justify-center items-center bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500 p-2"
     >
       <form
         className="w-full sm:w-4/5 lg:w-1/3 bg-white flex flex-col gap-6 rounded-2xl shadow-2xl p-4 sm:p-6 overflow-y-auto"
@@ -110,12 +110,12 @@ const Expense = () => {
             {...register("amount", { required: true })}
             type="number"
             placeholder="Amount"
-            className="border border-gray-300 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold bg-blue-100 text-gray-800 placeholder-gray-500"
+            className="border border-gray-300 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold bg-gradient-to-br from-blue-300 via-purple-300 to-pink-300 text-black placeholder-gray-500"
           />
 
           {/* Smart Category Input */}
           <div className="relative">
-            <div className="flex items-center gap-2 border border-gray-300 rounded-xl bg-blue-100 px-4 py-3 focus-within:ring-2 focus-within:ring-blue-500">
+            <div className="flex items-center gap-2 border border-gray-300 rounded-xl bg-gradient-to-br from-blue-300 via-purple-300 to-pink-300 px-4 py-3 focus-within:ring-2 focus-within:ring-blue-500">
               {categoryInput ? (
                 <span className="flex items-center gap-2 bg-blue-200 px-3 py-1 rounded-full text-gray-800 font-semibold">
                   {selectedIcon}
@@ -174,12 +174,12 @@ const Expense = () => {
             {...register("description")}
             type="text"
             placeholder="Description"
-            className="border border-gray-300 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold bg-blue-100 text-gray-800 placeholder-gray-500"
+            className="border border-gray-300 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold  text-gray-800 bg-gradient-to-br from-blue-300 via-purple-300 to-pink-300 placeholder-gray-500"
           />
           <input
             {...register("date")}
             type="date"
-            className="border border-gray-300 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold bg-blue-100 text-gray-800"
+            className="border border-gray-300 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold bg-gradient-to-br from-blue-300 via-purple-300 to-pink-300 text-gray-800"
           />
         </div>
 

@@ -173,7 +173,7 @@ const Dashboard = ({ user }) => {
   }
 
   return (
-    <div id="dashboard" className="bg-gradient-to-br from-blue-500 via-indigo-500 to-indigo-700 pt-[75px] sm:pt-[105px] w-screen h-screen">
+    <div id="dashboard" className="bg-black pt-[75px] sm:pt-[105px] w-screen h-screen">
       <Navbar username={user.username} />
 
       {/* Welcome Modal */}
@@ -200,13 +200,13 @@ const Dashboard = ({ user }) => {
       )}
 
       {/* Stats Cards */}
-      <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="p-6 border-b-2 border-purple-500/50 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 my-4">
         <Card
           title="Expenses This Month"
           value={`₹${monthlyTotal.toLocaleString()}`}
           onClick={goToMonthlyExpenses}
           icon={<FaWallet />}
-          className="bg-gradient-to-r from-purple-500 to-indigo-600 justify-between"
+          className="bg-gradient-to-r from-purple-500 to-indigo-500 justify-between"
         />
 
         <Card
@@ -214,7 +214,7 @@ const Dashboard = ({ user }) => {
           onClick={goToMonthlyIncome}
           value={`₹${monthlyIncome.toLocaleString()}`}
           icon={<FaCoins />}
-          className="bg-gradient-to-r from-yellow-400 to-amber-500 justify-between"
+          className="bg-gradient-to-r from-purple-500 to-indigo-500 justify-between"
         />
 
         <Card
@@ -222,7 +222,7 @@ const Dashboard = ({ user }) => {
           onClick={goToCategories}
           value={topCategory.category ? `${topCategory.category} (₹${topCategory.amount.toLocaleString()})` : "No data"}
           icon={<FaChartPie />}
-          className="bg-gradient-to-r from-green-600 to-green-500 justify-between"
+          className="bg-gradient-to-r from-purple-500 to-indigo-500 justify-between"
         />
 
         <Card
@@ -230,7 +230,7 @@ const Dashboard = ({ user }) => {
           onClick={goToExpenses}
           value={`₹${totalExpenses.toLocaleString()}`}
           icon={<FaClipboardCheck />}
-          className="bg-gradient-to-r from-rose-500 to-red-500 justify-between"
+          className="bg-gradient-to-r from-purple-500 to-indigo-500 justify-between"
         />
 
         <Card
@@ -238,14 +238,14 @@ const Dashboard = ({ user }) => {
           onClick={goToIncomes}
           value={`₹${totalIncome.toLocaleString()}`}
           icon={<FaCoins />}
-          className="bg-gradient-to-r from-lime-500 to-green-600 justify-between"
+          className="bg-gradient-to-r from-purple-500 to-indigo-500 justify-between"
         />
 
         <Card
           title="Expenses Logged"
           value={expenses}
           icon={<FaCalendarAlt />}
-          className="bg-gradient-to-r from-pink-500 to-red-500 justify-between"
+          className="bg-gradient-to-r from-purple-500 to-indigo-500 justify-between"
         />
       </div>
 
@@ -258,7 +258,7 @@ const Dashboard = ({ user }) => {
       />
 
       {/* Charts */}
-      <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 border-t-2  border-purple-500/50 mt-6 border-b border-purple-500/50 mb-6">
         <div className="bg-white rounded-lg shadow-md p-4">
           <h2 id="pie" className="text-xl font-bold mb-4">Expenses by Category</h2>
           <div className="h-64">

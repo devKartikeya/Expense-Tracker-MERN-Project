@@ -132,7 +132,7 @@ const Transactions = ({ user }) => {
     };
 
     return (
-        <div id="transactions" className="w-screen min-h-screen bg-gray-800 pt-[100px] px-4">
+        <div id="transactions" className="w-screen min-h-screen bg-black pt-[100px] px-4 mt-4">
             <Navbar username={user.username} className="print:hidden" />
 
             <div className="flex flex-col sm:flex-row justify-between items-center print:hidden gap-3">
