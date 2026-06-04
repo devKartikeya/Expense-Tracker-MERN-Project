@@ -4,7 +4,7 @@ A modern full-stack personal finance management platform built with React, Expre
 
 Xpense Tracker helps users efficiently manage their finances by tracking expenses, monitoring income, analyzing financial trends, and generating actionable insights through interactive dashboards and detailed transaction reports.
 
-The platform combines powerful analytics, secure authentication, dynamic category management, and an advanced Admin Panel to deliver a reliable, scalable, and production-ready financial tracking solution.
+The platform combines powerful analytics, secure authentication, dynamic category management, Personal profile pic updating and an advanced Admin Panel to deliver a reliable, scalable, and production-ready financial tracking solution.
 
 ---
 
@@ -146,6 +146,7 @@ Take control of monthly spending with a dedicated budgeting system.
 👤 Profile Management
 
 - User Profile Overview
+- User Profile Pic using cloudinary
 - Account Information
 - Join Date Tracking
 - Financial Statistics
@@ -256,7 +257,8 @@ Server| Express.js
 Database| MongoDB
 Authentication| JWT
 Security| bcrypt
-Email Service| Nodemailer
+Cloud Media | Cloudinary
+Email Service| Brevo
 Charts & Analytics| Recharts
 State Management| React Hooks
 
@@ -289,6 +291,12 @@ JWT_SECRET_KEY=your_secret_key
 EMAIL_USER=your_email@gmail.com
 
 EMAIL_PASSWORD=your_gmail_app_password
+
+CLOUDINARY=your_cloudinary_cloud_name
+
+CLOUDINARY_API=your_cloudinary_api
+
+CLOUDINARY_SECRET=your_cloudinary_api_secret
 
 Run backend:
 
@@ -393,14 +401,12 @@ into one complete modern full-stack financial management solution.
 - Recurring Transactions
 - Budget Planning Tools
 - Financial Goals Tracking
-- Export Reports (PDF / Excel)
 - Dark Mode
 - Push Notifications
 - Multi-Currency Support
-- Modern UX Practises 
 - AI-Based Expense Insights
 - Mobile Application Version
-
+- 
 ---
 
 👨‍💻 Author
