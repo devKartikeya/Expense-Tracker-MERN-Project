@@ -87,7 +87,7 @@ const Login = () => {
           >
             {/* Title */}
             <h2 className="sm:text-7xl text-5xl font-bold  text-white drop-shadow-lg sm:my-4 my-2 ml-3">
-              <span className="sm:text-8xl text-6xl"> Welcome </span>Back <span className="sm:text-7xl text-4xl font-bold">buddy</span>
+              <span className="sm:text-8xl text-6xl"> Welcome </span>Back <span className="sm:text-7xl text-4xl font-bold text-pink-400">buddy</span>
             </h2>
 
 

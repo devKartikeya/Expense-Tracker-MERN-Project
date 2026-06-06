@@ -84,7 +84,7 @@ const Navbar = ({ username, profileMode = false }) => {
               onClick={(e) => e.stopPropagation()}
             >
               {/* Drawer Header */}
-              <div className="w-full flex flex-col items-center mb-6 border-b border-white/30 pb-4 -mt-5">
+              <div className="w-full flex flex-col items-center mb-2 border-b border-white/30 pb-4 -mt-5">
                 <img
                   src={logo}
                   alt="Xpense Tracker Logo"
@@ -96,17 +96,21 @@ const Navbar = ({ username, profileMode = false }) => {
               </div>
 
               {/* Drawer Content */}
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 w-full">
                 <div className="flex flex-col border-b border-white/30 pb-4 gap-2">
-                  <DashboardButton command="Dashboard" onClick={goToDashboard} />
-                  <DashboardButton command="Profile" onClick={goToProfile} />
+                  {/* <DashboardButton command="Dashboard" onClick={goToDashboard} /> */}
+                   <Link to="/dashboard" className='text-white font-semibold text-lg'>Dashbaord</Link>
+                  {/* <DashboardButton command="Profile" onClick={goToProfile} /> */}
                 </div>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 justify-center items-center">
                   <DashboardButton command="Add Expense" onClick={goToExpense} />
                   <DashboardButton command="Add Income" onClick={goToIncome} />
                 </div>
               </div>
 
+              <div className="mt-auto w-full border-t border-white/30 pt-8 flex flex-col justify-center">
+                <Link to="/profile" className='text-white font-semibold text-lg'>My Profile</Link>
+              </div>
 
 
               {/* Logout at bottom */}
