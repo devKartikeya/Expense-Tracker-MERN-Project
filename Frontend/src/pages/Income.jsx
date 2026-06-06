@@ -1,12 +1,12 @@
-// src/pages/Expense.jsx
+// src/pages/Income.jsx
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useCategories } from "../categories"; // custom hook fetching cagories from backend
+import { useCategories } from "../categories"; // custom hook fetching categories
 
-const Expense = () => {
+const Income = () => {
     const navigate = useNavigate();
-    const { categoryArray } = useCategories(); // dynamic categories
+    const { categoryArray } = useCategories();
     const { register, handleSubmit, setValue } = useForm();
 
     const [categoryInput, setCategoryInput] = useState("");
@@ -15,7 +15,6 @@ const Expense = () => {
     const [noMatchMessage, setNoMatchMessage] = useState(false);
     const [highlightIndex, setHighlightIndex] = useState(-1);
 
-    // Auto-hide "no match" message
     useEffect(() => {
         if (noMatchMessage) {
             const timer = setTimeout(() => setNoMatchMessage(false), 3000);
@@ -23,7 +22,6 @@ const Expense = () => {
         }
     }, [noMatchMessage]);
 
-    // Debounce filtering
     useEffect(() => {
         const handler = setTimeout(() => {
             if (categoryInput) {
@@ -31,19 +29,13 @@ const Expense = () => {
                     cat.name.toLowerCase().includes(categoryInput.toLowerCase())
                 );
                 setFilteredCategories(filtered);
-
-                if (filtered.length === 0) {
-                    setNoMatchMessage(true);
-                } else {
-                    setNoMatchMessage(false);
-                }
+                setNoMatchMessage(filtered.length === 0);
             } else {
                 setFilteredCategories(categoryArray);
                 setNoMatchMessage(false);
             }
             setHighlightIndex(-1);
         }, 300);
-
         return () => clearTimeout(handler);
     }, [categoryInput, categoryArray]);
 
@@ -56,14 +48,11 @@ const Expense = () => {
         });
         let result = await response.json();
         console.log(result);
-        if (response.ok) {
-            navigate("/dashboard");
-        }
+        if (response.ok) navigate("/dashboard");
     };
 
     const goBack = () => window.history.back();
 
-    // Keyboard navigation
     const handleKeyDown = (e) => {
         if (!showSuggestions) return;
         if (e.key === "ArrowDown") {
@@ -71,9 +60,7 @@ const Expense = () => {
             setHighlightIndex((prev) => (prev + 1) % filteredCategories.length);
         } else if (e.key === "ArrowUp") {
             e.preventDefault();
-            setHighlightIndex(
-                (prev) => (prev - 1 + filteredCategories.length) % filteredCategories.length
-            );
+            setHighlightIndex((prev) => (prev - 1 + filteredCategories.length) % filteredCategories.length);
         } else if (e.key === "Enter") {
             if (highlightIndex >= 0 && filteredCategories[highlightIndex]) {
                 e.preventDefault();
@@ -87,20 +74,19 @@ const Expense = () => {
         }
     };
 
-    // Find icon for selected category
     const selectedIcon = categoryArray.find((c) => c.name === categoryInput)?.icon;
 
     return (
         <div
-            id="expense"
-            className="w-screen min-h-screen flex justify-center items-center bg-gradient-to-r from-green-600 via-green-700 to-green-600 p-2"
+            id="income"
+            className="w-screen min-h-screen flex justify-center items-center bg-gradient-to-br from-black via-purple-900 to-pink-700 p-4"
         >
             <form
-                className="w-full sm:w-4/5 lg:w-1/3 bg-white flex flex-col gap-6 rounded-2xl shadow-2xl p-4 sm:p-6 overflow-y-auto"
+                className="w-full sm:w-4/5 lg:w-1/3 bg-black/70 backdrop-blur-xl flex flex-col gap-6 rounded-2xl shadow-neon p-6 border border-pink-500/30"
                 onSubmit={handleSubmit(onSubmit)}
             >
                 {/* Header */}
-                <div className="w-full rounded-xl py-3 flex justify-center items-center bg-green-500 shadow-md sticky top-0 z-10">
+                <div className="w-full rounded-xl py-3 flex justify-center items-center bg-gradient-to-r from-purple-700 to-pink-600 shadow-md">
                     <h1 className="text-2xl sm:text-3xl font-bold text-white">Add Income</h1>
                 </div>
 
@@ -110,18 +96,19 @@ const Expense = () => {
                         {...register("amount", { required: true })}
                         type="number"
                         placeholder="Amount"
-                        className="border border-gray-300 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-green-500 font-semibold bg-green-100 text-gray-800 placeholder-gray-500"
+                        className="border border-pink-500/40 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-pink-500 font-semibold bg-black/60 text-white placeholder-gray-400"
                     />
 
                     {/* Smart Category Input */}
                     <div className="relative">
-                        <div className="flex items-center gap-2 border border-gray-300 rounded-xl bg-green-100 px-4 py-3 focus-within:ring-2 focus-within:ring-green-500">
+                        <div className="flex items-center gap-2 border border-pink-500/40 rounded-xl bg-black/60 px-4 py-3 focus-within:ring-2 focus-within:ring-pink-500">
                             {categoryInput ? (
-                                <span className="flex items-center gap-2 bg-blue-200 px-3 py-1 rounded-full text-gray-800 font-semibold">
+                                <span className="flex items-center gap-2 bg-purple-700/50 px-3 py-1 rounded-full text-white font-semibold">
+                                    {selectedIcon}
                                     {categoryInput}
                                 </span>
                             ) : (
-                                <span className="text-gray-500">Category</span>
+                                <span className="text-gray-400">Category</span>
                             )}
                             <input
                                 {...register("category", { required: true })}
@@ -133,13 +120,15 @@ const Expense = () => {
                                     setShowSuggestions(true);
                                 }}
                                 onFocus={() => setShowSuggestions(true)}
+                                onKeyDown={handleKeyDown}
                                 autoComplete="off"
                                 className="absolute inset-0 opacity-0 cursor-text"
                             />
                         </div>
+
                         {/* Suggestions Dropdown */}
                         {showSuggestions && categoryInput && (
-                            <ul className="absolute z-10 w-full bg-white border border-gray-300 rounded-xl mt-1 shadow-lg max-h-40 overflow-y-auto">
+                            <ul className="absolute z-10 w-full bg-black/90 border border-pink-500/40 rounded-xl mt-1 shadow-lg max-h-40 overflow-y-auto">
                                 {filteredCategories.length > 0 ? (
                                     filteredCategories.map((cat, idx) => (
                                         <li
@@ -149,8 +138,8 @@ const Expense = () => {
                                                 setValue("category", cat.name);
                                                 setShowSuggestions(false);
                                             }}
-                                            className={`flex items-center gap-2 px-4 py-2 cursor-pointer transition ${highlightIndex === idx ? "bg-blue-100" : "hover:bg-blue-50"
-                                                }`}
+                                            className={`flex items-center gap-2 px-4 py-2 cursor-pointer transition ${highlightIndex === idx ? "bg-purple-700/50" : "hover:bg-purple-900/40"
+                                                } text-white`}
                                         >
                                             {cat.icon}
                                             <span>{cat.name}</span>
@@ -158,7 +147,7 @@ const Expense = () => {
                                     ))
                                 ) : (
                                     noMatchMessage && (
-                                        <li className="px-4 py-2 text-gray-500">
+                                        <li className="px-4 py-2 text-gray-400">
                                             No matches, press Enter to add custom
                                         </li>
                                     )
@@ -171,12 +160,12 @@ const Expense = () => {
                         {...register("description")}
                         type="text"
                         placeholder="Description"
-                        className="border border-gray-300 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-green-500 font-semibold bg-green-100 text-gray-800 placeholder-gray-500"
+                        className="border border-pink-500/40 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-pink-500 font-semibold bg-black/60 text-white placeholder-gray-400"
                     />
                     <input
                         {...register("date")}
                         type="date"
-                        className="border border-gray-300 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-green-500 font-semibold bg-green-100 text-gray-800"
+                        className="border border-pink-500/40 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-pink-500 font-semibold bg-black/60 text-white"
                     />
                 </div>
 
@@ -184,13 +173,13 @@ const Expense = () => {
                 <div className="flex flex-col gap-4 w-full mt-4">
                     <button
                         type="submit"
-                        className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl shadow-md transition duration-300 cursor-pointer"
+                        className="bg-gradient-to-r from-purple-700 to-pink-600 hover:from-purple-800 hover:to-pink-700 text-white font-bold py-3 rounded-xl shadow-md transition duration-300 cursor-pointer"
                     >
                         Add Income
                     </button>
                     <button
                         type="button"
-                        className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 rounded-xl shadow-md transition duration-300 cursor-pointer"
+                        className="bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 rounded-xl shadow-md transition duration-300 cursor-pointer"
                         onClick={goBack}
                     >
                         Go Back
@@ -201,4 +190,4 @@ const Expense = () => {
     );
 };
 
-export default Expense;
+export default Income;
