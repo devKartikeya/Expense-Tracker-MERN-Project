@@ -70,20 +70,24 @@ const Login = () => {
       {loading ? (
         <Loader />
       ) : (
-        <div id="login-form" className="bg-black flex flex-col sm:flex-row sm:justify-evenly items-center w-screen h-screen text-white">
-          <img
-            src="/Copilot_20260603_103749.png"
-            alt="Xpense Tracker Logo"
-            width={330}
-            className="sm:w-[580px] sm:h-[580px] object-contain bg-black"
-          />
+        <div id="login-form" className="bg-gradient-to-br bg-black flex flex-col sm:flex-row sm:justify-evenly items-center w-screen min-h-screen text-white p-2">
+          <div className="flex flex-col items-center gap-3">
+            <img
+              src="/Copilot_20260603_103749.png"
+              alt="Xpense Tracker Logo"
+              className="w-64 sm:w-[580px] sm:h-[580px] object-contain"
+            />
+            <h1 className="italic font-semibold text-white text-center relative sm:bottom-36 bottom-16 text-lg sm:text-xl">
+              "Because Numbers tell Stories"
+            </h1>
+          </div>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="w-[95%] sm:w-[60%] flex flex-col items-center justify-center gap-4 sm:gap-6 bg-black rounded-3xl shadow-2xl px-4 sm:px-6 py-2 sm:py-6 overflow-y-auto"
+            className="w-[95%] sm:w-[60%] flex flex-col items-center justify-center gap-4 sm:gap-6 bg-black rounded-3xl shadow-2xl px-4 sm:px-6 py-2 sm:py-6 overflow-hidden"
           >
             {/* Title */}
             <h2 className="sm:text-7xl text-5xl font-bold  text-white drop-shadow-lg sm:my-4 my-2 ml-3">
-              Welcome Back
+              <span className="sm:text-8xl text-6xl"> Welcome </span>Back <span className="sm:text-7xl text-4xl font-bold">buddy</span>
             </h2>
 
 
@@ -131,7 +135,7 @@ const Login = () => {
             />
 
             {/* Footer */}
-            <p className="text-sm mt-2 text-gray-200">
+            <p className="text-sm mt-1 text-gray-200">
               Don’t have an account?{" "}
               <Link
                 to="/"

@@ -85,17 +85,21 @@ const Signup = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br bg-black flex flex-col sm:flex-row sm:justify-evenly items-center w-screen min-h-screen text-white p-2">
-      <img
-        src="/Copilot_20260603_103749.png"
-        alt="Xpense Tracker Logo"
-        width={330}
-        className="sm:w-[580px] sm:h-[580px] object-contain bg-black"
-      />
+    <div id="signup-form"  className="bg-gradient-to-br bg-black flex flex-col sm:flex-row sm:justify-evenly items-center w-screen min-h-screen text-white p-2">
+      <div className="flex flex-col items-center gap-3">
+        <img
+          src="/Copilot_20260603_103749.png"
+          alt="Xpense Tracker Logo"
+          className="w-64 sm:w-[580px] sm:h-[580px] object-contain"
+        />
+        <h1 className="italic font-semibold text-white text-center relative sm:bottom-36 bottom-16 text-lg sm:text-xl">
+          "Because Numbers tell Stories"
+        </h1>
+      </div>
       <form
-        id="signup-form"
+        
         onSubmit={handleSubmit(onSubmit)}
-        className="w-[95%] sm:w-[60%] flex flex-col items-center justify-center gap-4 sm:gap-6 bg-black rounded-3xl shadow-2xl px-4 sm:px-6 py-2 sm:py-6 overflow-y-auto"
+        className="w-[95%] sm:w-[60%] flex flex-col items-center justify-center gap-4 sm:gap-6 bg-black rounded-3xl shadow-2xl px-4 sm:px-6 py-2 sm:py-6 overflow-hidden"
       >
 
         {/* Title */}
