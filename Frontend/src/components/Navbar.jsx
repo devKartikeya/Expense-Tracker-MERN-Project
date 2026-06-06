@@ -106,15 +106,23 @@ const Navbar = ({ username, profileMode = false }) => {
                 </div>
               </div>
 
-              <div className="mt-auto w-full flex flex-col gap-4 border-t border-white/30 pt-6">
-                <Link to="/about-us" className="text-white font-semibold text-lg hover:text-pink-500">
+              {/* Middle Section: About + Contact */}
+              <div className="w-full border-t border-white/30 pt-6 flex flex-col gap-3 items-start">
+                <Link
+                  to="/about-us"
+                  className="text-white font-semibold text-lg hover:text-pink-500 transition-colors w-full"
+                >
                   About Us
                 </Link>
 
-                <Link to="/contact-us" className="text-white font-semibold text-lg hover:text-pink-500">
+                <Link
+                  to="/contact-us"
+                  className="text-white font-semibold text-lg hover:text-pink-500 transition-colors w-full"
+                >
                   Contact Us
                 </Link>
               </div>
+
 
               {/* Bottom Section: Profile + Logout */}
               <div className="mt-auto w-full flex flex-col gap-4 border-t border-white/30 pt-6">
