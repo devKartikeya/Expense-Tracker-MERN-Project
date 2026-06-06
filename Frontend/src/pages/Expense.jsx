@@ -82,7 +82,7 @@ const Expense = () => {
       className="w-screen min-h-screen flex justify-center items-center bg-gradient-to-br from-black via-purple-900 to-pink-700 p-4"
     >
       <form
-        className="w-full sm:w-4/5 lg:w-1/3 bg-black/70 backdrop-blur-xl flex flex-col gap-6 rounded-2xl shadow-neon p-6 border border-pink-500/30"
+        className="w-full sm:w-4/5 lg:w-3/4 bg-black/70 backdrop-blur-xl flex flex-col gap-6 rounded-2xl shadow-neon p-6 border border-pink-500/30"
         onSubmit={handleSubmit(onSubmit)}
       >
         {/* Header */}
@@ -162,6 +162,7 @@ const Expense = () => {
             placeholder="Description"
             className="border border-pink-500/40 rounded-xl py-3 px-4 focus:outline-none focus:ring-2 focus:ring-pink-500 font-semibold bg-black/60 text-white placeholder-gray-400"
           />
+         
           <input
             {...register("date")}
             type="date"

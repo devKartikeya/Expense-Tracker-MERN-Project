@@ -13,6 +13,9 @@ const Footer = () => {
                     <p className="text-sm text-gray-200">
                         Manage your expenses with clarity and confidence.
                     </p>
+                     <p className="text-sm text-center text-black font-semibold italic my-1">
+                        ~ "Because Numbers tell Stories"
+                    </p>
                 </div>
 
                 {/* Middle Section - Links */}
