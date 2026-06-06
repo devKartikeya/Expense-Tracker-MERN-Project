@@ -125,9 +125,8 @@ const Login = () => {
             <Button
               command="Login"
               className="w-full py-3 rounded-xl transition duration-300 shadow-md"
-              from_bg="pink-500"
-              to_bg="pink-600"
-              hover_from="pink-600"
+              from_bg="blue-500"
+              hover_from="pink-500"
               hover_to="pink-700"
             />
 
@@ -136,7 +135,7 @@ const Login = () => {
               Don’t have an account?{" "}
               <Link
                 to="/"
-                className="text-pink-300 hover:text-pink-200 font-semibold"
+                className="text-pink-300 hover:text-pink-200 underline font-semibold"
               >
                 Register
               </Link>
@@ -145,7 +144,7 @@ const Login = () => {
               Forgot your password?{" "}
               <Link
                 to="/reset-password"
-                className="text-pink-300 hover:text-pink-200 font-semibold"
+                className="text-pink-300 hover:text-pink-200 underline font-semibold"
               >
                 Reset Password
               </Link>

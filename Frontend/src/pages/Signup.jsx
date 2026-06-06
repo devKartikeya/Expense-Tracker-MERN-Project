@@ -164,8 +164,7 @@ const Signup = () => {
           command="Register"
           className="py-3 w-full rounded-xl transition duration-300 shadow-md"
           from_bg="blue-500"
-          to_bg="blue-600"
-          hover_from="blue-600"
+          hover_from="blue-500"
           hover_to="blue-700"
         />
 
