@@ -107,38 +107,25 @@ const Navbar = ({ username, profileMode = false }) => {
               </div>
 
               {/* Middle Section: About + Contact */}
-              <div className="w-full border-t border-white/30 pt-6 flex flex-col gap-3 items-start">
-                <Link
-                  to="/about-us"
-                  className="text-white font-semibold text-lg hover:text-pink-500 transition-colors w-full"
-                >
+              <div className="mt-auto w-full flex flex-col gap-4 border-t border-white/30 pt-6">
+                <Link to="/about-us" className="text-white font-semibold text-lg hover:text-pink-500">
                   About Us
                 </Link>
 
-                <Link
-                  to="/contact-us"
-                  className="text-white font-semibold text-lg hover:text-pink-500 transition-colors w-full"
-                >
+                <Link to="/contact-us" className="text-white font-semibold text-lg hover:text-pink-500">
                   Contact Us
                 </Link>
-              </div>
 
-
-              {/* Bottom Section: Profile + Logout */}
-              <div className="mt-auto w-full flex flex-col gap-4 border-t border-white/30 pt-6">
-                <Link to="/profile" className="text-white font-semibold text-lg hover:text-pink-500">
+                <Link to="/profile" className="text-white font-semibold text-lg">
                   My Profile
                 </Link>
 
-                <div className='border-t border-white/30 w-full pt-4'>
-
-                  <button
-                    onClick={() => setShowLogoutModal(true)}
-                    className="w-full bg-gradient-to-r from-red-500 via-rose-600 to-rose-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:from-red-700 hover:to-red-900 transition"
-                  >
-                    Logout
-                  </button>
-                </div>
+                <button
+                  onClick={() => setShowLogoutModal(true)}
+                  className="w-full bg-gradient-to-r from-red-500 via-rose-600 to-rose-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:from-red-700 hover:to-red-900 transition"
+                >
+                  Logout
+                </button>
               </div>
             </div>
           </>
