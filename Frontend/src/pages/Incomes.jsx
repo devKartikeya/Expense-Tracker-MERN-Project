@@ -115,7 +115,7 @@ const Incomes = ({ user }) => {
                 <div className="flex flex-col sm:flex-row justify-between items-center mb-12 print:hidden gap-4 sm:mt-4">
                     <h1 className="text-xl sm:text-2xl font-bold text-white">All Income</h1>
                     <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                        <button onClick={handlePrint} className="flex-1 bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg shadow-md cursor-pointer">Print</button>
+                        <button onClick={handlePrint} className="flex-1 bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg shadow-md cursor-pointer">Print</button>
                         <button onClick={exportToPDF} className="flex-1 bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-md cursor-pointer">PDF</button>
                         <button onClick={exportToExcel} className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg shadow-md cursor-pointer">Excel</button>
                     </div>
@@ -184,7 +184,7 @@ const Incomes = ({ user }) => {
                 <div className="flex justify-center mt-12">
                     <button
                         onClick={goToMonthlyIncome}
-                        className="w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-md"
+                        className="w-full sm:w-auto fixed bottom-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-md"
                     >
                         Show Monthly Income
                     </button>
