@@ -193,7 +193,7 @@ const MonthlyExpenses = ({ user }) => {
         <div className="flex justify-center">
           <button
             onClick={goToExpenses}
-            className="w-full sm:w-auto fixed bottom-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-md"
+            className="flex-1 sm:w-auto fixed bottom-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-md"
           >
             Show All Expenses
           </button>

@@ -259,22 +259,22 @@ const Dashboard = ({ user }) => {
 
       {/* Charts */}
       <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 border-t-2  border-purple-500/50 mt-9 border-b border-purple-500/50 mb-6">
-        <div className="bg-white rounded-lg shadow-md p-4">
+        <div className="bg-white rounded-lg shadow-md p-4 border-2 border-purple-600">
           <h2 id="pie" className="text-xl font-bold mb-4">Expenses by Category</h2>
           <div className="h-64">
             <Pie data={pieData} options={pieOptions} />
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-4">
+        <div className="bg-white rounded-lg shadow-md p-4 border-2 border-purple-600">
           <h2 id="bar" className="text-xl font-bold mb-4">Monthly Totals</h2>
-          <Bar data={barData} />
+          <Bar data={barData}  />
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-4 lg:col-span-2">
+        <div className="bg-white rounded-lg shadow-md p-4 lg:col-span-2 border-2 border-purple-600">
           <h2 id="line" className="text-xl font-bold mb-4">Daily Spending Trend</h2>
           <div className="h-64">
-            <Line data={lineData} options={{ maintainAspectRatio: false }} />
+            <Line data={lineData} options={{maintainAspectRatio: false, responsive: true}}/>
           </div>
         </div>
       </div>

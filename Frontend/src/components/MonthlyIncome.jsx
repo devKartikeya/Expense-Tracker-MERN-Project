@@ -191,7 +191,7 @@ const MonthlyIncome = ({ user }) => {
                 <div className="flex justify-center mt-12">
                     <button
                         onClick={goToIncome}
-                        className="w-full sm:w-auto fixed bottom-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-md"
+                        className="flex-1 sm:w-auto fixed bottom-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-md"
                     >
                         Show Total Income
                     </button>
