@@ -105,27 +105,45 @@ const Navbar = ({ username, profileMode = false }) => {
                   <DashboardButton command="Add Income" onClick={goToIncome} />
                 </div>
               </div>
+              {/* Bottom Section */}
+              <div className="mt-auto w-full flex flex-col gap-4">
 
-              {/* Middle Section: About + Contact */}
-              <div className="mt-auto w-full flex flex-col gap-4 border-t border-white/30 pt-6">
-                <Link to="/about-us" className="text-white font-semibold text-lg hover:text-pink-500">
-                  About Us
-                </Link>
+                {/* About + Contact Box */}
+                <div className="w-full border-t border-white/30 pt-6 flex flex-col gap-3">
+                  <Link
+                    to="/about-us"
+                    className="text-white font-semibold text-lg hover:text-pink-500 transition-colors"
+                  >
+                    About Us
+                  </Link>
+                  <Link
+                    to="/contact-us"
+                    className="text-white font-semibold text-lg hover:text-pink-500 transition-colors"
+                  >
+                    Contact Us
+                  </Link>
+                </div>
 
-                <Link to="/contact-us" className="text-white font-semibold text-lg hover:text-pink-500">
-                  Contact Us
-                </Link>
+                {/* Profile Box */}
+                <div className="w-full border-t border-white/30 pt-6">
+                  <Link
+                    to="/profile"
+                    className="text-white font-semibold text-lg hover:text-pink-500 transition-colors"
+                  >
+                    My Profile
+                  </Link>
+                </div>
 
-                <Link to="/profile" className="text-white font-semibold text-lg">
-                  My Profile
-                </Link>
+                {/* Logout Box */}
+                <div className="w-full border-t border-white/30 pt-6">
+                  <button
+                    onClick={() => setShowLogoutModal(true)}
+                    className="w-full bg-gradient-to-r from-red-500 via-rose-600 to-rose-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:from-red-700 hover:to-red-900 transition"
+                  >
+                    Logout
+                  </button>
+                </div>
 
-                <button
-                  onClick={() => setShowLogoutModal(true)}
-                  className="w-full bg-gradient-to-r from-red-500 via-rose-600 to-rose-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:from-red-700 hover:to-red-900 transition"
-                >
-                  Logout
-                </button>
               </div>
             </div>
           </>
