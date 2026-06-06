@@ -98,19 +98,27 @@ const Navbar = ({ username, profileMode = false }) => {
               {/* Drawer Content */}
               <div className="flex flex-col gap-4 w-full">
                 <div className="flex flex-col border-b border-white/30 pb-4 gap-2">
-                  {/* <DashboardButton command="Dashboard" onClick={goToDashboard} /> */}
-                  <Link to="/dashboard" className='text-white font-semibold text-lg'>Dashbaord</Link>
-                  {/* <DashboardButton command="Profile" onClick={goToProfile} /> */}
+                  <Link to="/dashboard" className='text-white font-semibold text-lg hover:text-purple-500'>Dashbaord</Link>
                 </div>
-                <div className="flex flex-col gap-2 justify-center items-center">
+                <div className="flex flex-col gap-2 justify-center items-center border-b border-white/30 pb-4">
                   <DashboardButton command="Add Expense" onClick={goToExpense} />
                   <DashboardButton command="Add Income" onClick={goToIncome} />
                 </div>
               </div>
 
+              <div className="mt-auto w-full flex flex-col gap-4 border-t border-white/30 pt-6">
+                <Link to="/about-us" className="text-white font-semibold text-lg hover:text-pink-500">
+                  About Us
+                </Link>
+
+                <Link to="/contact-us" className="text-white font-semibold text-lg hover:text-pink-500">
+                  Contact Us
+                </Link>
+              </div>
+
               {/* Bottom Section: Profile + Logout */}
               <div className="mt-auto w-full flex flex-col gap-4 border-t border-white/30 pt-6">
-                <Link to="/profile" className="text-white font-semibold text-lg">
+                <Link to="/profile" className="text-white font-semibold text-lg hover:text-pink-500">
                   My Profile
                 </Link>
 
