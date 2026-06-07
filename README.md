@@ -229,6 +229,7 @@ About Page
 Design Features
 
 - Tailwind CSS powered UI
+- Powerful Brutal Professional Theme
 - Glassmorphism effects
 - Gradient themes
 - Glowing accents
@@ -239,6 +240,9 @@ Design Features
 User Experience
 
 - Fast navigation
+- Inline Error Handling
+- Live form Validation using AJAX
+- Uniqueness of Usernames
 - Clean interface
 - Mobile-first responsiveness
 - Interactive dashboards
