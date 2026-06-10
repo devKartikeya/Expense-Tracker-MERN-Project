@@ -43,6 +43,23 @@ const AboutUs = ({ user }) => {
                         </div>
                     </div>
 
+                    {/* Features Section */}
+                    <div className="grid sm:grid-cols-2 gap-6 mt-6">
+                        <div className="flex flex-col items-center text-center p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg shadow-md">
+                            <h3 className="text-xl font-semibold text-blue-700">Smart Tracking</h3>
+                            <p className="text-gray-600 text-sm mt-2">
+                                Track expenses and incomes effortlessly with category icons, filters, and detailed ledgers.
+                            </p>
+                        </div>
+                        <div className="flex flex-col items-center text-center p-4 bg-gradient-to-r from-pink-50 to-red-50 rounded-lg shadow-md">
+                            <h3 className="text-xl font-semibold text-pink-700">Insightful Reports</h3>
+                            <p className="text-gray-600 text-sm mt-2">
+                                Export your data to PDF or Excel, visualize trends with charts, and stay ahead of your goals.
+                            </p>
+                        </div>
+                    </div>
+
+
                     {/* Values Section */}
                     <div className="flex flex-col sm:flex-row gap-6 mt-6">
                         <div className="flex-1 flex flex-col items-center text-center p-4 bg-gradient-to-r from-green-100 to-teal-100 rounded-lg shadow-md">
@@ -59,6 +76,57 @@ const AboutUs = ({ user }) => {
                             <p className="text-gray-600 text-sm mt-2">
                                 Every feature is designed with you in mind — simple, intuitive, and powerful.
                             </p>
+                        </div>
+                    </div>
+                    {/* Community Section */}
+                    <div className="mt-8 text-center">
+                        <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                            Community & Support
+                        </h3>
+                        <p className="text-gray-600 mt-2 text-sm">
+                            Xpense Tracker is more than an app — it’s a growing community of people who value clarity in finance.
+                            We’re here to support you with guides, updates, and a responsive helpline whenever you need help.
+                        </p>
+                    </div>
+
+                    {/* Why Choose Us Section */}
+                    <div className="mt-10">
+                        <h3 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 text-center mb-6">
+                            Why Choose Us
+                        </h3>
+
+                        <div className="grid sm:grid-cols-2 gap-6">
+                            <div className="flex flex-col items-center text-center p-6 bg-gradient-to-r from-blue-100 to-purple-100 rounded-lg shadow-md">
+                                <h4 className="text-xl font-semibold text-blue-700">Secure & Reliable</h4>
+                                <p className="text-gray-600 text-sm mt-2">
+                                    Your financial data is protected with strict authentication and modern encryption standards,
+                                    ensuring peace of mind every time you log in.
+                                </p>
+                            </div>
+
+                            <div className="flex flex-col items-center text-center p-6 bg-gradient-to-r from-purple-100 to-pink-100 rounded-lg shadow-md">
+                                <h4 className="text-xl font-semibold text-purple-700">Intuitive Design</h4>
+                                <p className="text-gray-600 text-sm mt-2">
+                                    A premium brutalist UI with glassmorphism and neon accents makes tracking finances not only
+                                    powerful but also visually engaging and easy to use.
+                                </p>
+                            </div>
+
+                            <div className="flex flex-col items-center text-center p-6 bg-gradient-to-r from-green-100 to-teal-100 rounded-lg shadow-md">
+                                <h4 className="text-xl font-semibold text-green-700">Insightful Analytics</h4>
+                                <p className="text-gray-600 text-sm mt-2">
+                                    Smart charts, ledgers, and exportable reports give you clarity on spending and income trends,
+                                    helping you make informed decisions.
+                                </p>
+                            </div>
+
+                            <div className="flex flex-col items-center text-center p-6 bg-gradient-to-r from-yellow-100 to-orange-100 rounded-lg shadow-md">
+                                <h4 className="text-xl font-semibold text-yellow-700">Community Support</h4>
+                                <p className="text-gray-600 text-sm mt-2">
+                                    We’re more than an app — we’re a growing community dedicated to financial empowerment,
+                                    with responsive support whenever you need help.
+                                </p>
+                            </div>
                         </div>
                     </div>
 
