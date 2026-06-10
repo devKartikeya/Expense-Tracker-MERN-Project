@@ -4,6 +4,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const User = require("../models/users.model");       // your user schema
 const Expense = require("../models/expenses.model"); // your expense schema
+const Income = require("../models/income.model");
 const Category = require("../models/category.model"); // your category schema
 const { checkAdmin } = require("../middlewares/admin.middleware");
 
@@ -64,6 +65,28 @@ router.post("/users/:id/reset-password", checkAdmin, async (req, res) => {
         res.json({ flag: "success", message: "Password reset successfully" });
     } catch (err) {
         res.status(500).json({ flag: "fail", message: "Error resetting password" });
+    }
+});
+
+// Get all expenses + incomes of a user
+router.get("/users/:username/records", checkAdmin, async (req, res) => {
+    try {
+        const { username } = req.params;
+        console.log(username);
+
+        const user = await User.find({ username });
+        const userId = user[0]._id;
+
+        const expenses = await Expense.find({ userId });
+        const incomes = await Income.find({ userId });
+
+        res.json({
+            flag: "success",
+            data: { expenses, incomes },
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ flag: "fail", message: "Error fetching records" });
     }
 });
 

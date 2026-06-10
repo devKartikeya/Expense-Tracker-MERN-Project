@@ -4,6 +4,7 @@ import Admin from "./pages/Admin";
 import AboutUs from "./pages/About";
 import Signup from "./pages/Signup";
 import Income from "./pages/Income";
+import AdminX from "./pages/AdminX";
 import Profile from "./pages/Profile";
 import Expense from "./pages/Expense";
 import ContactUs from "./pages/Contact";
@@ -181,6 +182,11 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="/admin-x/:username" element={
+          <ProtectedRoute>
+            <AdminX />
+          </ProtectedRoute>
+        } />
       </Routes>
     </Router>
   );

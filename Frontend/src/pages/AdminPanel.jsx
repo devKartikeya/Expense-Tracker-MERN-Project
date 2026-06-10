@@ -80,6 +80,10 @@ const AdminPanel = () => {
         navigate("/admin-categories");
     }
 
+    const goToAdminX = (username) => {
+        navigate(`/admin-x/${username}`);
+    };
+
     return (
         <div id="admin-panel" className="w-screen h-screen bg-gray-950 text-white flex flex-col font-poppins">
             {/* Header */}
@@ -144,8 +148,11 @@ const AdminPanel = () => {
                                                 <button onClick={() => handleDeleteUser(user._id)} className="bg-rose-600 hover:bg-rose-700 px-3 cursor-pointer py-1 rounded text-xs font-bold">
                                                     Delete
                                                 </button>
-                                                <button onClick={() => {handleResetPassword(user._id)}} className="bg-yellow-500 hover:bg-yellow-600 px-3 py-1 cursor-pointer rounded text-xs font-bold">
+                                                <button onClick={() => { handleResetPassword(user._id) }} className="bg-yellow-500 hover:bg-yellow-600 px-3 py-1 cursor-pointer rounded text-xs font-bold">
                                                     Reset
+                                                </button>
+                                                <button className="bg-green-500 hover:bg-green-600 px-3 py-1 cursor-pointer rounded text-xs font-bold" onClick={() => { goToAdminX(user.username) }}>
+                                                    Show Analysis
                                                 </button>
                                             </td>
                                         </tr>

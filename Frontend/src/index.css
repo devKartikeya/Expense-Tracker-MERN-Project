@@ -4,11 +4,13 @@ nav {
     font-family: 'Poppins', sans-serif;
 }
 
-#expense, #income {
+#expense,
+#income {
     font-family: 'Poppins', sans-serif;
 }
 
-#signup-form, #login-form {
+#signup-form,
+#login-form {
     font-family: 'Poppins', sans-serif;
 }
 
@@ -59,16 +61,20 @@ body {
     font-family: "Poppins";
 }
 
-#monthly-expenses, #monthly-income {
+#monthly-expenses,
+#monthly-income {
     font-family: "Poppins";
 }
 
 #categories,
-#category-expenses, #income-list {
+#category-expenses,
+#income-list {
     font-family: "Poppins";
 }
 
-#admin, #admin-panel, #admin-category {
+#admin,
+#admin-panel,
+#admin-category {
     font-family: "Poppins";
 }
 
@@ -77,6 +83,10 @@ body {
 }
 
 #loader {
+    font-family: "Poppins";
+}
+
+#admin-x {
     font-family: "Poppins";
 }
 
