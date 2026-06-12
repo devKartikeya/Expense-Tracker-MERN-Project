@@ -26,6 +26,7 @@ import MonthlyExpenses from "./components/MonthlyExpenses";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import CategoryManagement from "./pages/CategoryManagement";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
 
 const App = () => {
   return (
@@ -39,6 +40,12 @@ const App = () => {
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/home"
+          element={
+            <Home />
           }
         />
         <Route
@@ -124,17 +131,15 @@ const App = () => {
         <Route
           path="/contact-us"
           element={
-            <ProtectedRoute>
-              <ContactUs />
-            </ProtectedRoute>
+
+            <ContactUs />
           }
         />
         <Route
           path="/about-us"
           element={
-            <ProtectedRoute>
+           
               <AboutUs />
-            </ProtectedRoute>
           }
         />
         <Route

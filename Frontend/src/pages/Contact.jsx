@@ -30,16 +30,16 @@ const ContactUs = ({ user }) => {
     return (
         <div id="contact" className="pt-[100px] min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500">
             {/* Navbar */}
-            <Navbar username={user.username} profileMode={true} />
+            {/* <Navbar username={user.username} profileMode={true} /> */}
 
             {/* Contact Card */}
-            <div className="flex flex-col items-center py-12 gap-10">
+            <div className="flex flex-col items-center pb-12 gap-10">
                 {/* Contact Form */}
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className="bg-white/90 backdrop-blur-md rounded-xl shadow-2xl p-8 w-[90%] sm:w-[500px] flex flex-col gap-6 animate-fadeIn"
+                    className="bg-white/90 backdrop-blur-md rounded-xl shadow-2xl p-8 w-[100%] sm:w-[500px] flex flex-col gap-6 animate-fadeIn"
                 >
-                    <h2 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 text-center">
+                    <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 text-center">
                         Contact Us
                     </h2>
                     <p className="text-gray-600 text-center text-sm">

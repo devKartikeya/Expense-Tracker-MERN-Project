@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-nav {
+nav,
+#home {
     font-family: 'Poppins', sans-serif;
 }
 
@@ -10,13 +11,20 @@ nav {
 }
 
 #signup-form,
-#login-form ,
+#login-form,
 #error {
     font-family: 'Poppins', sans-serif;
 }
 
 body {
     background-color: black;
+}
+
+html {
+
+    scroll-behavior: smooth;
+
+
 }
 
 #reset-form {
@@ -174,4 +182,68 @@ body {
 
 .backdrop.close {
     animation: fadeOut 0.5s forwards;
+}
+
+
+
+/* Drawer slide down/up */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+.home-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: black;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1rem;
+  padding: 2.5rem;
+  z-index: 50;
+}
+
+.home-drawer.open {
+  animation: slideDown 0.5s forwards;
+}
+
+.home-drawer.close {
+  animation: slideUp 0.5s forwards;
+}
+
+/* Backdrop for mobile menu */
+.home-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 40;
+}
+
+.home-backdrop.open {
+  animation: fadeIn 0.5s forwards;
+}
+
+.home-backdrop.close {
+  animation: fadeOut 0.5s forwards;
 }

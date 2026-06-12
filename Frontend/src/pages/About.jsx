@@ -6,10 +6,10 @@ const AboutUs = ({ user }) => {
     return (
         <div id="about" className="pt-[100px] min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500">
             {/* Navbar */}
-            <Navbar username={user.username} profileMode={true} />
+            {/* <Navbar username={user.username} profileMode={true} /> */}
 
             {/* About Card */}
-            <div className="flex justify-center items-center py-12">
+            <div className="flex justify-center items-center pb-12">
                 <div className="bg-white/90 backdrop-blur-md rounded-xl shadow-2xl p-10 w-[90%] sm:w-[700px] flex flex-col gap-8 animate-fadeIn">
                     <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 text-center">
                         About Us
