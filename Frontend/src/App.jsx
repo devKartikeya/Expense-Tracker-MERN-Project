@@ -1,6 +1,7 @@
 import React from "react";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
+import Error from "./pages/Error";
 import AboutUs from "./pages/About";
 import Signup from "./pages/Signup";
 import Income from "./pages/Income";
@@ -186,6 +187,9 @@ const App = () => {
           <ProtectedRoute>
             <AdminX />
           </ProtectedRoute>
+        } />
+        <Route path="*" element={
+          <Error />
         } />
       </Routes>
     </Router>

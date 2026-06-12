@@ -10,7 +10,8 @@ nav {
 }
 
 #signup-form,
-#login-form {
+#login-form ,
+#error {
     font-family: 'Poppins', sans-serif;
 }
 
