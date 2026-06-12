@@ -85,7 +85,7 @@ const Profile = ({ user }) => {
       setShowModal(false);
       setShowDeleteSuccess(true);
       setTimeout(() => {
-        navigate("/");
+        navigate("/signup");
       }, 5000);
     } else {
       alert(response.error);

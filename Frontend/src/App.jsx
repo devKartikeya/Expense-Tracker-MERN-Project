@@ -1,4 +1,5 @@
 import React from "react";
+import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 import Error from "./pages/Error";
@@ -26,13 +27,12 @@ import MonthlyExpenses from "./components/MonthlyExpenses";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import CategoryManagement from "./pages/CategoryManagement";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Signup />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route
           path="/dashboard"
@@ -43,9 +43,9 @@ const App = () => {
           }
         />
         <Route
-          path="/home"
+          path="/signup"
           element={
-            <Home />
+            <Signup />
           }
         />
         <Route
@@ -131,15 +131,13 @@ const App = () => {
         <Route
           path="/contact-us"
           element={
-
             <ContactUs />
           }
         />
         <Route
           path="/about-us"
           element={
-           
-              <AboutUs />
+            <AboutUs />
           }
         />
         <Route

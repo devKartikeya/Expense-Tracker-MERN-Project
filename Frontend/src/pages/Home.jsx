@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { FiShield, FiBarChart2, FiDownload, FiSmartphone } from "react-icons/fi";
 import HomeNavbar from "../components/HomeNavbar";
+import Footer from "../components/Footer";
 
 const Home = () => {
     const navigate = useNavigate()
@@ -29,8 +30,8 @@ const Home = () => {
                         <button onClick={() => { navigate("/login") }} className="bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-3 rounded-lg font-semibold hover:scale-105 transition-transform">
                             Get Started
                         </button>
-                        <button className="bg-gradient-to-r from-pink-500 to-red-600 px-6 py-3 rounded-lg font-semibold hover:scale-105 transition-transform">
-                            Learn More
+                        <button onClick={() => { navigate("/dashboard") }} className="bg-gradient-to-r from-pink-500 to-red-600 px-6 py-3 rounded-lg font-semibold hover:scale-105 transition-transform">
+                            My Dashboard
                         </button>
                     </div>
                 </div>
@@ -165,21 +166,60 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* About Section */}
-            <section className="py-16 px-6 sm:px-12 bg-black text-center">
-                <h2 className="text-3xl font-bold mb-6">About Xpense Tracker</h2>
-                <p className="text-gray-400 max-w-2xl mx-auto">
-                    Inspired by the professionalism of global firms like EY, KPMG, and Deloitte,
-                    Xpense Tracker is built to deliver clarity and confidence in financial management.
-                    Our mission is to simplify expense tracking while maintaining enterprise‑level security
-                    and design excellence.
-                </p>
+            {/* Vision & Insights Section */}
+            <section
+                id="insights"
+                className="relative py-20 px-6 sm:px-12 text-white"
+                style={{ backgroundImage: "url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')", backgroundSize: "cover", backgroundPosition: "center", borderBottom: "2px solid white" }}
+            >
+                {/* Overlay for readability */}
+                <div className="absolute inset-0 bg-black/70"></div>
+
+                {/* Content */}
+                <div className="relative z-10 max-w-7xl mx-auto grid sm:grid-cols-2 gap-12 items-start">
+
+                    {/* Left Heading */}
+                    <div>
+                        <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-6">
+                            Vision & Insights
+                        </h2>
+                        <p className="text-gray-300 text-sm">
+                            A forward-looking perspective on financial clarity and digital empowerment.
+                        </p>
+                    </div>
+
+                    {/* Right Content Blocks */}
+                    <div className="flex flex-col gap-8">
+                        <div className="bg-black/60 rounded-lg shadow-lg p-6">
+                            <h3 className="text-xl font-semibold text-blue-400 mb-2">Strategic Vision</h3>
+                            <p className="text-gray-300 text-sm">
+                                Xpense Tracker is designed to redefine personal and organizational finance management.
+                                Our vision is to integrate secure technology with intuitive design, enabling users to
+                                transform raw data into actionable insights.
+                            </p>
+                        </div>
+
+                        <div className="bg-black/60 rounded-lg shadow-lg p-6">
+                            <h3 className="text-xl font-semibold text-purple-400 mb-2">Operational Excellence</h3>
+                            <p className="text-gray-300 text-sm">
+                                We emphasize scalability, resilience, and compliance. Every feature is engineered to
+                                meet professional standards, ensuring reliability across diverse financial ecosystems.
+                            </p>
+                        </div>
+
+                        <div className="bg-black/60 rounded-lg shadow-lg p-6">
+                            <h3 className="text-xl font-semibold text-green-400 mb-2">User Empowerment</h3>
+                            <p className="text-gray-300 text-sm">
+                                Beyond tracking, our platform empowers decision-making. With analytics, reporting,
+                                and community support, users gain confidence to navigate complex financial landscapes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </section>
 
-            {/* Footer */}
-            <footer className="py-6 bg-gray-900 text-center text-gray-500 text-sm">
-                © 2026 Xpense Tracker | Crafted with ❤️ by Kartikeya Mishra
-            </footer>
+
+            <Footer />
         </main>
     );
 };

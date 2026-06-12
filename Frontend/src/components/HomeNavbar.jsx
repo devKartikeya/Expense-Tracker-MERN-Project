@@ -15,16 +15,27 @@ const HomeNavbar = () => {
 
                 {/* Desktop Menu */}
                 <nav className="hidden md:flex gap-8 items-center font-medium">
-                    <Link to="/home" className="hover:text-blue-400 transition">Home</Link>
+                    <a href="#insights" className="hover:text-blue-400 transition">Insights</a>
                     <a href="#features" className="hover:text-blue-400 transition">Features</a>
                     <Link to="/about-us" className="hover:text-blue-400 transition">About</Link>
                     <Link to="/contact-us" className="hover:text-blue-400 transition">Contact</Link>
-                    <Link
-                        to="/login"
-                        className="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-2 rounded-lg font-semibold hover:scale-105 transition-transform"
-                    >
-                        Login
-                    </Link>
+                    <Link to="dashboard" className="hover:text-blue-400 transition">My Dashboard</Link>
+                    <div className="flex gap-3 items-center">
+                        <Link
+                            to="/login"
+                            onClick={() => setOpen(false)}
+                            className="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-2 rounded-lg font-semibold hover:scale-105 transition-transform flex items-center justify-center"
+                        >
+                            Login
+                        </Link>
+                        <Link
+                            to="/signup"
+                            onClick={() => setOpen(false)}
+                            className="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-2 rounded-lg font-semibold hover:scale-105 transition-transform flex items-center justify-center"
+                        >
+                            Signup
+                        </Link>
+                    </div>
                 </nav>
 
                 {/* Mobile Menu Toggle */}
@@ -50,10 +61,11 @@ const HomeNavbar = () => {
                         </button>
 
                         {/* Nav Links */}
-                        <Link to="/home" onClick={() => setOpen(false)} className="hover:text-blue-400 transition">Home</Link>
+                        <a href="#insights" onClick={() => setOpen(false)} className="hover:text-blue-400 transition">Insights</a>
                         <a href="#features" onClick={() => setOpen(false)} className="hover:text-blue-400 transition">Features</a>
                         <Link to="/about-us" onClick={() => setOpen(false)} className="hover:text-blue-400 transition">About Us</Link>
                         <Link to="/contact-us" onClick={() => setOpen(false)} className="hover:text-blue-400 transition">Contact Us</Link>
+                        <Link to="/dashboard" onClick={() => setOpen(false)} className="hover:text-blue-400 transition">My Dashboard</Link>
                         <div className="flex gap-3 items-center">
                             <Link
                                 to="/login"
