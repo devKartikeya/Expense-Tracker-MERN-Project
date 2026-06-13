@@ -1,12 +1,76 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { FiShield, FiBarChart2, FiDownload, FiSmartphone } from "react-icons/fi";
 import HomeNavbar from "../components/HomeNavbar";
 import Footer from "../components/Footer";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    useEffect(() => {
+
+        gsap.from(".hero-content", {
+            scrollTrigger: {
+                trigger: "#hero",              // give hero section an id="hero"
+                start: "top 80%",              // when hero enters viewport
+                toggleActions: "play reverse play reverse",
+            },
+            opacity: 0,
+            y: 200,
+            duration: 1.2,
+            ease: "power3.out",
+        });
+
+        // Capabilities cards
+        gsap.from(".capability-card", {
+            scrollTrigger: {
+                trigger: "#capabilities",
+                start: "top 80%",
+                toggleActions: "play reverse play reverse",
+            },
+            opacity: 0,
+            y: 60,
+            stagger: 0.2,
+            duration: 1,
+            ease: "power3.out",
+        });
+
+        // Features cards
+        gsap.utils.toArray(".feature-card").forEach((card, i) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 85%",
+                    toggleActions: "play reverse play reverse",
+                },
+                opacity: 0,
+                y: 60,
+                duration: 0.4,
+                delay: i * 0.1,
+                ease: "power3.out",
+            });
+        });
+
+        // Vision & Insights blocks
+        gsap.from(".vision-block", {
+            scrollTrigger: {
+                trigger: "#insights",
+                start: "top 80%",
+                toggleActions: "play reverse play reverse",
+            },
+            opacity: 0,
+            x: -80,
+            stagger: 0.3,
+            duration: 1,
+            ease: "power3.out",
+        });
+    }, []);
+
+
     return (
         <main id="home" className="bg-black text-white w-screen min-h-screen">
             {/* Navbar */}
@@ -14,7 +78,8 @@ const Home = () => {
 
             {/* Hero Section */}
             <section
-                className="relative w-full h-[95vh] flex items-center justify-center bg-cover bg-center"
+                id="hero"
+                className="relative w-full h-[95vh] flex items-center justify-center bg-cover bg-center hero-content"
                 style={{ backgroundImage: "url('https://plus.unsplash.com/premium_photo-1679923813998-6603ee2466c5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')" }} // replace with a professional image
             >
                 <div className="absolute inset-0 bg-black/70"></div>
@@ -38,7 +103,7 @@ const Home = () => {
             </section>
 
             {/* Capabilities Section */}
-            <section className="py-20 px-6 sm:px-12 bg-gradient-to-br from-gray-900 via-black to-gray-800">
+            <section id="capabilities" className="py-20 px-6 sm:px-12 bg-gradient-to-br from-gray-900 via-black to-gray-800">
                 <h2 className="sm:text-6xl text-4xl font-extrabold text-center mb-4">
                     Our Capabilities
                 </h2>
@@ -49,7 +114,7 @@ const Home = () => {
 
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
                     {/* Secure */}
-                    <div className="flex flex-col items-center text-center p-8 bg-gray-800 rounded-xl shadow-lg hover:scale-105 transition-transform">
+                    <div className="capability-card flex flex-col items-center text-center p-8 bg-gray-800 rounded-xl shadow-lg hover:scale-105 transition-transform">
                         <FiShield className="text-5xl text-blue-400 mb-4" />
                         <h3 className="text-xl font-semibold mb-2">Secure</h3>
                         <p className="text-gray-400 text-sm">
@@ -58,7 +123,7 @@ const Home = () => {
                     </div>
 
                     {/* Analytics */}
-                    <div className="flex flex-col items-center text-center p-8 bg-gray-800 rounded-xl shadow-lg hover:scale-105 transition-transform">
+                    <div className="capability-card flex flex-col items-center text-center p-8 bg-gray-800 rounded-xl shadow-lg hover:scale-105 transition-transform">
                         <FiBarChart2 className="text-5xl text-green-400 mb-4" />
                         <h3 className="text-xl font-semibold mb-2">Analytics</h3>
                         <p className="text-gray-400 text-sm">
@@ -67,7 +132,7 @@ const Home = () => {
                     </div>
 
                     {/* Reports */}
-                    <div className="flex flex-col items-center text-center p-8 bg-gray-800 rounded-xl shadow-lg hover:scale-105 transition-transform">
+                    <div className="capability-card flex flex-col items-center text-center p-8 bg-gray-800 rounded-xl shadow-lg hover:scale-105 transition-transform">
                         <FiDownload className="text-5xl text-yellow-400 mb-4" />
                         <h3 className="text-xl font-semibold mb-2">Reports</h3>
                         <p className="text-gray-400 text-sm">
@@ -76,7 +141,7 @@ const Home = () => {
                     </div>
 
                     {/* Responsive */}
-                    <div className="flex flex-col items-center text-center p-8 bg-gray-800 rounded-xl shadow-lg hover:scale-105 transition-transform">
+                    <div className="capability-card flex flex-col items-center text-center p-8 bg-gray-800 rounded-xl shadow-lg hover:scale-105 transition-transform">
                         <FiSmartphone className="text-5xl text-pink-400 mb-4" />
                         <h3 className="text-xl font-semibold mb-2"> Mobile Support</h3>
                         <p className="text-gray-400 text-sm">
@@ -85,7 +150,7 @@ const Home = () => {
                     </div>
 
                     {/* Scalability */}
-                    <div className="flex flex-col items-center text-center p-8 bg-gray-800 rounded-xl shadow-lg hover:scale-105 transition-transform">
+                    <div className="capability-card flex flex-col items-center text-center p-8 bg-gray-800 rounded-xl shadow-lg hover:scale-105 transition-transform">
                         <span className="text-5xl text-purple-400 mb-4">⚡</span>
                         <h3 className="text-xl font-semibold mb-2">Scalable</h3>
                         <p className="text-gray-400 text-sm">
@@ -94,7 +159,7 @@ const Home = () => {
                     </div>
 
                     {/* Support */}
-                    <div className="flex flex-col items-center text-center p-8 bg-gray-800 rounded-xl shadow-lg hover:scale-105 transition-transform">
+                    <div className="capability-card flex flex-col items-center text-center p-8 bg-gray-800 rounded-xl shadow-lg hover:scale-105 transition-transform">
                         <span className="text-5xl text-teal-400 mb-4">🤝</span>
                         <h3 className="text-xl font-semibold mb-2">Support</h3>
                         <p className="text-gray-400 text-sm">
@@ -116,7 +181,7 @@ const Home = () => {
 
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
                     {/* Daily Tracking */}
-                    <div className="flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition">
+                    <div className="feature-card flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition">
                         <h3 className="text-xl font-semibold mb-2 text-blue-600">Daily Tracking</h3>
                         <p className="text-gray-600 text-sm">
                             Record expenses and incomes effortlessly with category icons and filters,
@@ -125,7 +190,7 @@ const Home = () => {
                     </div>
 
                     {/* Budget Management */}
-                    <div className="flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition">
+                    <div className="feature-card flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition">
                         <h3 className="text-xl font-semibold mb-2 text-purple-600">Budget Management</h3>
                         <p className="text-gray-600 text-sm">
                             Set monthly or yearly budgets, monitor progress, and receive alerts when you’re close to limits.
@@ -133,7 +198,7 @@ const Home = () => {
                     </div>
 
                     {/* Analytics Dashboard */}
-                    <div className="flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition">
+                    <div className="feature-card flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition">
                         <h3 className="text-xl font-semibold mb-2 text-green-600">Analytics Dashboard</h3>
                         <p className="text-gray-600 text-sm">
                             Visualize spending trends with charts and summaries, helping you make informed financial decisions.
@@ -141,7 +206,7 @@ const Home = () => {
                     </div>
 
                     {/* Export & Reporting */}
-                    <div className="flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition">
+                    <div className="feature-card flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition">
                         <h3 className="text-xl font-semibold mb-2 text-yellow-600">Export & Reporting</h3>
                         <p className="text-gray-600 text-sm">
                             Generate professional reports in PDF or Excel formats for compliance, sharing, or record keeping.
@@ -149,7 +214,7 @@ const Home = () => {
                     </div>
 
                     {/* Admin Oversight */}
-                    <div className="flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition">
+                    <div className="feature-card flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition">
                         <h3 className="text-xl font-semibold mb-2 text-pink-600">Admin Oversight</h3>
                         <p className="text-gray-600 text-sm">
                             A dedicated admin panel to manage users, categories, and monitor overall financial health.
@@ -157,7 +222,7 @@ const Home = () => {
                     </div>
 
                     {/* Support & Community */}
-                    <div className="flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition">
+                    <div className="feature-card flex flex-col items-center text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition">
                         <h3 className="text-xl font-semibold mb-2 text-teal-600">Support & Community</h3>
                         <p className="text-gray-600 text-sm">
                             Access responsive support and join a growing community focused on financial empowerment.
@@ -190,7 +255,7 @@ const Home = () => {
 
                     {/* Right Content Blocks */}
                     <div className="flex flex-col gap-8">
-                        <div className="bg-black/60 rounded-lg shadow-lg p-6">
+                        <div className="vision-block bg-black/60 rounded-lg shadow-lg p-6">
                             <h3 className="text-xl font-semibold text-blue-400 mb-2">Strategic Vision</h3>
                             <p className="text-gray-300 text-sm">
                                 Xpense Tracker is designed to redefine personal and organizational finance management.
@@ -199,7 +264,7 @@ const Home = () => {
                             </p>
                         </div>
 
-                        <div className="bg-black/60 rounded-lg shadow-lg p-6">
+                        <div className="vision-block bg-black/60 rounded-lg shadow-lg p-6">
                             <h3 className="text-xl font-semibold text-purple-400 mb-2">Operational Excellence</h3>
                             <p className="text-gray-300 text-sm">
                                 We emphasize scalability, resilience, and compliance. Every feature is engineered to
@@ -207,7 +272,7 @@ const Home = () => {
                             </p>
                         </div>
 
-                        <div className="bg-black/60 rounded-lg shadow-lg p-6">
+                        <div className="vision-block bg-black/60 rounded-lg shadow-lg p-6">
                             <h3 className="text-xl font-semibold text-green-400 mb-2">User Empowerment</h3>
                             <p className="text-gray-300 text-sm">
                                 Beyond tracking, our platform empowers decision-making. With analytics, reporting,
