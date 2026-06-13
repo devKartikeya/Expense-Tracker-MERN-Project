@@ -29,7 +29,7 @@ const Home = () => {
         gsap.from(".capability-card", {
             scrollTrigger: {
                 trigger: "#capabilities",
-                start: "top 80%",
+                start: "top 50%",
                 toggleActions: "play reverse play reverse",
             },
             opacity: 0,
@@ -171,7 +171,10 @@ const Home = () => {
 
             {/* Features / Services Section */}
             <section id="features" className="py-20 px-6 sm:px-12 bg-gradient-to-br from-white via-gray-100 to-gray-200 text-black">
-                <h2 className="text-4xl font-extrabold text-center mb-4">
+                <h2 className="text-6xl font-bold text-left mb-4">
+                    What we Provide ?
+                </h2>
+                 <h2 className="text-5xl font-extrabold text-center my-8 text-purple-600">
                     Our Services
                 </h2>
                 <p className="text-gray-700 text-center max-w-2xl mx-auto mb-12">
