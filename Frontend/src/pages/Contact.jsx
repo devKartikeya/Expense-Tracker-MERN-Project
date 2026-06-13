@@ -28,7 +28,7 @@ const ContactUs = ({ user }) => {
     };
 
     return (
-        <div id="contact" className="pt-[100px] min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500">
+        <div id="contact" className="pt-[50px] min-h-screen bg-gradient-to-br w-screen from-blue-600 via-purple-600 to-pink-500">
             {/* Navbar */}
             {/* <Navbar username={user.username} profileMode={true} /> */}
 
@@ -37,9 +37,9 @@ const ContactUs = ({ user }) => {
                 {/* Contact Form */}
                 <form
                     onSubmit={handleSubmit(onSubmit)}
-                    className="bg-white/90 backdrop-blur-md rounded-xl shadow-2xl p-8 w-[100%] sm:w-[500px] flex flex-col gap-6 animate-fadeIn"
+                    className="bg-white/90 backdrop-blur-md rounded-xl shadow-2xl p-8 w-[90%] sm:w-[90%] flex flex-col gap-8 animate-fadeIn"
                 >
-                    <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 text-center">
+                    <h2 className="sm:text-6xl text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 text-center">
                         Contact Us
                     </h2>
                     <p className="text-gray-600 text-center text-sm">
@@ -102,22 +102,24 @@ const ContactUs = ({ user }) => {
                 </form>
 
                 {/* Extra Contact Info */}
-                <div className="bg-black/70 backdrop-blur-md rounded-xl shadow-lg p-6 w-[90%] sm:w-[500px] text-white space-y-4">
-                    <h3 className="text-xl font-bold text-center text-purple-600">Other Ways to Reach Us</h3>
-                    <p className="flex items-center gap-2">
+                <div className="bg-black/70 backdrop-blur-md rounded-xl shadow-lg p-6 w-[90%] sm:w-[90%] text-white space-y-4">
+                    <h3 className="text-xl font-bold text-center text-white">Other Ways to Reach Us</h3>
+                    <p className="flex items-center gap-2 flex-col sm:flex-row">
                         <FiMail />
+                        Mail us at: 
                         <a href="mailto:kartikeya2122008@gmail.com" className="text-pink-400 hover:underline">
                             kartikeya2122008@gmail.com
                         </a>
                     </p>
-                    <p className="flex items-center gap-2">
+                    <p className="flex items-center gap-2 flex-col sm:flex-row">
                         <FiMail />
+                            Mail us at: 
                         <a href="mailto:devKartikeya2122002@gmail.com" className="text-pink-400 hover:underline">
                             devKartikeya2122002@gmail.com
                         </a>
                     </p>
-                    <p className="flex items-center gap-2"><FiLinkedin /> <a href="https://linkedin.com/in/kartikeya-mishra-8199973a9" target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:underline">LinkedIn Profile</a></p>
-                    <p className="flex items-center gap-2 text-purple-600"><FiPhone /> +91-6394734057 (Helpline)</p>
+                    <p className="flex items-center gap-2 flex-col sm:flex-row"><FiLinkedin /> <a href="https://linkedin.com/in/kartikeya-mishra-8199973a9" target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:underline">LinkedIn Profile</a></p>
+                    <p className="flex items-center gap-2 flex-col sm:flex-row text-purple-600"><FiPhone /> +91-6394734057 (Helpline)</p>
                 </div>
             </div>
         </div>
