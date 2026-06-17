@@ -215,6 +215,7 @@ Contact System
 - Message storage in MongoDB
 - Email forwarding using Nodemailer
 - Secure message handling
+- Other methods to communicate
 
 About Page
 
@@ -229,6 +230,7 @@ About Page
 Design Features
 
 - Tailwind CSS powered UI
+- GSAP animations & Scrolltrigger
 - Powerful Brutal Professional Theme
 - Glassmorphism effects
 - Gradient themes
